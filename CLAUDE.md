@@ -45,15 +45,16 @@ skills/
 
 Three places must always match when a skill changes status or is added:
 
-| File | What to update |
-|------|----------------|
-| `.claude-plugin/marketplace.json` | `plugins` array entry |
-| `README.md` | Skill Overview table |
+| File                                 | What to update                              |
+| ------------------------------------ | ------------------------------------------- |
+| `.claude-plugin/marketplace.json`    | `plugins` array entry                       |
+| `README.md`                          | Skill Overview table                        |
 | `skills/skill-shop-manager/SKILL.md` | Skill Catalog table + Recommendations table |
 
 ## Marketplace schema reference
 
 Active skill entry (`strict: true` – needs `.claude-plugin/plugin.json`):
+
 ```json
 {
   "name": "skill-name",
@@ -67,6 +68,7 @@ Active skill entry (`strict: true` – needs `.claude-plugin/plugin.json`):
 ```
 
 Planned skill placeholder (`strict: false` – no plugin.json needed):
+
 ```json
 {
   "name": "skill-name",

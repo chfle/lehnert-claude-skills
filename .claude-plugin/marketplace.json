@@ -184,6 +184,15 @@
       "version": "0.1.0",
       "author": { "name": "Lehnert" },
       "strict": false
+    },
+    {
+      "name": "sw-idea-analyzer",
+      "source": "./skills/sw-idea-analyzer",
+      "description": "Analyzes software ideas for feasibility, target audience, core features, technical complexity, risks, and MVP scope – pure planning, no code generation.",
+      "version": "1.0.0",
+      "author": { "name": "Lehnert" },
+      "category": "planning",
+      "keywords": ["idea", "analysis", "feasibility", "mvp", "planning", "startup"]
     }
   ]
 }

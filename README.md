@@ -75,9 +75,31 @@ claude plugin install /path/to/lehnert-claude-skills --scope user
 
 ## Skill Overview
 
-| #   | Skill                | Category | Description                                    | Status    |
-| --- | -------------------- | -------- | ---------------------------------------------- | --------- |
-| 01  | `skill-shop-manager` | 🏪 Meta  | Manages this shop, lists and recommends skills | ✅ Active |
+| # | Skill | Category | Description | Status |
+|---|-------|----------|-------------|--------|
+| 01 | `skill-shop-manager` | 🏪 Meta | Manages this shop, lists and recommends skills | ✅ Active |
+| 02 | `brand-guidelines` | 🎨 Brand | Brand colors, tone of voice, corporate identity | 🔲 Planned |
+| 03 | `email-marketing` | 📧 Marketing | Newsletters, subject lines, A/B variants | 🔲 Planned |
+| 04 | `blog-writer` | ✍️ Content | SEO blog articles in Lehnert's tone | 🔲 Planned |
+| 05 | `social-media-manager` | 📱 Marketing | LinkedIn, Instagram, Twitter/X posts | 🔲 Planned |
+| 06 | `code-reviewer` | 💻 Dev | Code reviews following quality standards | 🔲 Planned |
+| 07 | `sql-analyst` | 📊 Data | SQL queries, data analysis, reports | 🔲 Planned |
+| 08 | `project-planner` | 📋 Business | Project plans, milestones, resources | 🔲 Planned |
+| 09 | `customer-support` | 🤝 Service | Customer emails, complaints, FAQ | 🔲 Planned |
+| 10 | `seo-optimizer` | 🔍 Marketing | Meta tags, keywords, on-page SEO | 🔲 Planned |
+| 11 | `meeting-summarizer` | 🗒️ Productivity | Minutes, action items, decisions | 🔲 Planned |
+| 12 | `research-assistant` | 🔬 Research | Market research, competitive analysis, sources | 🔲 Planned |
+| 13 | `api-documenter` | 💻 Dev | OpenAPI specs, endpoint docs | 🔲 Planned |
+| 14 | `sprint-planner` | ⚡ Agile | Sprint planning, velocity, backlog | 🔲 Planned |
+| 15 | `user-story-writer` | ⚡ Agile | User stories, acceptance criteria | 🔲 Planned |
+| 16 | `legal-reviewer` | ⚖️ Legal | ToS checks, privacy (not legal advice) | 🔲 Planned |
+| 17 | `financial-analyst` | 💰 Finance | Budgets, KPIs, cost analysis | 🔲 Planned |
+| 18 | `onboarding-guide` | 🧑‍💼 HR | Employee onboarding, checklists | 🔲 Planned |
+| 19 | `changelog-writer` | 💻 Dev | Release notes, CHANGELOG.md | 🔲 Planned |
+| 20 | `data-visualizer` | 📊 Data | Charts, Mermaid diagrams, infographics | 🔲 Planned |
+| 21 | `presentation-builder` | 🎤 Content | Slides, pitch decks, executive summaries | 🔲 Planned |
+| 22 | `ai-prompt-engineer` | 🤖 AI | System prompts, templates, LLM optimization | 🔲 Planned |
+| 23 | `sw-idea-analyzer` | 💡 Planning | Analyzes software ideas for feasibility, features, risks, and MVP scope | ✅ Active |
 
 ---
 

@@ -37,6 +37,7 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | 20 | `data-visualizer` | 📊 Data | Chart recommendations, Mermaid diagrams, infographics | 🔲 Planned |
 | 21 | `presentation-builder` | 🎤 Content | Slide structures, executive summaries, pitch decks | 🔲 Planned |
 | 22 | `ai-prompt-engineer` | 🤖 AI | System prompts, prompt templates, LLM optimization | 🔲 Planned |
+| 23 | `sw-idea-analyzer` | 💡 Planning | Analyzes software ideas for feasibility, features, risks, and MVP scope | ✅ Active |
 
 ## Automatic Recommendations
 
@@ -55,6 +56,9 @@ When the user describes a task, recommend the matching skill:
 | "Create user stories" | → `user-story-writer` |
 | "Write release notes" | → `changelog-writer` |
 | "Onboard a new employee" | → `onboarding-guide` |
+| "Analyze my software idea" | → `sw-idea-analyzer` |
+| "Is my app idea worth building?" | → `sw-idea-analyzer` |
+| "Help me scope an MVP" | → `sw-idea-analyzer` |
 
 > Skill not active yet? Say: **"Create the skill [name] for me"** – I'll build the folder and SKILL.md right away.
 
