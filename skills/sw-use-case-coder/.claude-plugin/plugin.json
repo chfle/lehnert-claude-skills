@@ -1,9 +1,9 @@
 {
   "name": "sw-use-case-coder",
+  "description": "Generates production-ready code scaffolding for selected use cases from tech-stack.yaml and use-cases.md.",
   "version": "1.0.0",
-  "description": "Generates production-ready code scaffolding for selected use cases based on tech-stack.yaml.",
   "author": {
     "name": "Lehnert"
   },
-  "strict": true
+  "keywords": ["code-generation", "scaffolding", "use-cases", "nextjs", "nestjs", "spring", "fastapi", "prisma", "testcontainers"]
 }
