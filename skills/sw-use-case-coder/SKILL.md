@@ -1,7 +1,7 @@
 ---
 name: sw-use-case-coder
-description: Use when user wants to generate code for a use case, says "code UC-01", "implement UC-02 UC-03", "generate all MVP code", "scaffold UC-01", or wants production-ready files from use-cases.md and tech-stack.yaml.
-version: 1.0.0
+description: Use when user wants to generate code for a use case, says "code UC-01", "implement UC-02 UC-03", "generate all MVP code", "scaffold UC-01", or wants production-ready files from use-cases.md and tech-stack.yaml written directly into the project root.
+version: 2.0.0
 author: Lehnert
 ---
 
@@ -9,7 +9,7 @@ author: Lehnert
 
 ## Overview
 
-Reads `requirements/tech-stack.yaml` and `requirements/use-cases.md` to generate production-ready, stack-specific code for selected use cases. All files land in `requirements/code/<uc-slug>/`. Nothing is printed in chat.
+Reads `requirements/tech-stack.yaml` and `requirements/use-cases.md`, then writes production-ready code **directly into the current workspace root** using the correct real project paths. Operates silently – nothing is printed in chat except the final confirmation.
 
 **Language detection:** Read the user's input language and respond entirely in that language. Default to German if undetectable.
 
@@ -27,160 +27,151 @@ Reads `requirements/tech-stack.yaml` and `requirements/use-cases.md` to generate
    > `requirements/use-cases.md` not found.
    > Run `/sw-use-case-creator` first to define your use cases.
 
-3. **Both exist** → read `requirements/user-stories.md` as optional context for acceptance criteria, then proceed.
+3. **Both exist** → read `requirements/user-stories.md` as optional context, then proceed to the boilerplate check.
 
 ---
 
 ## Use Case Selection
 
-Parse the argument to determine which use cases to implement:
+Parse the argument:
 
 | Input | Meaning |
 |-------|---------|
 | `UC-001` | Single use case by ID |
-| `UC-001 UC-003 UC-005` | Multiple specific use cases |
-| `all MVP` | All UCs marked MVP or with `[MVP]` tag in use-cases.md |
+| `UC-001 UC-003` | Multiple specific use cases |
+| `all MVP` | All UCs marked MVP or tagged `[MVP]` in use-cases.md |
 | `all` | Every use case in use-cases.md |
 | *(no argument)* | Ask: "Which use cases should I implement? (e.g. UC-001, all MVP, all)" |
 
 ---
 
-## Output Folder Naming
+## Step 1 – Boilerplate Check
 
-Derive the slug from the UC ID and name – lowercase, kebab-case:
+Before generating any code, check the workspace root for a project bootstrap file:
 
-| Use Case | Folder |
-|----------|--------|
-| UC-001: Register Device | `uc-001-register-device` |
-| UC-002: Send Alert Notification | `uc-002-send-alert-notification` |
-| UC-003: View Dashboard | `uc-003-view-dashboard` |
+**Detected files:** `package.json`, `pom.xml`, `build.gradle`, `build.gradle.kts`, `Makefile`, `pyproject.toml`, `Cargo.toml`, `go.mod`, `composer.json`
 
-Full path: `requirements/code/<uc-slug>/`
+### If a bootstrap file IS found → skip to Step 2.
 
-All files go flat into that folder. The developer copies them to the right place in `src/`.
+### If NO bootstrap file is found:
 
----
+**For JavaScript / TypeScript stacks** (Next.js, NestJS, React, Vite, Express, Fastify), ask exactly:
 
-## File Generation Rules
+> No project boilerplate detected in root. Shall I create the full boilerplate now based on tech-stack.yaml? Reply YES to proceed.
 
-Read `tech-stack.yaml` in full before generating anything. Match every file to the detected stack. Never generate files for frameworks not listed in the stack.
+**For all other stacks** (Java, Python, Go, Rust, PHP, etc.), ask exactly:
 
-### Frontend Files
+> No project boilerplate detected in root. Which build file should I generate?
+> Options based on your stack: [list relevant options from tech-stack.yaml, e.g. pom.xml (Maven), build.gradle (Gradle)]
+> Reply with your choice to proceed.
 
-| Stack detected | Files to generate |
-|----------------|-------------------|
-| Next.js App Router | `page.tsx`, `<Feature>Form.tsx` (if flow has input step), `<Feature>List.tsx` (if flow shows a list/table), `<feature>.actions.ts` (server actions) |
-| Next.js Pages Router | `<feature>.page.tsx`, `<Feature>Form.tsx` (if form in flow), `<feature>.api.ts` |
-| React SPA (Vite/CRA) | `<Feature>Page.tsx`, `<Feature>Form.tsx` (if form), `<feature>.api.ts` |
-| Vanilla TypeScript | `<feature>.ts`, `<feature>.html` (if UI step in main flow) |
-| None / API-only | Skip frontend files |
+**Wait for the user's reply before doing anything else.**
 
-Rules:
-- Add `'use client'` only when the component uses state, effects, or event handlers
-- Server Components are the default in Next.js App Router
-- Use the `ui_library` value from tech-stack.yaml (e.g. shadcn/ui, Tailwind CSS, Material UI)
+### After user confirms (YES or chooses a build file):
 
-### Backend Files
+Silently create the complete boilerplate in the root. What "complete boilerplate" means per stack:
 
-| Stack detected | Files to generate |
-|----------------|-------------------|
-| NestJS | `<feature>.controller.ts`, `<feature>.service.ts`, `<feature>.module.ts`, `create-<feature>.dto.ts`, `update-<feature>.dto.ts` (if UC has update flow) |
-| Express / Fastify | `<feature>.routes.ts`, `<feature>.controller.ts`, `<feature>.service.ts` |
-| Spring Boot | `<Feature>Controller.java`, `<Feature>Service.java`, `<Feature>Repository.java`, `<Feature>Dto.java` |
-| FastAPI | `<feature>.router.py`, `<feature>.schema.py`, `<feature>.service.py` |
-| Next.js (no separate backend) | `<feature>.actions.ts` (server action) or `route.ts` (API route) – skip separate backend files |
-| None | Skip backend files |
+| Stack | Boilerplate files to create |
+|-------|-----------------------------|
+| Next.js | `package.json`, `tsconfig.json`, `next.config.ts`, `tailwind.config.ts` (if Tailwind), `postcss.config.js` (if Tailwind), `.env.example`, `.gitignore`, `app/layout.tsx`, `app/page.tsx` |
+| NestJS | `package.json`, `tsconfig.json`, `tsconfig.build.json`, `nest-cli.json`, `.env.example`, `.gitignore`, `src/main.ts`, `src/app.module.ts`, `src/app.controller.ts`, `src/app.service.ts` |
+| Next.js + NestJS (monorepo) | All files above, plus `turbo.json` or `pnpm-workspace.yaml` if monorepo is true in tech-stack.yaml |
+| Spring Boot (Maven) | `pom.xml`, `src/main/java/.../Application.java`, `src/main/resources/application.yml`, `.gitignore` |
+| Spring Boot (Gradle) | `build.gradle.kts`, `settings.gradle.kts`, `src/main/java/.../Application.java`, `src/main/resources/application.yml`, `.gitignore` |
+| FastAPI | `pyproject.toml`, `main.py`, `requirements.txt`, `.env.example`, `.gitignore` |
+| Docker-first | `docker-compose.yml` (full, using all services from tech-stack.yaml `docker.services`) plus a `.env.example` |
 
-### Shared Types
-
-Always generate a types file:
-
-| Language | File |
-|----------|------|
-| TypeScript | `<feature>.types.ts` |
-| Java | `<Feature>Dto.java` (if not already in backend files) |
-| Python | `<feature>.schema.py` (if not already in backend files) |
-
-Types must reflect the exact fields from the use case main flow – no generic placeholders.
-
-### Database / ORM
-
-| ORM detected | File to generate |
-|-------------|-----------------|
-| Prisma | `<feature>.schema.prisma` – complete `model` block(s) to append to `prisma/schema.prisma` |
-| TypeORM | `<Feature>.entity.ts` |
-| Hibernate / JPA | `<Feature>Entity.java` (if not already in backend files) |
-| SQLAlchemy | `<feature>.model.py` |
-| jOOQ + Flyway | `V<n>__add_<feature>.sql` – versioned Flyway migration with all required tables |
-| None / no DB in UC | Skip |
-
-### Tests
-
-Generate tests that match the `testing` section of tech-stack.yaml:
-
-| Test type | Condition | File |
-|-----------|-----------|------|
-| Unit test | Always | `<feature>.service.spec.ts` (or `.test.ts` / `ServiceTest.java` / `test_<feature>.py`) |
-| Integration (Testcontainers) | `testcontainers: true` in yaml | `<feature>.integration.spec.ts` |
-| E2E | `e2e` key present in yaml | `<feature>.e2e.spec.ts` |
-| API / Supertest | `api` key present in yaml | `<feature>.api.spec.ts` |
-
-In every test file, add `// TODO: AC-X: <criterion text>` comments above each test case, linked to the acceptance criteria from use-cases.md.
-
-### Docker Snippet
-
-Generate `docker-compose.<uc-slug>.snippet.yml` **only** when the use case requires a new service not already listed in `docker.services` in tech-stack.yaml (e.g., a message queue, a file storage service, a new microservice). Skip this file if no new infrastructure is needed.
+Always include a `docker-compose.yml` when `docker.services` is non-empty in tech-stack.yaml, regardless of other stack choices.
 
 ---
 
-## Code Quality Rules
+## Step 2 – Generate Use Case Code
 
-- Use the exact language from `frontend.language` / `backend.language` in tech-stack.yaml
-- Follow the naming convention of the detected framework:
-  - NestJS / React: PascalCase for classes and components, camelCase for methods
-  - Spring Boot: PascalCase for classes, camelCase for methods
-  - FastAPI / Python: snake_case throughout
-- DTOs / schemas must contain the exact fields found in the use case main flow
-- Acceptance criteria from use-cases.md become `// TODO: AC-X` comments in test files
-- Use realistic field names from the use case – never `fooBar`, `lorem`, or generic placeholder names
-- No hardcoded secrets, credentials, or connection strings in any file
-- Import paths use `@/` alias (Next.js) or relative imports – match the detected framework convention
+Write all files for the selected use cases directly into their correct project paths in the workspace root. Do not create any intermediate staging folder.
+
+### Path conventions per stack
+
+| Stack | Example real paths |
+|-------|--------------------|
+| Next.js App Router | `app/(feature)/page.tsx`, `app/(feature)/<Feature>Form.tsx`, `app/(feature)/actions.ts`, `lib/types/<feature>.ts` |
+| Next.js Pages Router | `pages/<feature>/index.tsx`, `components/<Feature>Form.tsx`, `lib/<feature>.ts` |
+| NestJS | `src/<feature>/<feature>.controller.ts`, `src/<feature>/<feature>.service.ts`, `src/<feature>/<feature>.module.ts`, `src/<feature>/dto/create-<feature>.dto.ts` |
+| Spring Boot | `src/main/java/<package>/<feature>/<Feature>Controller.java`, `.../service/<Feature>Service.java`, `.../repository/<Feature>Repository.java`, `.../dto/<Feature>Dto.java` |
+| FastAPI | `routers/<feature>.py`, `schemas/<feature>.py`, `services/<feature>.py` |
+| Prisma | Append model block to `prisma/schema.prisma` |
+| Flyway | `src/main/resources/db/migration/V<n>__add_<feature>.sql` |
+| Jest / Vitest tests | `src/<feature>/<feature>.service.spec.ts` |
+| Testcontainers tests | `src/<feature>/<feature>.integration.spec.ts` |
+| JUnit tests | `src/test/java/<package>/<feature>/<Feature>ServiceTest.java` |
+| Playwright E2E | `e2e/<feature>.spec.ts` |
+
+### File generation rules
+
+- Read `frontend.language` and `backend.language` from tech-stack.yaml for the exact language
+- Use the `ui_library` value (shadcn/ui, Tailwind, Material UI) for component styling
+- Add `'use client'` in Next.js only for components with state, effects, or event handlers
+- DTOs and schemas must contain the exact fields from the use case main flow
+- Acceptance criteria from use-cases.md become `// TODO: AC-X: <text>` comments in test files
+- No hardcoded secrets or connection strings – use `process.env.VAR` or equivalent
+- Use `@/` alias for Next.js imports; use relative imports for NestJS and other frameworks
 - For Prisma: include `@@map("table_name")` and all required relations
+
+### Tests to generate
+
+| Test type | Condition | File location |
+|-----------|-----------|---------------|
+| Unit test | Always | `src/<feature>/<feature>.service.spec.ts` or equivalent |
+| Integration (Testcontainers) | `testcontainers: true` in yaml | `src/<feature>/<feature>.integration.spec.ts` |
+| E2E | `e2e` key present in yaml | `e2e/<feature>.spec.ts` |
+| API / Supertest | `api` key present in yaml | `src/<feature>/<feature>.api.spec.ts` |
 
 ---
 
 ## Output Rules
 
-- **Never output any code or file content in the chat.**
-- Do not show file paths, snippets, diffs, imports, or Markdown code blocks in the chat response.
-- The only chat output allowed is the confirmation lines at the end.
-- If an error occurs (missing file, ambiguous UC ID), report only the error – no partial code output.
+- **Never output any code, file content, directory tree, or file list in the chat.**
+- Do not show snippets, diffs, imports, or Markdown code blocks.
+- The only chat output allowed is the confirmation lines below.
+- If an error occurs, report only the error message – no partial code.
 
 ---
 
-## File Output
+## Final Output
 
-For each use case:
+After all files are written, print **exactly two lines** – nothing else:
 
-1. `mkdir -p requirements/code/<uc-slug>`
-2. Generate and write all files
-3. Print **only** these lines – nothing else:
+```
+✅ UC-001 implemented in root (X files updated/created)
+To test: <dynamic command>
+```
 
-Single use case:
-> ✅ Files created in `requirements/code/<uc-slug>/` (X files)
-> Open the folder in your editor or copy to `src/` when ready.
+The dynamic command is determined from tech-stack.yaml:
 
-Multiple use cases:
-> ✅ Files created in `requirements/code/uc-001-register-device/` (7 files)
-> ✅ Files created in `requirements/code/uc-003-view-dashboard/` (5 files)
-> Open the folders in your editor or copy to `src/` when ready.
+| Stack / package manager | Command |
+|------------------------|---------|
+| Next.js + pnpm | `pnpm install && pnpm dev` |
+| Next.js + npm | `npm install && npm run dev` |
+| Next.js + yarn | `yarn && yarn dev` |
+| NestJS + pnpm | `pnpm install && pnpm start:dev` |
+| NestJS + npm | `npm install && npm run start:dev` |
+| Spring Boot + Maven | `./mvnw spring-boot:run` |
+| Spring Boot + Gradle | `./gradlew bootRun` |
+| FastAPI | `uvicorn main:app --reload` |
+| Docker-first (docker.services non-empty) | `docker compose up` |
+| Go | `go run ./cmd/...` |
+| Rust | `cargo run` |
 
-One optional summary sentence max (e.g. "Implemented UC-001 and UC-003 – 12 files total, Prisma schema and Testcontainers integration tests included."). No code, no file listings, no Markdown blocks.
+When `docker.services` is non-empty in tech-stack.yaml, always prefer `docker compose up` as the primary command. If multiple use cases were implemented, list each on its own line before the "To test" line:
+
+```
+✅ UC-001 implemented in root (7 files)
+✅ UC-003 implemented in root (5 files)
+To test: pnpm install && pnpm dev
+```
 
 ---
 
 ## Next Skill
 
 > ▶ **Next steps:**
-> - Review the generated files in `requirements/code/` and copy to `src/` when satisfied
 > - Run `/sw-diagram-creator` to generate sequence or architecture diagrams from your use cases
