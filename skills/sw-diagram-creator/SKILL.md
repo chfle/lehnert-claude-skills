@@ -82,11 +82,11 @@ Output as plain fenced code block (` ``` `).
 
 ## Output Rules
 
-1. **Always** wrap output in the correct fenced code block – never output raw diagram syntax
-2. **Always** add a 2–3 sentence explanation in the user's language before or after the code block
-3. **Never** generate a diagram without at least a one-line description of what it shows
-4. If the input is ambiguous, ask **one** clarifying question before generating – do not guess silently
-5. After the diagram, offer 1–2 alternative diagram types the user might also want
+1. **Never print the diagram or explanation to the console.** All output goes to files only.
+2. Do not show any diagram code, code blocks, or descriptions in the chat.
+3. The only console output allowed is the final confirmation line.
+4. If the input is ambiguous, ask **one** clarifying question before generating – do not guess silently.
+5. After saving, offer 1–2 alternative diagram types in the confirmation line only.
 
 ---
 
@@ -129,9 +129,9 @@ After generating every diagram, always save it to `requirements/diagrams/` in th
    - PlantUML → `requirements/diagrams/<slug>.puml`
    - ASCII → `requirements/diagrams/<slug>.txt`
 4. File content = the raw diagram code only (no fences, no explanation)
-5. End the response with:
+5. Print only this single line to the console:
 
-> ✅ File created: `requirements/diagrams/<slug>.<ext>`
+> ✅ Diagram saved: `requirements/diagrams/<slug>.<ext>` — also consider: [1–2 alternative diagram types]
 
 **Slug examples:**
 

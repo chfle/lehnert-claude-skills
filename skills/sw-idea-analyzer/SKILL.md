@@ -103,24 +103,26 @@ List 2–3 existing alternatives and explain the differentiation angle:
 
 ## Output Rules
 
-- Always use the user's input language throughout the entire response
-- Use tables for structured data (features, risks, competition)
-- Keep each section concise – aim for signal, not length
-- Never generate code
-- Never make API calls or use external tools
+- **Never print the analysis to the console.** All output goes to files only.
+- Do not show tables, sections, or any analysis content in the chat.
+- The only console output allowed is the final confirmation line.
+- Always use the user's input language in the file content.
+- Use tables for structured data (features, risks, competition) inside the file.
+- Never generate code.
+- Never make API calls or use external tools.
 
 ---
 
 ## File Output
 
-After completing the full analysis, always create the file `requirements/vision.md` in the repository root.
+After completing the full analysis, write everything to `requirements/vision.md`. Print nothing to the console except the confirmation.
 
 **Steps:**
 1. If `requirements/` does not exist, create it first: `mkdir -p requirements`
-2. Write the complete structured analysis output (all 8 sections, clean Markdown) to `requirements/vision.md`
-3. End the response with:
+2. Write the complete structured analysis (all 8 sections, clean Markdown) to `requirements/vision.md`
+3. Print only this single line to the console:
 
-> ✅ File created: `requirements/vision.md`
+> ✅ Analysis complete. Please review: `requirements/vision.md`
 
 **`requirements/vision.md` structure:**
 ```markdown
@@ -150,6 +152,9 @@ After completing the full analysis, always create the file `requirements/vision.
 ...
 
 ## Next Steps
+...
+
+## Suggested Next Skill
 ...
 ```
 
