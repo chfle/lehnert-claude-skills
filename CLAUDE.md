@@ -53,7 +53,7 @@ Three places must always match when a skill changes status or is added:
 
 ## Marketplace schema reference
 
-Active skill entry (`strict: true` – needs `.claude-plugin/plugin.json`):
+Active skill entry (needs `.claude-plugin/plugin.json` – do NOT add `strict: true`, it breaks installation):
 
 ```json
 {
