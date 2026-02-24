@@ -123,4 +123,6 @@ One optional sentence max summarizing what was generated (e.g. "Generated 12 use
 
 ## Next Skill
 
-> ▶ **Visualize the architecture?** → Run `/sw-diagram-creator` to generate ERD, flowchart, or C4 diagrams from your vision.
+> ▶ **Next steps:**
+> - Run `/sw-use-case-creator` to expand user stories into detailed use cases with actor flows and exceptions
+> - Run `/sw-diagram-creator` to visualize the architecture

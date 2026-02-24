@@ -1,0 +1,9 @@
+{
+  "name": "sw-use-case-creator",
+  "description": "Generates a complete use case document with actors, flows, exceptions, and acceptance criteria from user-stories.md, vision.md, or any software description.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Lehnert"
+  },
+  "keywords": ["use-cases", "requirements", "actors", "flows", "specifications", "planning"]
+}

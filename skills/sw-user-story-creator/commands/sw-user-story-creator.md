@@ -21,4 +21,6 @@ Open it in your editor or commit it.
 
 One optional sentence max (e.g. "Generated 9 user stories across 3 epics.") – no code blocks, no Markdown, no full output.
 
+Next: Run /sw-use-case-creator to expand stories into detailed use cases, or /sw-diagram-creator to visualize the architecture.
+
 $ARGUMENTS
