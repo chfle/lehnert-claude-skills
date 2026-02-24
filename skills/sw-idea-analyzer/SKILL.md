@@ -120,9 +120,11 @@ After completing the full analysis, write everything to `requirements/vision.md`
 **Steps:**
 1. If `requirements/` does not exist, create it first: `mkdir -p requirements`
 2. Write the complete structured analysis (all 8 sections, clean Markdown) to `requirements/vision.md`
-3. Print only this single line to the console:
+3. Print only these lines to the console:
 
 > ✅ Analysis complete. Please review: `requirements/vision.md`
+>
+> ▶ Ready to visualize? Run `/sw-diagram-creator` to generate diagrams from your vision.
 
 **`requirements/vision.md` structure:**
 ```markdown

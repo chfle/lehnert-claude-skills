@@ -104,15 +104,21 @@ The skill handles three input types – detect automatically:
 
 ## Workflow
 
-1. Detect input language → all output in that language
-2. Identify input type (free text / sw-idea-analyzer output / YAML)
-3. Select diagram type using the table above (or use `diagram.type` from YAML)
-4. Select format: Mermaid unless user specifies otherwise
-5. Generate the diagram in the correct fenced code block
-6. Add explanation (2–3 sentences)
+1. **Check for `requirements/vision.md`**
+   - If the file exists → read it and use it as the primary input source
+   - If the file does NOT exist and the user provided no other input → stop and respond:
+
+     > `requirements/vision.md` not found. Please run `/sw-idea-analyzer` first to generate it, or describe your system directly as an argument:
+     > `/sw-diagram-creator <your description>`
+
+   - If the file does NOT exist but the user provided a description → continue with that description
+2. Detect input language → all output in that language
+3. Identify input type (vision.md / free-text / YAML)
+4. Select diagram type using the table above (or use `diagram.type` from YAML)
+5. Select format: Mermaid unless user specifies otherwise
+6. Generate the diagram internally
 7. Save the diagram file to `requirements/diagrams/` (see File Output below)
-8. Suggest 1–2 alternative diagram types
-9. Suggest next skill
+8. Print confirmation line only
 
 ---
 
