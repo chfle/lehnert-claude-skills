@@ -21,7 +21,7 @@
       "name": "sw-idea-analyzer",
       "source": "./skills/sw-idea-analyzer",
       "description": "Analyzes software ideas for feasibility, target audience, core features, technical complexity, risks, and MVP scope – pure planning, no code generation.",
-      "version": "1.4.0",
+      "version": "1.5.0",
       "author": { "name": "Lehnert" },
       "category": "software-planning",
       "keywords": ["idea", "analysis", "feasibility", "mvp", "planning", "startup"]
@@ -34,6 +34,15 @@
       "author": { "name": "Lehnert" },
       "category": "software-planning",
       "keywords": ["diagram", "mermaid", "plantuml", "architecture", "erd", "flowchart", "sequence", "c4", "visualization"]
+    },
+    {
+      "name": "sw-user-story-creator",
+      "source": "./skills/sw-user-story-creator",
+      "description": "Generates a complete user story document with acceptance criteria and priorities from requirements/vision.md or any software description.",
+      "version": "1.0.0",
+      "author": { "name": "Lehnert" },
+      "category": "software-planning",
+      "keywords": ["user-stories", "requirements", "acceptance-criteria", "agile", "planning", "vision"]
     }
   ]
 }

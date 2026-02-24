@@ -64,6 +64,7 @@ Skills without a `commands/` directory are **helpers** – they are loaded autom
 | `skill-shop-manager` | Meta | Loaded automatically |
 | `sw-idea-analyzer` | Slash command | `/sw-idea-analyzer` |
 | `sw-diagram-creator` | Slash command | `/sw-diagram-creator` |
+| `sw-user-story-creator` | Slash command | `/sw-user-story-creator` |
 
 **Rule of thumb:** If a skill is a standalone user-facing tool → give it a `commands/` file. If it's a helper or orchestrator → leave it as a pure skill.
 
@@ -110,6 +111,7 @@ claude plugin install /path/to/lehnert-claude-skills --scope user
 |-------|-------------|--------|
 | `sw-idea-analyzer` | Analyzes software ideas for feasibility, features, risks, and MVP scope | ✅ Active |
 | `sw-diagram-creator` | Generates Mermaid, PlantUML, and ASCII diagrams from any description or sw-idea-analyzer output | ✅ Active |
+| `sw-user-story-creator` | Generates a complete user story document with acceptance criteria from vision.md or any description | ✅ Active |
 
 ### 💻 Software Development
 

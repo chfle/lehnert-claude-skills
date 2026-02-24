@@ -1,0 +1,9 @@
+{
+  "name": "sw-user-story-creator",
+  "description": "Generates a complete user story document with acceptance criteria and priorities from requirements/vision.md or any software description.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Lehnert"
+  },
+  "keywords": ["user-stories", "requirements", "acceptance-criteria", "agile", "planning", "vision"]
+}

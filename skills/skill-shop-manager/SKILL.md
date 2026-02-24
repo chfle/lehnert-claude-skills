@@ -19,6 +19,7 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 |-------|-------------|--------|
 | `sw-idea-analyzer` | Analyzes software ideas for feasibility, features, risks, and MVP scope | ✅ Active |
 | `sw-diagram-creator` | Generates Mermaid, PlantUML, and ASCII diagrams from any description or sw-idea-analyzer output | ✅ Active |
+| `sw-user-story-creator` | Generates a complete user story document with acceptance criteria from vision.md or any description | ✅ Active |
 
 ### 💻 Software Development
 
@@ -51,6 +52,9 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | "Create a diagram for my app" | → `sw-diagram-creator` |
 | "Generate an ERD / flowchart / sequence diagram" | → `sw-diagram-creator` |
 | "Visualize my sw-idea-analyzer output" | → `sw-diagram-creator` |
+| "Write user stories for my project" | → `sw-user-story-creator` |
+| "Create acceptance criteria" | → `sw-user-story-creator` |
+| "Turn my vision into requirements" | → `sw-user-story-creator` |
 
 > No skill for your task yet? Say: **"Create the skill [name] for me"** – I'll build the folder and SKILL.md right away.
 

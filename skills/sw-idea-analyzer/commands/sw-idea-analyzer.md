@@ -11,6 +11,8 @@ Then run the full sw-idea-analyzer framework silently:
 
 ✅ Analysis complete. Please review: `requirements/vision.md`
 
-▶ Ready to visualize? Run `/sw-diagram-creator` to generate diagrams from your vision.
+▶ Next steps:
+  - Run `/sw-user-story-creator` to turn the vision into user stories with acceptance criteria
+  - Run `/sw-diagram-creator` to visualize the architecture
 
 $ARGUMENTS
