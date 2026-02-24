@@ -4,6 +4,34 @@
 
 ---
 
+## 🚀 Marketplace Installation (Claude Code 2026)
+
+The fastest way to get everything – one command registers the marketplace, one command installs any skill:
+
+```bash
+# Step 1: Register this repo as a marketplace (once)
+/plugin marketplace add chfle/lehnert-claude-skills
+
+# Step 2: Install individual skills
+/plugin install skill-shop-manager@lehnert-claude-skills
+/plugin install blog-writer@lehnert-claude-skills
+/plugin install code-reviewer@lehnert-claude-skills
+```
+
+**To install all active skills at once:**
+```bash
+/plugin install skill-shop-manager@lehnert-claude-skills
+```
+
+**When a new skill is released**, just run:
+```bash
+/plugin install <skill-name>@lehnert-claude-skills
+```
+
+No cloning, no copying files – Claude Code fetches and installs directly from GitHub.
+
+---
+
 ## What is this?
 
 This shop is a Git repository with **ready-made skills** for Claude. Every skill lives in its own folder as a `SKILL.md` file and can be installed in seconds. The central meta-skill `skill-shop-manager` knows all skills, recommends the right one, and creates new ones on demand.
@@ -142,10 +170,13 @@ cp -r skills/my-new-skill ~/.claude/skills/
 ```
 lehnert-claude-skills/
 ├── .claude-plugin/
-│   └── plugin.json
+│   ├── marketplace.json         ← marketplace registry
+│   └── plugin.json              ← repo-level plugin manifest
 ├── README.md
 └── skills/
     ├── skill-shop-manager/
+    │   ├── .claude-plugin/
+    │   │   └── plugin.json      ← skill plugin manifest
     │   └── SKILL.md
     ├── brand-guidelines/        ← to be created
     │   └── SKILL.md

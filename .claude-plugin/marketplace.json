@@ -1,0 +1,189 @@
+{
+  "name": "lehnert-claude-skills",
+  "owner": {
+    "name": "Lehnert"
+  },
+  "metadata": {
+    "description": "Lehnert's personal Claude skill shop – productivity, marketing, dev, content, and more.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "skill-shop-manager",
+      "source": "./skills/skill-shop-manager",
+      "description": "Manages this skill shop – lists all skills, recommends the right one for any task, and creates new skills on demand.",
+      "version": "1.0.0",
+      "author": { "name": "Lehnert" },
+      "category": "meta",
+      "keywords": ["skills", "shop", "manager", "catalog", "meta"]
+    },
+    {
+      "name": "brand-guidelines",
+      "source": "./skills/brand-guidelines",
+      "description": "Planned skill: brand guidelines",
+      "version": "0.1.0",
+      "author": { "name": "Lehnert" },
+      "strict": false
+    },
+    {
+      "name": "email-marketing",
+      "source": "./skills/email-marketing",
+      "description": "Planned skill: email-marketing",
+      "version": "0.1.0",
+      "author": { "name": "Lehnert" },
+      "strict": false
+    },
+    {
+      "name": "blog-writer",
+      "source": "./skills/blog-writer",
+      "description": "Planned skill: blog-writer",
+      "version": "0.1.0",
+      "author": { "name": "Lehnert" },
+      "strict": false
+    },
+    {
+      "name": "social-media-manager",
+      "source": "./skills/social-media-manager",
+      "description": "Planned skill: social-media-manager",
+      "version": "0.1.0",
+      "author": { "name": "Lehnert" },
+      "strict": false
+    },
+    {
+      "name": "code-reviewer",
+      "source": "./skills/code-reviewer",
+      "description": "Planned skill: code-reviewer",
+      "version": "0.1.0",
+      "author": { "name": "Lehnert" },
+      "strict": false
+    },
+    {
+      "name": "sql-analyst",
+      "source": "./skills/sql-analyst",
+      "description": "Planned skill: sql-analyst",
+      "version": "0.1.0",
+      "author": { "name": "Lehnert" },
+      "strict": false
+    },
+    {
+      "name": "project-planner",
+      "source": "./skills/project-planner",
+      "description": "Planned skill: project-planner",
+      "version": "0.1.0",
+      "author": { "name": "Lehnert" },
+      "strict": false
+    },
+    {
+      "name": "customer-support",
+      "source": "./skills/customer-support",
+      "description": "Planned skill: customer-support",
+      "version": "0.1.0",
+      "author": { "name": "Lehnert" },
+      "strict": false
+    },
+    {
+      "name": "seo-optimizer",
+      "source": "./skills/seo-optimizer",
+      "description": "Planned skill: seo-optimizer",
+      "version": "0.1.0",
+      "author": { "name": "Lehnert" },
+      "strict": false
+    },
+    {
+      "name": "meeting-summarizer",
+      "source": "./skills/meeting-summarizer",
+      "description": "Planned skill: meeting-summarizer",
+      "version": "0.1.0",
+      "author": { "name": "Lehnert" },
+      "strict": false
+    },
+    {
+      "name": "research-assistant",
+      "source": "./skills/research-assistant",
+      "description": "Planned skill: research-assistant",
+      "version": "0.1.0",
+      "author": { "name": "Lehnert" },
+      "strict": false
+    },
+    {
+      "name": "api-documenter",
+      "source": "./skills/api-documenter",
+      "description": "Planned skill: api-documenter",
+      "version": "0.1.0",
+      "author": { "name": "Lehnert" },
+      "strict": false
+    },
+    {
+      "name": "sprint-planner",
+      "source": "./skills/sprint-planner",
+      "description": "Planned skill: sprint-planner",
+      "version": "0.1.0",
+      "author": { "name": "Lehnert" },
+      "strict": false
+    },
+    {
+      "name": "user-story-writer",
+      "source": "./skills/user-story-writer",
+      "description": "Planned skill: user-story-writer",
+      "version": "0.1.0",
+      "author": { "name": "Lehnert" },
+      "strict": false
+    },
+    {
+      "name": "legal-reviewer",
+      "source": "./skills/legal-reviewer",
+      "description": "Planned skill: legal-reviewer",
+      "version": "0.1.0",
+      "author": { "name": "Lehnert" },
+      "strict": false
+    },
+    {
+      "name": "financial-analyst",
+      "source": "./skills/financial-analyst",
+      "description": "Planned skill: financial-analyst",
+      "version": "0.1.0",
+      "author": { "name": "Lehnert" },
+      "strict": false
+    },
+    {
+      "name": "onboarding-guide",
+      "source": "./skills/onboarding-guide",
+      "description": "Planned skill: onboarding-guide",
+      "version": "0.1.0",
+      "author": { "name": "Lehnert" },
+      "strict": false
+    },
+    {
+      "name": "changelog-writer",
+      "source": "./skills/changelog-writer",
+      "description": "Planned skill: changelog-writer",
+      "version": "0.1.0",
+      "author": { "name": "Lehnert" },
+      "strict": false
+    },
+    {
+      "name": "data-visualizer",
+      "source": "./skills/data-visualizer",
+      "description": "Planned skill: data-visualizer",
+      "version": "0.1.0",
+      "author": { "name": "Lehnert" },
+      "strict": false
+    },
+    {
+      "name": "presentation-builder",
+      "source": "./skills/presentation-builder",
+      "description": "Planned skill: presentation-builder",
+      "version": "0.1.0",
+      "author": { "name": "Lehnert" },
+      "strict": false
+    },
+    {
+      "name": "ai-prompt-engineer",
+      "source": "./skills/ai-prompt-engineer",
+      "description": "Planned skill: ai-prompt-engineer",
+      "version": "0.1.0",
+      "author": { "name": "Lehnert" },
+      "strict": false
+    }
+  ]
+}

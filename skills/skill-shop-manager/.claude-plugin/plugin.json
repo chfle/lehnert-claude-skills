@@ -1,0 +1,9 @@
+{
+  "name": "skill-shop-manager",
+  "description": "Manages Lehnert's skill shop – lists all skills, recommends the right one for any task, and creates new skills on demand.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Lehnert"
+  },
+  "keywords": ["skills", "shop", "manager", "catalog", "meta"]
+}
