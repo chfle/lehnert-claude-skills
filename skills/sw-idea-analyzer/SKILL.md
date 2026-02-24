@@ -111,6 +111,50 @@ List 2–3 existing alternatives and explain the differentiation angle:
 
 ---
 
+## File Output
+
+After completing the full analysis, always create the file `requirements/vision.md` in the repository root.
+
+**Steps:**
+1. If `requirements/` does not exist, create it first: `mkdir -p requirements`
+2. Write the complete structured analysis output (all 8 sections, clean Markdown) to `requirements/vision.md`
+3. End the response with:
+
+> ✅ File created: `requirements/vision.md`
+
+**`requirements/vision.md` structure:**
+```markdown
+# Vision: <Idea Title>
+
+## Idea Summary
+...
+
+## Target Audience
+| Segment | Description | Primary Pain Point |
+...
+
+## Problem & Solution Fit
+...
+
+## Core Features (MVP)
+| # | Feature | Why It's Core |
+...
+
+## Technical Complexity
+...
+
+## Market & Competition
+...
+
+## Top Risks
+...
+
+## Next Steps
+...
+```
+
+---
+
 ## Next Skill
 
 At the end of every analysis, suggest the most logical next step:

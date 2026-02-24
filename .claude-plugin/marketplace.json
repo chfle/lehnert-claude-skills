@@ -21,7 +21,7 @@
       "name": "sw-idea-analyzer",
       "source": "./skills/sw-idea-analyzer",
       "description": "Analyzes software ideas for feasibility, target audience, core features, technical complexity, risks, and MVP scope – pure planning, no code generation.",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "author": { "name": "Lehnert" },
       "category": "software-planning",
       "keywords": ["idea", "analysis", "feasibility", "mvp", "planning", "startup"]
@@ -30,7 +30,7 @@
       "name": "sw-diagram-creator",
       "source": "./skills/sw-diagram-creator",
       "description": "Generates ready-to-copy Mermaid, PlantUML, and ASCII diagrams from any software description, idea, or sw-idea-analyzer output.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "author": { "name": "Lehnert" },
       "category": "software-planning",
       "keywords": ["diagram", "mermaid", "plantuml", "architecture", "erd", "flowchart", "sequence", "c4", "visualization"]

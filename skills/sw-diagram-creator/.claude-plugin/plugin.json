@@ -1,7 +1,7 @@
 {
   "name": "sw-diagram-creator",
   "description": "Generates ready-to-copy Mermaid, PlantUML, and ASCII diagrams from any software description, idea, or sw-idea-analyzer output.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": {
     "name": "Lehnert"
   },

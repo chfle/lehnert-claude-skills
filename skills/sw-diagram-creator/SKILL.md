@@ -110,8 +110,36 @@ The skill handles three input types – detect automatically:
 4. Select format: Mermaid unless user specifies otherwise
 5. Generate the diagram in the correct fenced code block
 6. Add explanation (2–3 sentences)
-7. Suggest 1–2 alternative diagram types
-8. Suggest next skill
+7. Save the diagram file to `requirements/diagrams/` (see File Output below)
+8. Suggest 1–2 alternative diagram types
+9. Suggest next skill
+
+---
+
+## File Output
+
+After generating every diagram, always save it to `requirements/diagrams/` in the repository root.
+
+**Steps:**
+1. If `requirements/diagrams/` does not exist, create it: `mkdir -p requirements/diagrams`
+2. Slugify the diagram title: lowercase, spaces → hyphens, remove special chars
+   - Example: "User Login Flow" → `user-login-flow`
+3. Save with the correct extension:
+   - Mermaid → `requirements/diagrams/<slug>.mmd`
+   - PlantUML → `requirements/diagrams/<slug>.puml`
+   - ASCII → `requirements/diagrams/<slug>.txt`
+4. File content = the raw diagram code only (no fences, no explanation)
+5. End the response with:
+
+> ✅ File created: `requirements/diagrams/<slug>.<ext>`
+
+**Slug examples:**
+
+| Title | Filename |
+|-------|----------|
+| User Login Flow | `requirements/diagrams/user-login-flow.mmd` |
+| Freelancer ERD | `requirements/diagrams/freelancer-erd.mmd` |
+| Auth Sequence | `requirements/diagrams/auth-sequence.puml` |
 
 ---
 
