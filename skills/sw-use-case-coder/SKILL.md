@@ -1,7 +1,7 @@
 ---
 name: sw-use-case-coder
-description: Use when user wants to generate code for a use case, says "code UC-01", "implement UC-02 UC-03", "generate all MVP code", "scaffold UC-01", or wants production-ready files from use-cases.md and tech-stack.yaml written directly into the project root.
-version: 2.0.0
+description: Use when user wants to generate code for a use case or user story, says "code UC-01", "implement US-03", "generate all MVP", "scaffold UC-05 UC-07", or wants production-ready files from use-cases.md and tech-stack.yaml written directly into the project root.
+version: 2.1.0
 author: Lehnert
 ---
 
@@ -33,15 +33,19 @@ Reads `requirements/tech-stack.yaml` and `requirements/use-cases.md`, then write
 
 ## Use Case Selection
 
-Parse the argument:
+Accept **any ID format the user provides** – never hardcode or normalize IDs. Preserve them exactly as typed.
 
-| Input | Meaning |
-|-------|---------|
-| `UC-001` | Single use case by ID |
-| `UC-001 UC-003` | Multiple specific use cases |
-| `all MVP` | All UCs marked MVP or tagged `[MVP]` in use-cases.md |
-| `all` | Every use case in use-cases.md |
-| *(no argument)* | Ask: "Which use cases should I implement? (e.g. UC-001, all MVP, all)" |
+| Input example | Meaning |
+|---------------|---------|
+| `UC-01`, `UC-1`, `UC-001` | Single item by exact ID |
+| `US-03`, `US-11` | Single user story by exact ID |
+| `UC-01 UC-04`, `US-01 US-03` | Multiple items – space-separated |
+| `all MVP` | Every item tagged MVP or `[MVP]` in the source file |
+| `all Nice-to-have` | Every item tagged Nice-to-have |
+| `all` | Every item in the source file |
+| *(no argument)* | Ask: "Which items should I implement? (e.g. UC-01, US-03, all MVP, all)" |
+
+Look up each ID in both `requirements/use-cases.md` and `requirements/user-stories.md`. Use whatever context is found.
 
 ---
 
@@ -138,10 +142,26 @@ Write all files for the selected use cases directly into their correct project p
 
 ## Final Output
 
-After all files are written, print **exactly two lines** – nothing else:
+After all files are written, print **exactly two lines** – nothing else.
 
+**Rule: always use the exact ID string the user entered – never normalize, pad, or change it.**
+
+Single item:
 ```
-✅ UC-001 implemented in root (X files updated/created)
+✅ [exact user input] implemented in root (X files updated/created)
+To test: <dynamic command>
+```
+
+Multiple items – one line per ID, then the test command:
+```
+✅ [exact user input 1] implemented in root (X files)
+✅ [exact user input 2] implemented in root (X files)
+To test: <dynamic command>
+```
+
+Batch input (`all MVP`, `all Nice-to-have`, `all`):
+```
+✅ all MVP implemented in root (X files updated/created)
 To test: <dynamic command>
 ```
 
@@ -161,13 +181,7 @@ The dynamic command is determined from tech-stack.yaml:
 | Go | `go run ./cmd/...` |
 | Rust | `cargo run` |
 
-When `docker.services` is non-empty in tech-stack.yaml, always prefer `docker compose up` as the primary command. If multiple use cases were implemented, list each on its own line before the "To test" line:
-
-```
-✅ UC-001 implemented in root (7 files)
-✅ UC-003 implemented in root (5 files)
-To test: pnpm install && pnpm dev
-```
+When `docker.services` is non-empty in tech-stack.yaml, always prefer `docker compose up`.
 
 ---
 
