@@ -14,8 +14,8 @@ The fastest way to get everything – one command registers the marketplace, one
 
 # Step 2: Install individual skills
 /plugin install skill-shop-manager@lehnert-claude-skills
-/plugin install blog-writer@lehnert-claude-skills
-/plugin install code-reviewer@lehnert-claude-skills
+/plugin install sw-idea-analyzer@lehnert-claude-skills
+/plugin install sw-diagram-creator@lehnert-claude-skills
 ```
 
 **To install all active skills at once:**
@@ -37,6 +37,35 @@ No cloning, no copying files – Claude Code fetches and installs directly from 
 ## What is this?
 
 This shop is a Git repository with **ready-made skills** for Claude. Every skill lives in its own folder as a `SKILL.md` file and can be installed in seconds. The central meta-skill `skill-shop-manager` knows all skills, recommends the right one, and creates new ones on demand.
+
+---
+
+## Commands vs Skills
+
+There are two types of active plugins in this shop:
+
+### Slash Commands (`/command-name`)
+
+Skills that have a `commands/` directory with a matching `.md` file become **direct slash commands** in Claude Code. They appear in the `/` menu and can be invoked immediately with optional arguments:
+
+```bash
+/sw-idea-analyzer A gym tracking app with AI coaching
+/sw-diagram-creator ERD for the freelancer invoicing app
+```
+
+### Meta / Sub-Skills (loaded automatically)
+
+Skills without a `commands/` directory are **helpers** – they are loaded automatically by the `skill-shop-manager` or referenced as next steps by other skills. They don't appear as `/` commands but Claude knows when to use them based on context.
+
+**Current skills and their type:**
+
+| Skill | Type | How to invoke |
+|-------|------|---------------|
+| `skill-shop-manager` | Meta | Loaded automatically |
+| `sw-idea-analyzer` | Slash command | `/sw-idea-analyzer` |
+| `sw-diagram-creator` | Slash command | `/sw-diagram-creator` |
+
+**Rule of thumb:** If a skill is a standalone user-facing tool → give it a `commands/` file. If it's a helper or orchestrator → leave it as a pure skill.
 
 ---
 
@@ -80,6 +109,7 @@ claude plugin install /path/to/lehnert-claude-skills --scope user
 | Skill | Description | Status |
 |-------|-------------|--------|
 | `sw-idea-analyzer` | Analyzes software ideas for feasibility, features, risks, and MVP scope | ✅ Active |
+| `sw-diagram-creator` | Generates Mermaid, PlantUML, and ASCII diagrams from any description or sw-idea-analyzer output | ✅ Active |
 
 ### 💻 Software Development
 
