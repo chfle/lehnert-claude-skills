@@ -15,6 +15,9 @@ The fastest way to get everything – one command registers the marketplace, one
 # Step 2: Install individual skills
 /plugin install skill-shop-manager@lehnert-claude-skills
 /plugin install sw-idea-analyzer@lehnert-claude-skills
+/plugin install sw-user-story-creator@lehnert-claude-skills
+/plugin install sw-use-case-creator@lehnert-claude-skills
+/plugin install sw-tech-stack-planner@lehnert-claude-skills
 /plugin install sw-diagram-creator@lehnert-claude-skills
 ```
 
@@ -66,6 +69,7 @@ Skills without a `commands/` directory are **helpers** – they are loaded autom
 | `sw-diagram-creator` | Slash command | `/sw-diagram-creator` |
 | `sw-user-story-creator` | Slash command | `/sw-user-story-creator` |
 | `sw-use-case-creator` | Slash command | `/sw-use-case-creator` |
+| `sw-tech-stack-planner` | Slash command | `/sw-tech-stack-planner` |
 
 **Rule of thumb:** If a skill is a standalone user-facing tool → give it a `commands/` file. If it's a helper or orchestrator → leave it as a pure skill.
 
@@ -114,6 +118,7 @@ claude plugin install /path/to/lehnert-claude-skills --scope user
 | `sw-diagram-creator` | Generates Mermaid, PlantUML, and ASCII diagrams from any description or sw-idea-analyzer output | ✅ Active |
 | `sw-user-story-creator` | Generates a complete user story document with acceptance criteria from vision.md or any description | ✅ Active |
 | `sw-use-case-creator` | Generates a detailed use case document with actors, flows, and exceptions from user-stories.md or any description | ✅ Active |
+| `sw-tech-stack-planner` | Recommends the best modern Docker-first tech stack and generates requirements/tech-stack.yaml with full rationale | ✅ Active |
 
 ### 💻 Software Development
 
