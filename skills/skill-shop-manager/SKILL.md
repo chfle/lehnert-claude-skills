@@ -21,6 +21,7 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | `sw-diagram-creator` | Generates Mermaid, PlantUML, and ASCII diagrams from any description or sw-idea-analyzer output | ✅ Active |
 | `sw-user-story-creator` | Generates a complete user story document with acceptance criteria from vision.md or any description | ✅ Active |
 | `sw-use-case-creator` | Generates a detailed use case document with actors, flows, and exceptions from user-stories.md or any description | ✅ Active |
+| `sw-tech-stack-planner` | Recommends the best modern Docker-first tech stack and generates requirements/tech-stack.yaml | ✅ Active |
 
 ### 💻 Software Development
 
@@ -59,6 +60,9 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | "Create use cases for my project" | → `sw-use-case-creator` |
 | "Write actor flows and exceptions" | → `sw-use-case-creator` |
 | "Specify system behavior in detail" | → `sw-use-case-creator` |
+| "Choose a tech stack for my project" | → `sw-tech-stack-planner` |
+| "Set up Docker / docker-compose" | → `sw-tech-stack-planner` |
+| "What framework should I use?" | → `sw-tech-stack-planner` |
 
 > No skill for your task yet? Say: **"Create the skill [name] for me"** – I'll build the folder and SKILL.md right away.
 

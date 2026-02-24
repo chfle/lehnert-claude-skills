@@ -140,4 +140,6 @@ One optional summary sentence max (e.g. "Generated 7 use cases covering all MVP 
 
 ## Next Skill
 
-> ▶ **Visualize the flows?** → Run `/sw-diagram-creator` to generate sequence or flowchart diagrams from your use cases.
+> ▶ **Next steps:**
+> - Run `/sw-tech-stack-planner` to select the tech stack and generate `requirements/tech-stack.yaml`
+> - Run `/sw-diagram-creator` to generate sequence or flowchart diagrams from your use cases

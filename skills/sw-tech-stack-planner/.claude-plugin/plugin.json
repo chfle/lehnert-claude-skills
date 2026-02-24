@@ -1,0 +1,9 @@
+{
+  "name": "sw-tech-stack-planner",
+  "description": "Recommends the best modern tech stack for a project and generates a ready-to-use requirements/tech-stack.yaml with Docker-first setup, Testcontainers, and full rationale.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Lehnert"
+  },
+  "keywords": ["tech-stack", "architecture", "docker", "docker-compose", "testcontainers", "planning", "devops"]
+}

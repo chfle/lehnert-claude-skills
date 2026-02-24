@@ -52,6 +52,15 @@
       "author": { "name": "Lehnert" },
       "category": "software-planning",
       "keywords": ["use-cases", "requirements", "actors", "flows", "specifications", "planning"]
+    },
+    {
+      "name": "sw-tech-stack-planner",
+      "source": "./skills/sw-tech-stack-planner",
+      "description": "Recommends the best modern tech stack and generates requirements/tech-stack.yaml with Docker-first setup, Testcontainers, and full rationale.",
+      "version": "1.0.0",
+      "author": { "name": "Lehnert" },
+      "category": "software-planning",
+      "keywords": ["tech-stack", "architecture", "docker", "docker-compose", "testcontainers", "planning", "devops"]
     }
   ]
 }
