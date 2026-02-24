@@ -1,0 +1,9 @@
+{
+  "name": "sw-use-case-coder",
+  "version": "1.0.0",
+  "description": "Generates production-ready code scaffolding for selected use cases based on tech-stack.yaml.",
+  "author": {
+    "name": "Lehnert"
+  },
+  "strict": true
+}

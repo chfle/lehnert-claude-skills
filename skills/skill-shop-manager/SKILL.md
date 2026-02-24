@@ -27,7 +27,7 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 
 | Skill | Description | Status |
 |-------|-------------|--------|
-| *(no skills yet)* | | |
+| `sw-use-case-coder` | Generates production-ready code for selected use cases from tech-stack.yaml and use-cases.md | ✅ Active |
 
 ### 🐧 Linux & Sysadmin
 
@@ -63,6 +63,9 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | "Choose a tech stack for my project" | → `sw-tech-stack-planner` |
 | "Set up Docker / docker-compose" | → `sw-tech-stack-planner` |
 | "What framework should I use?" | → `sw-tech-stack-planner` |
+| "Generate code for UC-001" | → `sw-use-case-coder` |
+| "Implement all MVP use cases" | → `sw-use-case-coder` |
+| "Scaffold files for a use case" | → `sw-use-case-coder` |
 
 > No skill for your task yet? Say: **"Create the skill [name] for me"** – I'll build the folder and SKILL.md right away.
 

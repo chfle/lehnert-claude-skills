@@ -191,5 +191,6 @@ One optional summary sentence max (e.g. "Recommended Next.js 15 + NestJS + Postg
 
 ## Next Skill
 
-> ▶ Tech stack is set. All following coding skills will read `requirements/tech-stack.yaml` to generate correct code.
-> Start building: use the appropriate implementation skill for your language/framework.
+> ▶ **Next steps:**
+> - Run `/sw-use-case-coder UC-001` to generate production-ready code for a specific use case
+> - Run `/sw-use-case-coder all MVP` to scaffold all MVP use cases at once
