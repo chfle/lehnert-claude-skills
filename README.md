@@ -1,12 +1,12 @@
-# Lehnerts Claude Skill Shop 🚀
+# Lehnert's Claude Skill Shop 🚀
 
-> Deine persönliche Sammlung von Claude-Skills – installierbar für Claude Code und Claude.ai.
+> Your personal collection of Claude skills – installable for Claude Code and Claude.ai.
 
 ---
 
-## Was ist das hier?
+## What is this?
 
-Dieser Shop ist ein Git-Repository mit **fertigen Skills** für Claude. Jeder Skill steckt in einem eigenen Ordner als `SKILL.md` und kann in Sekunden installiert werden. Der zentrale Meta-Skill `skill-shop-manager` kennt alle Skills, empfiehlt den passenden und erstellt auf Befehl neue.
+This shop is a Git repository with **ready-made skills** for Claude. Every skill lives in its own folder as a `SKILL.md` file and can be installed in seconds. The central meta-skill `skill-shop-manager` knows all skills, recommends the right one, and creates new ones on demand.
 
 ---
 
@@ -15,146 +15,153 @@ Dieser Shop ist ein Git-Repository mit **fertigen Skills** für Claude. Jeder Sk
 ### Option A – Claude Code (`~/.claude/skills/`)
 
 ```bash
-# Repository klonen
-git clone https://github.com/dein-username/my-claude-skill-shop.git
-cd my-claude-skill-shop
+# Clone the repository
+git clone https://github.com/your-username/lehnert-claude-skills.git
+cd lehnert-claude-skills
 
-# Einzelnen Skill installieren (Beispiel: skill-shop-manager)
+# Install a single skill (example: skill-shop-manager)
 cp -r skills/skill-shop-manager ~/.claude/skills/
 
-# ODER: Alle Skills auf einmal installieren
+# OR: Install all skills at once
 cp -r skills/* ~/.claude/skills/
 ```
 
-Skills werden beim nächsten Claude-Code-Start automatisch erkannt.
+Skills are automatically detected on the next Claude Code start.
 
-### Option B – Claude.ai (Datei-Upload)
+### Option B – Claude.ai (File Upload)
 
-1. Öffne ein neues Gespräch auf [claude.ai](https://claude.ai)
-2. Klicke auf das **Büroklammer-Symbol** (Datei anhängen)
-3. Lade die gewünschte `SKILL.md` direkt hoch
-4. Claude liest den Skill und wendet ihn sofort an
+1. Open a new conversation on [claude.ai](https://claude.ai)
+2. Click the **paperclip icon** (attach file)
+3. Upload the desired `SKILL.md` directly
+4. Claude reads the skill and applies it immediately
 
----
-
-## Skill-Übersicht
-
-| # | Skill | Kategorie | Beschreibung | Status |
-|---|-------|-----------|--------------|--------|
-| 01 | `skill-shop-manager` | 🏪 Meta | Verwaltet diesen Shop, listet und empfiehlt Skills | ✅ Aktiv |
-| 02 | `brand-guidelines` | 🎨 Brand | Markenfarben, Tonalität, Corporate Identity | 🔲 Geplant |
-| 03 | `email-marketing` | 📧 Marketing | Newsletter, Betreffzeilen, A/B-Varianten | 🔲 Geplant |
-| 04 | `blog-writer` | ✍️ Content | SEO-Blogartikel in Lehnerts Tonalität | 🔲 Geplant |
-| 05 | `social-media-manager` | 📱 Marketing | LinkedIn, Instagram, Twitter/X Posts | 🔲 Geplant |
-| 06 | `code-reviewer` | 💻 Dev | Code-Reviews nach Qualitätsstandards | 🔲 Geplant |
-| 07 | `sql-analyst` | 📊 Data | SQL-Abfragen, Datenanalysen, Reports | 🔲 Geplant |
-| 08 | `project-planner` | 📋 Business | Projektpläne, Meilensteine, Ressourcen | 🔲 Geplant |
-| 09 | `customer-support` | 🤝 Service | Kunden-E-Mails, Beschwerden, FAQ | 🔲 Geplant |
-| 10 | `seo-optimizer` | 🔍 Marketing | Meta-Tags, Keywords, On-Page-SEO | 🔲 Geplant |
-| 11 | `meeting-summarizer` | 🗒️ Productivity | Protokolle, Action Items, Entscheidungen | 🔲 Geplant |
-| 12 | `research-assistant` | 🔬 Research | Marktrecherche, Wettbewerb, Quellen | 🔲 Geplant |
-| 13 | `api-documenter` | 💻 Dev | OpenAPI-Specs, Endpoint-Docs | 🔲 Geplant |
-| 14 | `sprint-planner` | ⚡ Agile | Sprint-Planung, Velocity, Backlog | 🔲 Geplant |
-| 15 | `user-story-writer` | ⚡ Agile | User Stories, Akzeptanzkriterien | 🔲 Geplant |
-| 16 | `legal-reviewer` | ⚖️ Legal | AGB-Checks, Datenschutz (kein Rechtsrat) | 🔲 Geplant |
-| 17 | `financial-analyst` | 💰 Finance | Budgets, KPIs, Kostenanalysen | 🔲 Geplant |
-| 18 | `onboarding-guide` | 🧑‍💼 HR | Mitarbeiter-Onboarding, Checklisten | 🔲 Geplant |
-| 19 | `changelog-writer` | 💻 Dev | Release Notes, CHANGELOG.md | 🔲 Geplant |
-| 20 | `data-visualizer` | 📊 Data | Charts, Mermaid-Diagramme, Infografiken | 🔲 Geplant |
-| 21 | `presentation-builder` | 🎤 Content | Slides, Pitch Decks, Executive Summaries | 🔲 Geplant |
-| 22 | `ai-prompt-engineer` | 🤖 AI | System-Prompts, Templates, LLM-Optimierung | 🔲 Geplant |
-
----
-
-## Neuen Skill hinzufügen
-
-### Schritt 1 – Ordner und Datei erstellen
+### Option C – Claude Code Plugin Install
 
 ```bash
-# Kebab-case Name wählen, z.B. "mein-neuer-skill"
-mkdir -p skills/mein-neuer-skill
+claude plugin install /path/to/lehnert-claude-skills --scope user
 ```
 
-### Schritt 2 – SKILL.md anlegen
+---
+
+## Skill Overview
+
+| # | Skill | Category | Description | Status |
+|---|-------|----------|-------------|--------|
+| 01 | `skill-shop-manager` | 🏪 Meta | Manages this shop, lists and recommends skills | ✅ Active |
+| 02 | `brand-guidelines` | 🎨 Brand | Brand colors, tone of voice, corporate identity | 🔲 Planned |
+| 03 | `email-marketing` | 📧 Marketing | Newsletters, subject lines, A/B variants | 🔲 Planned |
+| 04 | `blog-writer` | ✍️ Content | SEO blog articles in Lehnert's tone | 🔲 Planned |
+| 05 | `social-media-manager` | 📱 Marketing | LinkedIn, Instagram, Twitter/X posts | 🔲 Planned |
+| 06 | `code-reviewer` | 💻 Dev | Code reviews following quality standards | 🔲 Planned |
+| 07 | `sql-analyst` | 📊 Data | SQL queries, data analysis, reports | 🔲 Planned |
+| 08 | `project-planner` | 📋 Business | Project plans, milestones, resources | 🔲 Planned |
+| 09 | `customer-support` | 🤝 Service | Customer emails, complaints, FAQ | 🔲 Planned |
+| 10 | `seo-optimizer` | 🔍 Marketing | Meta tags, keywords, on-page SEO | 🔲 Planned |
+| 11 | `meeting-summarizer` | 🗒️ Productivity | Minutes, action items, decisions | 🔲 Planned |
+| 12 | `research-assistant` | 🔬 Research | Market research, competitive analysis, sources | 🔲 Planned |
+| 13 | `api-documenter` | 💻 Dev | OpenAPI specs, endpoint docs | 🔲 Planned |
+| 14 | `sprint-planner` | ⚡ Agile | Sprint planning, velocity, backlog | 🔲 Planned |
+| 15 | `user-story-writer` | ⚡ Agile | User stories, acceptance criteria | 🔲 Planned |
+| 16 | `legal-reviewer` | ⚖️ Legal | ToS checks, privacy (not legal advice) | 🔲 Planned |
+| 17 | `financial-analyst` | 💰 Finance | Budgets, KPIs, cost analysis | 🔲 Planned |
+| 18 | `onboarding-guide` | 🧑‍💼 HR | Employee onboarding, checklists | 🔲 Planned |
+| 19 | `changelog-writer` | 💻 Dev | Release notes, CHANGELOG.md | 🔲 Planned |
+| 20 | `data-visualizer` | 📊 Data | Charts, Mermaid diagrams, infographics | 🔲 Planned |
+| 21 | `presentation-builder` | 🎤 Content | Slides, pitch decks, executive summaries | 🔲 Planned |
+| 22 | `ai-prompt-engineer` | 🤖 AI | System prompts, templates, LLM optimization | 🔲 Planned |
+
+---
+
+## Adding a New Skill
+
+### Step 1 – Create folder and file
 
 ```bash
-cat > skills/mein-neuer-skill/SKILL.md << 'EOF'
+# Choose a kebab-case name, e.g. "my-new-skill"
+mkdir -p skills/my-new-skill
+```
+
+### Step 2 – Create SKILL.md
+
+```bash
+cat > skills/my-new-skill/SKILL.md << 'EOF'
 ---
-name: mein-neuer-skill
-description: Use when [konkreter Auslöser, z.B. "user asks to write X" or "user mentions Y"]
+name: my-new-skill
+description: Use when [specific trigger, e.g. "user asks to write X" or "user mentions Y"]
 ---
 
-# Mein Neuer Skill
+# My New Skill
 
 ## Overview
-[Kurze Beschreibung, 1-2 Sätze]
+[Short description, 1-2 sentences]
 
-## Anleitung
-[Schritt-für-Schritt oder Tabelle]
+## Instructions
+[Step-by-step or table]
 
-## Beispiel
-[Ein konkretes, übertragbares Beispiel]
+## Example
+[One concrete, reusable example]
 EOF
 ```
 
-### Schritt 3 – In die Tabelle eintragen
+### Step 3 – Update the tables
 
-Trage den neuen Skill in die Tabelle in `README.md` **und** in `skills/skill-shop-manager/SKILL.md` ein.
+Add the new skill to the table in `README.md` **and** in `skills/skill-shop-manager/SKILL.md`.
 
-### Schritt 4 – Committen und pushen
+### Step 4 – Commit and push
 
 ```bash
-git add skills/mein-neuer-skill/
-# README und skill-shop-manager aktualisiert? Dann auch:
+git add skills/my-new-skill/
 git add README.md skills/skill-shop-manager/SKILL.md
-git commit -m "feat: add mein-neuer-skill"
+git commit -m "feat: add my-new-skill"
 git push
 ```
 
-### Schritt 5 – Installieren
+### Step 5 – Install
 
 ```bash
-cp -r skills/mein-neuer-skill ~/.claude/skills/
+cp -r skills/my-new-skill ~/.claude/skills/
 ```
 
 ---
 
-## Regeln für Skills
+## Skill Rules
 
-| Regel | Detail |
-|-------|--------|
-| **Dateiname** | Immer exakt `SKILL.md` |
-| **Ordnername** | kebab-case, nur Buchstaben/Zahlen/Bindestriche |
-| **Frontmatter** | Nur `name` und `description`, max. 1024 Zeichen gesamt |
-| **description** | Beginnt mit `Use when …`, beschreibt NUR Trigger, kein Workflow |
-| **Keine README** | Kein `README.md` in Skill-Ordnern |
-| **Flache Struktur** | `skills/skill-name/SKILL.md` – keine tieferen Verschachtelungen |
+| Rule | Detail |
+|------|--------|
+| **File name** | Always exactly `SKILL.md` |
+| **Folder name** | kebab-case, letters/numbers/hyphens only |
+| **Frontmatter** | Only `name` and `description`, max 1024 characters total |
+| **description** | Starts with `Use when …`, describes triggers only – no workflow summary |
+| **No README** | No `README.md` inside skill folders |
+| **Flat structure** | `skills/skill-name/SKILL.md` – no deeper nesting |
 
 ---
 
-## Ordnerstruktur
+## Folder Structure
 
 ```
-my-claude-skill-shop/
+lehnert-claude-skills/
+├── .claude-plugin/
+│   └── plugin.json
 ├── README.md
 └── skills/
     ├── skill-shop-manager/
     │   └── SKILL.md
-    ├── brand-guidelines/        ← noch anzulegen
+    ├── brand-guidelines/        ← to be created
     │   └── SKILL.md
     └── ...
 ```
 
 ---
 
-## Status-Legende
+## Status Legend
 
-| Icon | Bedeutung |
-|------|-----------|
-| ✅ Aktiv | Fertig und einsatzbereit |
-| 🚧 In Arbeit | Wird gerade entwickelt |
-| 🔲 Geplant | Slot reserviert, noch nicht erstellt |
+| Icon | Meaning |
+|------|---------|
+| ✅ Active | Finished and ready to use |
+| 🚧 In Progress | Currently being developed |
+| 🔲 Planned | Slot reserved, not yet created |
 
 ---
 
-*Erstellt mit Claude Code · Gepflegt von Lehnert*
+*Built with Claude Code · Maintained by Lehnert*

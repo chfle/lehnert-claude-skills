@@ -1,0 +1,9 @@
+{
+  "name": "lehnert-skills",
+  "description": "Lehnert's personal Claude skill shop – skill-shop-manager and more skills",
+  "version": "1.0.0",
+  "author": {
+    "name": "Lehnert"
+  },
+  "keywords": ["skills", "skill-shop", "productivity"]
+}
