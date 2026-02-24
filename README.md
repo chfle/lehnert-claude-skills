@@ -19,11 +19,13 @@ The fastest way to get everything – one command registers the marketplace, one
 ```
 
 **To install all active skills at once:**
+
 ```bash
 /plugin install skill-shop-manager@lehnert-claude-skills
 ```
 
 **When a new skill is released**, just run:
+
 ```bash
 /plugin install <skill-name>@lehnert-claude-skills
 ```
@@ -73,30 +75,9 @@ claude plugin install /path/to/lehnert-claude-skills --scope user
 
 ## Skill Overview
 
-| # | Skill | Category | Description | Status |
-|---|-------|----------|-------------|--------|
-| 01 | `skill-shop-manager` | 🏪 Meta | Manages this shop, lists and recommends skills | ✅ Active |
-| 02 | `brand-guidelines` | 🎨 Brand | Brand colors, tone of voice, corporate identity | 🔲 Planned |
-| 03 | `email-marketing` | 📧 Marketing | Newsletters, subject lines, A/B variants | 🔲 Planned |
-| 04 | `blog-writer` | ✍️ Content | SEO blog articles in Lehnert's tone | 🔲 Planned |
-| 05 | `social-media-manager` | 📱 Marketing | LinkedIn, Instagram, Twitter/X posts | 🔲 Planned |
-| 06 | `code-reviewer` | 💻 Dev | Code reviews following quality standards | 🔲 Planned |
-| 07 | `sql-analyst` | 📊 Data | SQL queries, data analysis, reports | 🔲 Planned |
-| 08 | `project-planner` | 📋 Business | Project plans, milestones, resources | 🔲 Planned |
-| 09 | `customer-support` | 🤝 Service | Customer emails, complaints, FAQ | 🔲 Planned |
-| 10 | `seo-optimizer` | 🔍 Marketing | Meta tags, keywords, on-page SEO | 🔲 Planned |
-| 11 | `meeting-summarizer` | 🗒️ Productivity | Minutes, action items, decisions | 🔲 Planned |
-| 12 | `research-assistant` | 🔬 Research | Market research, competitive analysis, sources | 🔲 Planned |
-| 13 | `api-documenter` | 💻 Dev | OpenAPI specs, endpoint docs | 🔲 Planned |
-| 14 | `sprint-planner` | ⚡ Agile | Sprint planning, velocity, backlog | 🔲 Planned |
-| 15 | `user-story-writer` | ⚡ Agile | User stories, acceptance criteria | 🔲 Planned |
-| 16 | `legal-reviewer` | ⚖️ Legal | ToS checks, privacy (not legal advice) | 🔲 Planned |
-| 17 | `financial-analyst` | 💰 Finance | Budgets, KPIs, cost analysis | 🔲 Planned |
-| 18 | `onboarding-guide` | 🧑‍💼 HR | Employee onboarding, checklists | 🔲 Planned |
-| 19 | `changelog-writer` | 💻 Dev | Release notes, CHANGELOG.md | 🔲 Planned |
-| 20 | `data-visualizer` | 📊 Data | Charts, Mermaid diagrams, infographics | 🔲 Planned |
-| 21 | `presentation-builder` | 🎤 Content | Slides, pitch decks, executive summaries | 🔲 Planned |
-| 22 | `ai-prompt-engineer` | 🤖 AI | System prompts, templates, LLM optimization | 🔲 Planned |
+| #   | Skill                | Category | Description                                    | Status    |
+| --- | -------------------- | -------- | ---------------------------------------------- | --------- |
+| 01  | `skill-shop-manager` | 🏪 Meta  | Manages this shop, lists and recommends skills | ✅ Active |
 
 ---
 
@@ -154,14 +135,14 @@ cp -r skills/my-new-skill ~/.claude/skills/
 
 ## Skill Rules
 
-| Rule | Detail |
-|------|--------|
-| **File name** | Always exactly `SKILL.md` |
-| **Folder name** | kebab-case, letters/numbers/hyphens only |
-| **Frontmatter** | Only `name` and `description`, max 1024 characters total |
-| **description** | Starts with `Use when …`, describes triggers only – no workflow summary |
-| **No README** | No `README.md` inside skill folders |
-| **Flat structure** | `skills/skill-name/SKILL.md` – no deeper nesting |
+| Rule               | Detail                                                                  |
+| ------------------ | ----------------------------------------------------------------------- |
+| **File name**      | Always exactly `SKILL.md`                                               |
+| **Folder name**    | kebab-case, letters/numbers/hyphens only                                |
+| **Frontmatter**    | Only `name` and `description`, max 1024 characters total                |
+| **description**    | Starts with `Use when …`, describes triggers only – no workflow summary |
+| **No README**      | No `README.md` inside skill folders                                     |
+| **Flat structure** | `skills/skill-name/SKILL.md` – no deeper nesting                        |
 
 ---
 
@@ -187,12 +168,12 @@ lehnert-claude-skills/
 
 ## Status Legend
 
-| Icon | Meaning |
-|------|---------|
-| ✅ Active | Finished and ready to use |
-| 🚧 In Progress | Currently being developed |
-| 🔲 Planned | Slot reserved, not yet created |
+| Icon           | Meaning                        |
+| -------------- | ------------------------------ |
+| ✅ Active      | Finished and ready to use      |
+| 🚧 In Progress | Currently being developed      |
+| 🔲 Planned     | Slot reserved, not yet created |
 
 ---
 
-*Built with Claude Code · Maintained by Lehnert*
+_Built with Claude Code · Maintained by Lehnert_
