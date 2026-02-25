@@ -1,0 +1,9 @@
+{
+  "name": "sw-boilerplate-structure",
+  "description": "Creates the source code skeleton (entry points, modules, controllers, app structure) from tech-stack.yaml.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Lehnert"
+  },
+  "keywords": ["boilerplate", "scaffold", "structure", "src", "entrypoint", "modules"]
+}

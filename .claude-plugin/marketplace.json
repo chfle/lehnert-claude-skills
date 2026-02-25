@@ -70,6 +70,60 @@
       "author": { "name": "Lehnert" },
       "category": "software-planning",
       "keywords": ["code-generation", "scaffolding", "use-cases", "nextjs", "nestjs", "spring", "fastapi", "prisma", "testcontainers"]
+    },
+    {
+      "name": "sw-boilerplate",
+      "source": "./skills/sw-boilerplate",
+      "description": "Orchestrates all boilerplate sub-skills to scaffold a complete project from tech-stack.yaml directly into the workspace root.",
+      "version": "1.0.0",
+      "author": { "name": "Lehnert" },
+      "category": "software-development",
+      "keywords": ["boilerplate", "scaffold", "project-setup", "orchestrator", "fullstack", "init"]
+    },
+    {
+      "name": "sw-boilerplate-root",
+      "source": "./skills/sw-boilerplate-root",
+      "description": "Creates root-level project config files (package.json, tsconfig.json, pom.xml, .gitignore etc.) from tech-stack.yaml.",
+      "version": "1.0.0",
+      "author": { "name": "Lehnert" },
+      "category": "software-development",
+      "keywords": ["boilerplate", "scaffold", "package-json", "tsconfig", "pom-xml", "config"]
+    },
+    {
+      "name": "sw-boilerplate-structure",
+      "source": "./skills/sw-boilerplate-structure",
+      "description": "Creates the source code skeleton (entry points, modules, controllers) from tech-stack.yaml.",
+      "version": "1.0.0",
+      "author": { "name": "Lehnert" },
+      "category": "software-development",
+      "keywords": ["boilerplate", "scaffold", "structure", "src", "entrypoint", "modules"]
+    },
+    {
+      "name": "sw-boilerplate-db",
+      "source": "./skills/sw-boilerplate-db",
+      "description": "Creates database and ORM foundation files (Prisma schema, Flyway migration, SQLAlchemy setup) from tech-stack.yaml.",
+      "version": "1.0.0",
+      "author": { "name": "Lehnert" },
+      "category": "software-development",
+      "keywords": ["boilerplate", "database", "prisma", "flyway", "sqlalchemy", "typeorm", "migration"]
+    },
+    {
+      "name": "sw-boilerplate-docker",
+      "source": "./skills/sw-boilerplate-docker",
+      "description": "Creates Docker infrastructure files (docker-compose.yml, Dockerfiles, .dockerignore, Traefik config) from tech-stack.yaml.",
+      "version": "1.0.0",
+      "author": { "name": "Lehnert" },
+      "category": "software-development",
+      "keywords": ["boilerplate", "docker", "docker-compose", "dockerfile", "traefik", "infrastructure"]
+    },
+    {
+      "name": "sw-boilerplate-ui",
+      "source": "./skills/sw-boilerplate-ui",
+      "description": "Creates UI foundation files (Tailwind config, shadcn/ui setup, global styles, layout components) from tech-stack.yaml.",
+      "version": "1.0.0",
+      "author": { "name": "Lehnert" },
+      "category": "software-development",
+      "keywords": ["boilerplate", "ui", "tailwind", "shadcn", "styles", "layout", "components"]
     }
   ]
 }

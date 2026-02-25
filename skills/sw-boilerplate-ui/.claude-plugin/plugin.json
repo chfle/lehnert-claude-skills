@@ -1,0 +1,9 @@
+{
+  "name": "sw-boilerplate-ui",
+  "description": "Creates UI foundation files (Tailwind config, shadcn/ui setup, global styles, layout components) from tech-stack.yaml.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Lehnert"
+  },
+  "keywords": ["boilerplate", "ui", "tailwind", "shadcn", "styles", "layout", "components"]
+}

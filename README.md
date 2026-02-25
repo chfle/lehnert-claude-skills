@@ -19,6 +19,12 @@ The fastest way to get everything – one command registers the marketplace, one
 /plugin install sw-use-case-creator@lehnert-claude-skills
 /plugin install sw-tech-stack-planner@lehnert-claude-skills
 /plugin install sw-use-case-coder@lehnert-claude-skills
+/plugin install sw-boilerplate@lehnert-claude-skills
+/plugin install sw-boilerplate-root@lehnert-claude-skills
+/plugin install sw-boilerplate-structure@lehnert-claude-skills
+/plugin install sw-boilerplate-db@lehnert-claude-skills
+/plugin install sw-boilerplate-docker@lehnert-claude-skills
+/plugin install sw-boilerplate-ui@lehnert-claude-skills
 /plugin install sw-diagram-creator@lehnert-claude-skills
 ```
 
@@ -72,6 +78,12 @@ Skills without a `commands/` directory are **helpers** – they are loaded autom
 | `sw-use-case-creator` | Slash command | `/sw-use-case-creator` |
 | `sw-tech-stack-planner` | Slash command | `/sw-tech-stack-planner` |
 | `sw-use-case-coder` | Slash command | `/sw-use-case-coder` |
+| `sw-boilerplate` | Slash command | `/sw-boilerplate` |
+| `sw-boilerplate-root` | Slash command | `/sw-boilerplate-root` |
+| `sw-boilerplate-structure` | Slash command | `/sw-boilerplate-structure` |
+| `sw-boilerplate-db` | Slash command | `/sw-boilerplate-db` |
+| `sw-boilerplate-docker` | Slash command | `/sw-boilerplate-docker` |
+| `sw-boilerplate-ui` | Slash command | `/sw-boilerplate-ui` |
 
 **Rule of thumb:** If a skill is a standalone user-facing tool → give it a `commands/` file. If it's a helper or orchestrator → leave it as a pure skill.
 
@@ -127,6 +139,12 @@ claude plugin install /path/to/lehnert-claude-skills --scope user
 | Skill | Description | Status |
 |-------|-------------|--------|
 | `sw-use-case-coder` | Generates production-ready code for selected use cases from tech-stack.yaml and use-cases.md | ✅ Active |
+| `sw-boilerplate` | Orchestrates all boilerplate sub-skills to scaffold a complete project from tech-stack.yaml into root | ✅ Active |
+| `sw-boilerplate-root` | Creates root config files (package.json, tsconfig.json, pom.xml etc.) from tech-stack.yaml | ✅ Active |
+| `sw-boilerplate-structure` | Creates source code skeleton (entry points, modules, controllers) from tech-stack.yaml | ✅ Active |
+| `sw-boilerplate-db` | Creates database and ORM files (Prisma schema, Flyway migration, SQLAlchemy) from tech-stack.yaml | ✅ Active |
+| `sw-boilerplate-docker` | Creates Docker infrastructure files (docker-compose.yml, Dockerfiles, Traefik) from tech-stack.yaml | ✅ Active |
+| `sw-boilerplate-ui` | Creates UI foundation files (Tailwind, shadcn/ui, globals.css, layout) from tech-stack.yaml | ✅ Active |
 
 ### 🐧 Linux & Sysadmin
 

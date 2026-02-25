@@ -1,0 +1,9 @@
+{
+  "name": "sw-boilerplate",
+  "description": "Orchestrates all boilerplate sub-skills to scaffold a complete project from tech-stack.yaml directly into the workspace root.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Lehnert"
+  },
+  "keywords": ["boilerplate", "scaffold", "project-setup", "orchestrator", "fullstack", "init"]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "sw-boilerplate-docker",
+  "description": "Creates Docker infrastructure files (docker-compose.yml, Dockerfiles, .dockerignore, Traefik config) from tech-stack.yaml.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Lehnert"
+  },
+  "keywords": ["boilerplate", "docker", "docker-compose", "dockerfile", "traefik", "infrastructure"]
+}

@@ -28,6 +28,12 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | Skill | Description | Status |
 |-------|-------------|--------|
 | `sw-use-case-coder` | Generates production-ready code for selected use cases from tech-stack.yaml and use-cases.md | ✅ Active |
+| `sw-boilerplate` | Orchestrates all boilerplate sub-skills to scaffold a complete project from tech-stack.yaml into the workspace root | ✅ Active |
+| `sw-boilerplate-root` | Creates root config files (package.json, tsconfig.json, pom.xml etc.) from tech-stack.yaml | ✅ Active |
+| `sw-boilerplate-structure` | Creates source code skeleton (entry points, modules, controllers) from tech-stack.yaml | ✅ Active |
+| `sw-boilerplate-db` | Creates database and ORM files (Prisma schema, Flyway migration, SQLAlchemy) from tech-stack.yaml | ✅ Active |
+| `sw-boilerplate-docker` | Creates Docker infrastructure files (docker-compose.yml, Dockerfiles, Traefik) from tech-stack.yaml | ✅ Active |
+| `sw-boilerplate-ui` | Creates UI foundation files (Tailwind, shadcn/ui, globals.css, layout) from tech-stack.yaml | ✅ Active |
 
 ### 🐧 Linux & Sysadmin
 
@@ -66,6 +72,12 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | "Generate code for UC-001" | → `sw-use-case-coder` |
 | "Implement all MVP use cases" | → `sw-use-case-coder` |
 | "Scaffold files for a use case" | → `sw-use-case-coder` |
+| "Create project boilerplate" | → `sw-boilerplate` |
+| "Set up the project skeleton" | → `sw-boilerplate` |
+| "Generate package.json / tsconfig" | → `sw-boilerplate-root` |
+| "Create docker-compose.yml" | → `sw-boilerplate-docker` |
+| "Set up Prisma / database files" | → `sw-boilerplate-db` |
+| "Create Tailwind / shadcn setup" | → `sw-boilerplate-ui` |
 
 > No skill for your task yet? Say: **"Create the skill [name] for me"** – I'll build the folder and SKILL.md right away.
 

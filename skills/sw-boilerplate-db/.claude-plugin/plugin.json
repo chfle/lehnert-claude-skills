@@ -1,0 +1,9 @@
+{
+  "name": "sw-boilerplate-db",
+  "description": "Creates database and ORM foundation files (Prisma schema, Flyway migration, SQLAlchemy setup) from tech-stack.yaml.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Lehnert"
+  },
+  "keywords": ["boilerplate", "database", "prisma", "flyway", "sqlalchemy", "typeorm", "migration"]
+}
