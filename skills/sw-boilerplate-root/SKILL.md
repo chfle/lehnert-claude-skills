@@ -1,7 +1,7 @@
 ---
 name: sw-boilerplate-root
 description: Use when user wants to create root-level project config files (package.json, pom.xml, tsconfig.json, .gitignore etc.) based on requirements/tech-stack.yaml in the workspace root.
-version: 1.0.0
+version: 1.1.0
 author: Lehnert
 ---
 
@@ -9,7 +9,7 @@ author: Lehnert
 
 ## Overview
 
-Creates all root-level project configuration files directly in the workspace root based on `requirements/tech-stack.yaml`. Silent – nothing is printed in chat except the completion line.
+Creates or shows root-level project configuration files based on `requirements/tech-stack.yaml`. First asks the user whether to generate files or just show content. Waits for reply before doing anything else.
 
 ---
 
@@ -20,15 +20,48 @@ Creates all root-level project configuration files directly in the workspace roo
 
 ---
 
-## Files to Create
+## Step 1 – Always ask first (no exceptions)
 
-Read `frontend.framework`, `backend.framework`, `backend.language`, and `database.orm` from tech-stack.yaml, then create:
+Before reading tech-stack.yaml or doing anything else, ask the user **exactly** this question and wait for their reply:
+
+---
+
+Do you want to create the root files (package.json, pom.xml, build.gradle, Makefile, pyproject.toml etc.) yourself?
+
+1. Yes, I will create them myself – show me the exact content based on tech-stack.yaml
+2. No, generate them for me
+   ⚠️ Warning: Generated library versions might not be the latest. After generation I recommend running pnpm update / ./mvnw versions:use-latest-releases or equivalent.
+
+Reply with 1 or 2 only.
+
+---
+
+**Do not proceed until the user replies.**
+
+---
+
+## Step 2a – If user replies 1 (show content only)
+
+Read tech-stack.yaml. Show the exact file content for each relevant root file based on the detected stack. Do NOT write any files to disk. After showing all content, print nothing else.
+
+Show content for:
+- JS/TS stacks: `package.json`, `tsconfig.json`, `.gitignore`, `.env.example`, and framework extras (next.config.ts, nest-cli.json, etc.)
+- Spring Boot Maven: `pom.xml`
+- Spring Boot Gradle: `build.gradle.kts`, `settings.gradle.kts`
+- FastAPI: `pyproject.toml`, `requirements.txt`
+- Go: `go.mod`
+
+---
+
+## Step 2b – If user replies 2 (generate files)
+
+Read tech-stack.yaml silently. Write all root files directly to the workspace root. Do not output any file content or file list in chat.
 
 ### JavaScript / TypeScript stacks (Next.js, NestJS, React, Vite, Express)
 
 | File | Content |
 |------|---------|
-| `package.json` | Correct name, scripts, and dependencies for the detected framework(s) and package manager from `deployment` or inferred from stack |
+| `package.json` | Correct name, scripts, and dependencies for the detected framework(s) and package manager |
 | `tsconfig.json` | Strict TypeScript config matching the framework (Next.js paths, NestJS decorators, etc.) |
 | `.eslintrc.js` | ESLint config for the framework |
 | `.prettierrc` | Prettier defaults |
@@ -66,14 +99,9 @@ Read `frontend.framework`, `backend.framework`, `backend.language`, and `databas
 | `go.mod` | Module path + Go version + direct dependencies |
 | `.gitignore` | Go ignores |
 
----
-
-## Output Rules
-
-- Write all files silently to the workspace root.
-- Never output file content, code snippets, or file lists in chat.
-- At the end, print exactly one line:
+### After writing all files, print exactly two lines:
 
 ```
-✅ sw-boilerplate-root completed
+✅ Root boilerplate files created in root
+⚠️ Warning: Library versions might not be the latest. Run pnpm update (or equivalent) to update them.
 ```

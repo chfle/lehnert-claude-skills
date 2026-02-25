@@ -24,36 +24,38 @@ Read the full file before starting. Note: `frontend.framework`, `backend.framewo
 
 ---
 
-## Module 1 – Root Config (always runs)
+## Module 1 – Root Config (always runs, interactive)
 
-Create all root-level configuration files for the detected stack.
+**Before doing anything else**, ask the user exactly this question and wait for their reply:
 
-**JavaScript / TypeScript** (Next.js, NestJS, React, Vite, Express, Fastify):
-- `package.json` – correct name, scripts (`dev`, `build`, `start`, `test`), and dependencies for the detected framework(s) and package manager
-- `tsconfig.json` – strict TypeScript config for the framework (Next.js paths, NestJS decorators, etc.)
-- `.eslintrc.js` – ESLint config for the framework
-- `.prettierrc` – Prettier defaults
-- `.env.example` – all env vars referenced by the stack (DB URL, auth secret, ports) with placeholder values
-- `.gitignore` – Node ignores + `.env`
-- Next.js: also `next.config.ts`
-- NestJS: also `nest-cli.json`, `tsconfig.build.json`
-- Monorepo (`preferences.monorepo: true`): also `pnpm-workspace.yaml` or `turbo.json`
+---
 
-**Spring Boot:**
-- Maven: `pom.xml` with Spring Boot parent + all required dependencies (Web, JPA/jOOQ, Flyway, Security, Testcontainers, Lombok)
-- Gradle: `build.gradle.kts` + `settings.gradle.kts` with same dependencies
-- `.gitignore` – Java/Maven/Gradle ignores
+Do you want to create the root files (package.json, pom.xml, build.gradle, Makefile, pyproject.toml etc.) yourself?
 
-**Python / FastAPI:**
-- `pyproject.toml` – project metadata, FastAPI, uvicorn, SQLAlchemy/Alembic, pytest
-- `requirements.txt` – pinned versions
-- `.env.example`, `.gitignore`
+1. Yes, I will create them myself – show me the exact content based on tech-stack.yaml
+2. No, generate them for me
+   ⚠️ Warning: Generated library versions might not be the latest. After generation I recommend running pnpm update / ./mvnw versions:use-latest-releases or equivalent.
 
-**Go:**
-- `go.mod` – module path + Go version + direct dependencies
-- `.gitignore`
+Reply with 1 or 2 only.
 
-After writing all root files, print: `✅ [1/5] Root config files created`
+---
+
+**If user replies 1:** Show the exact file content for all relevant root files based on tech-stack.yaml. Do NOT write anything to disk. Do not print a completion line. Proceed to Module 2 after showing content.
+
+**If user replies 2:** Silently write all root files to the workspace root. No file content or lists in chat.
+
+Files to create based on the stack:
+- JS/TS: `package.json`, `tsconfig.json`, `.eslintrc.js`, `.prettierrc`, `.env.example`, `.gitignore`, plus `next.config.ts` (Next.js), `nest-cli.json` + `tsconfig.build.json` (NestJS), `pnpm-workspace.yaml` or `turbo.json` (monorepo)
+- Spring Boot Maven: `pom.xml`, `.gitignore`, `src/main/resources/application.yml`
+- Spring Boot Gradle: `build.gradle.kts`, `settings.gradle.kts`, `.gitignore`, `src/main/resources/application.yml`
+- FastAPI: `pyproject.toml`, `requirements.txt`, `.env.example`, `.gitignore`
+- Go: `go.mod`, `.gitignore`
+
+After writing all files (option 2 only), print exactly two lines:
+```
+✅ Root boilerplate files created in root
+⚠️ Warning: Library versions might not be the latest. Run pnpm update (or equivalent) to update them.
+```
 
 ---
 

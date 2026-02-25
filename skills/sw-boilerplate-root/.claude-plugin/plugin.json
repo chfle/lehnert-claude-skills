@@ -1,7 +1,7 @@
 {
   "name": "sw-boilerplate-root",
   "description": "Creates root-level project config files (package.json, tsconfig.json, pom.xml, .gitignore etc.) from tech-stack.yaml.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": {
     "name": "Lehnert"
   },
