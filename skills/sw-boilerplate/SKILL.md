@@ -53,7 +53,7 @@ Create all root-level configuration files for the detected stack.
 - `go.mod` – module path + Go version + direct dependencies
 - `.gitignore`
 
-After writing all root files, print: `✅ sw-boilerplate-root completed`
+After writing all root files, print: `✅ [1/5] Root config files created`
 
 ---
 
@@ -93,7 +93,7 @@ Create the source directory skeleton and entry point files.
 - `cmd/main.go` – main() with HTTP server setup
 - `internal/handler/.gitkeep`, `internal/service/.gitkeep`, `internal/repository/.gitkeep`
 
-After writing all structure files, print: `✅ sw-boilerplate-structure completed`
+After writing all structure files, print: `✅ [2/5] Source structure created`
 
 ---
 
@@ -123,7 +123,7 @@ Create database/ORM schema, config, and migration foundation.
 **Redis / cache** (if `database.cache` is set):
 - NestJS: `src/cache/cache.module.ts` – CacheModule.registerAsync()
 
-After writing all DB files, print: `✅ sw-boilerplate-db completed`
+After writing all DB files, print: `✅ [3/5] Database files created`
 
 ---
 
@@ -153,7 +153,7 @@ Create Docker infrastructure files.
 - `traefik.yml` – static config: entryPoints (web 80, websecure 443), Let's Encrypt resolver, Docker provider
 - `dynamic/.gitkeep`
 
-After writing all Docker files, print: `✅ sw-boilerplate-docker completed`
+After writing all Docker files, print: `✅ [4/5] Docker infrastructure created`
 
 ---
 
@@ -181,7 +181,7 @@ Create UI foundation files.
 - `src/main.tsx` – ReactDOM.createRoot mount
 - If Tailwind: also `tailwind.config.ts`, `postcss.config.js`
 
-After writing all UI files, print: `✅ sw-boilerplate-ui completed`
+After writing all UI files, print: `✅ [5/5] UI foundation created`
 
 ---
 
