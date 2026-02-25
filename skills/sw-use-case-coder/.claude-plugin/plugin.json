@@ -1,7 +1,7 @@
 {
   "name": "sw-use-case-coder",
   "description": "Generates production-ready code scaffolding for selected use cases from tech-stack.yaml and use-cases.md.",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "author": {
     "name": "Lehnert"
   },
