@@ -1,7 +1,7 @@
 ---
 name: sw-use-case-coder
 description: Use when user wants to generate code for a use case or user story, says "code UC-01", "implement US-03", "generate all MVP", "scaffold UC-05 UC-07", or wants production-ready files from use-cases.md and tech-stack.yaml written directly into the project root.
-version: 2.1.0
+version: 2.2.0
 author: Lehnert
 ---
 
@@ -16,6 +16,18 @@ Reads `requirements/tech-stack.yaml` and `requirements/use-cases.md`, then write
 ---
 
 ## Required Input – Check in Order
+
+0. **Boilerplate check first** – before reading any requirements file, check the workspace root for at least one of:
+   `package.json`, `pom.xml`, `build.gradle`, `build.gradle.kts`, `Makefile`, `pyproject.toml`, `Cargo.toml`, `go.mod`, `composer.json`
+   Also check any root file named under `package_manager` in tech-stack.yaml if it exists.
+
+   If NONE of these files exist in the workspace root → stop immediately and output exactly:
+
+   ```
+   ❌ No project boilerplate found in root.
+   Please run /sw-boilerplate first to create the full project structure.
+   Then try this command again.
+   ```
 
 1. **`requirements/tech-stack.yaml` missing** → stop immediately:
 
