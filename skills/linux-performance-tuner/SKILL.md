@@ -1,7 +1,7 @@
 ---
 name: linux-performance-tuner
 description: Use when user wants to tune Linux performance — kernel parameters, CPU governor, I/O scheduler, memory and swap settings, network stack tuning, database tuning (PostgreSQL, MySQL, Redis), high-throughput or low-latency optimization, profiling slow systems, or asks why their server is slow, has high load, or underperforms.
-version: 1.0.0
+version: 1.1.0
 author: Lehnert
 ---
 
@@ -93,14 +93,14 @@ If the bottleneck or workload type isn't clear, present options:
 
 **CPU:**
 ```bash
-# Set performance governor (max CPU frequency)
+# Apply immediately (current session only):
 cpupower frequency-set -g performance
-# Or with direct kernel interface:
+# Or without cpupower:
 for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do
   echo performance > "$cpu"
 done
 
-# Persist across reboots (systemd)
+# To persist across reboots, create a systemd service:
 cat > /etc/systemd/system/cpu-performance.service << 'EOF'
 [Unit]
 Description=Set CPU governor to performance
@@ -141,7 +141,9 @@ net.core.wmem_max = 16777216
 net.ipv4.tcp_rmem = 4096 87380 16777216
 net.ipv4.tcp_wmem = 4096 65536 16777216
 
-# Congestion control (BBR — better on high-bandwidth/latency links)
+# Congestion control (BBR — better throughput on high-bandwidth links)
+# Note: BBR can increase latency on lossy or congested networks.
+# Fallback: net.ipv4.tcp_congestion_control = cubic
 net.ipv4.tcp_congestion_control = bbr
 net.core.default_qdisc = fq
 
@@ -170,7 +172,8 @@ kernel.shmmax = 68719476736     # 64 GB — set to 75% of RAM
 kernel.shmall = 4294967296
 
 # Huge pages (PostgreSQL benefit significantly)
-vm.nr_hugepages = 512           # calculate: shared_buffers / 2MB
+vm.nr_hugepages = 512           # = shared_buffers_bytes / 2097152
+                                # Example: 4GB shared_buffers → 4096MB / 2MB = 2048 huge pages
 # Check current: grep HugePages /proc/meminfo
 
 # Reduce swap use — databases need RAM, not swap
@@ -205,7 +208,7 @@ done
 
 | Parameter | Formula / Value | Notes |
 |-----------|----------------|-------|
-| `shared_buffers` | 25% of RAM | e.g. 4GB on 16GB server |
+| `shared_buffers` | 15–25% of RAM | Lower (15%) for mixed workloads, higher (25%) for dedicated DB |
 | `effective_cache_size` | 75% of RAM | Planner hint only |
 | `work_mem` | RAM / (max_connections × 2) | Per-sort memory |
 | `maintenance_work_mem` | 512MB–2GB | VACUUM, CREATE INDEX |

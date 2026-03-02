@@ -183,7 +183,7 @@
       "name": "linux-network-configurer",
       "source": "./skills/linux-network-configurer",
       "description": "Configures Linux networking — static IP, routing, VLANs, bonding, bridges, WireGuard, OpenVPN, iptables, nftables, firewalld, DNS, and network troubleshooting.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["network", "networking", "static-ip", "wireguard", "vpn", "iptables", "nftables", "vlan", "bonding", "bridge", "dns", "routing", "firewall", "linux"]
@@ -201,7 +201,7 @@
       "name": "linux-systemd-manager",
       "source": "./skills/linux-systemd-manager",
       "description": "Creates, debugs, and hardens systemd service, timer, socket, path, and mount units — with sandboxing, resource limits, restart policies, and timer scheduling.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["systemd", "service", "timer", "socket", "unit", "journalctl", "autostart", "boot", "scheduling", "sandboxing", "linux"]
@@ -219,7 +219,7 @@
       "name": "linux-selinux-helper",
       "source": "./skills/linux-selinux-helper",
       "description": "Diagnoses and fixes SELinux denials — file context relabeling, boolean toggles, port labeling, and custom policy modules. Never suggests disabling SELinux.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["selinux", "avc", "denial", "policy", "semanage", "restorecon", "audit2allow", "boolean", "context", "rhel", "rocky", "fedora", "security"]
@@ -228,7 +228,7 @@
       "name": "linux-performance-tuner",
       "source": "./skills/linux-performance-tuner",
       "description": "Profiles a Linux system and generates tuned sysctl, CPU governor, I/O scheduler, and workload-specific configs for web, database, networking, HPC, or general workloads.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["performance", "tuning", "sysctl", "cpu-governor", "io-scheduler", "kernel", "linux", "optimization", "profiling", "latency", "throughput", "bbr", "hugepages", "numa"]

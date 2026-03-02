@@ -1,7 +1,7 @@
 ---
 name: linux-network-configurer
 description: Use when user wants to configure Linux networking — static IP, network interfaces, routing, iptables, nftables, firewalld, VLANs, bonding, WireGuard VPN, OpenVPN, DNS, bridge interfaces, network namespaces, or asks how to set up, troubleshoot, or change any network setting on a Linux system.
-version: 1.0.0
+version: 1.1.0
 author: Lehnert
 ---
 
@@ -280,8 +280,12 @@ ListenPort = 51820
 PrivateKey = <SERVER_PRIVATE_KEY>
 
 # Enable IP forwarding and NAT for client internet access
+# iptables version (most systems):
 PostUp = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+# nftables alternative (Debian 12+, RHEL 9+):
+# PostUp = nft add rule inet filter forward iifname wg0 accept; nft add rule inet nat postrouting oifname eth0 masquerade
+# PostDown = nft flush ruleset
 
 [Peer]
 # Client 1
@@ -301,6 +305,7 @@ PublicKey = <SERVER_PUBLIC_KEY>
 Endpoint = YOUR_SERVER_IP:51820
 AllowedIPs = 0.0.0.0/0    # Route all traffic through VPN
 PersistentKeepalive = 25
+# MTU = 1280              # Uncomment if experiencing fragmentation issues
 ```
 
 Key generation commands:
@@ -540,3 +545,24 @@ Then print ONLY:
 - **Validate before apply** — include syntax check commands (`netplan try`, `wg showconf`)
 - **`netplan try`** instead of `netplan apply` when possible — auto-reverts after 120s if no confirmation
 - **Never disable the primary interface** without confirming there's console/IPMI access
+
+### Safe Remote Apply Sequence
+
+Always include this workflow when the user is applying config over SSH:
+
+```
+1. Open a SECOND SSH session to the server — keep it open as a safety net
+2. Apply config in the FIRST session
+3. From the SECOND session: verify connectivity (ping, ssh test)
+4. Only close the first session once verified
+5. If something breaks: use the second session to revert
+```
+
+For Netplan specifically:
+```bash
+# netplan try auto-reverts after 120s if you don't confirm
+netplan try
+# If you can still SSH in:
+netplan apply   # or press Enter if prompted
+# If locked out — wait 120s, netplan will revert automatically
+```

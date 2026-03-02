@@ -1,7 +1,7 @@
 ---
 name: linux-selinux-helper
 description: Use when user has an SELinux denial, AVC message, permission error on RHEL/Rocky/Alma/Fedora/CentOS, wants to write a custom SELinux policy module, needs to fix file contexts, label ports, manage SELinux booleans, troubleshoot why an application is blocked, or wants to understand SELinux modes, contexts, and policies.
-version: 1.0.0
+version: 1.1.0
 author: Lehnert
 ---
 
@@ -261,6 +261,18 @@ allow httpd_t var_log_t:file { read write create open getattr };
 allow httpd_t var_log_t:dir { write add_name };
 ```
 
+**Finding the correct type for a path:**
+```bash
+# What type SHOULD this path have?
+matchpathcon /data/logs
+
+# What type DOES it currently have?
+ls -Z /data/logs
+
+# What type does a running process have?
+ps -eZ | grep nginx
+```
+
 Compile manually:
 ```bash
 checkmodule -M -m -o nginx-custom.mod nginx-custom.te
@@ -334,6 +346,32 @@ selinux/
   build-and-load.sh  ← compile + load script
 ```
 
+`build-and-load.sh` must contain:
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+MODULE="${1:-nginx-custom}"
+TE_FILE="${MODULE}.te"
+MOD_FILE="${MODULE}.mod"
+PP_FILE="${MODULE}.pp"
+
+if [[ ! -f "$TE_FILE" ]]; then
+  echo "Error: ${TE_FILE} not found"
+  exit 1
+fi
+
+echo "Compiling ${TE_FILE}..."
+checkmodule -M -m -o "$MOD_FILE" "$TE_FILE"
+semodule_package -o "$PP_FILE" -m "$MOD_FILE"
+
+echo "Loading ${PP_FILE}..."
+semodule -i "$PP_FILE"
+
+echo "✓ Policy module '${MODULE}' loaded successfully"
+echo "Verify: ausearch -m avc -ts recent | audit2why"
+```
+
 Then print:
 ```
 ✅ Custom SELinux policy written to ./selinux/
@@ -343,10 +381,11 @@ Then print:
 
 ▶ Build and load:
   chmod +x selinux/build-and-load.sh
-  sudo ./selinux/build-and-load.sh
+  cd selinux && sudo ./build-and-load.sh nginx-custom
 
 ▶ Verify no new denials:
   ausearch -m avc -ts recent | audit2why
 
 💡 Next: re-run sealert to confirm the denial is resolved.
+💡 Tip: use matchpathcon /path/to/file to find the correct SELinux type for a path.
 ```

@@ -1,7 +1,7 @@
 ---
 name: linux-systemd-manager
 description: Use when user wants to create, edit, debug, or optimize a systemd service, timer, socket, mount, or path unit — or asks how to run something as a service, auto-restart a process, schedule tasks with systemd timers, understand journalctl output, troubleshoot a failed unit, or manage systemd targets and dependencies.
-version: 1.0.0
+version: 1.1.0
 author: Lehnert
 ---
 
@@ -107,6 +107,8 @@ PrivateTmp=yes
 ProtectSystem=strict
 ProtectHome=yes
 ReadWritePaths=/var/lib/myapp /var/log/myapp
+StateDirectory=myapp          # creates /var/lib/myapp with correct ownership automatically
+LogsDirectory=myapp           # creates /var/log/myapp with correct ownership automatically
 ProtectKernelTunables=yes
 ProtectKernelModules=yes
 ProtectControlGroups=yes
@@ -115,7 +117,10 @@ RestrictNamespaces=yes
 LockPersonality=yes
 MemoryDenyWriteExecute=yes
 RestrictRealtime=yes
-CapabilityBoundingSet=
+CapabilityBoundingSet=       # Drop ALL capabilities (recommended)
+# Exception: if app must bind port < 1024:
+# CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+# AmbientCapabilities=CAP_NET_BIND_SERVICE
 AmbientCapabilities=
 SystemCallFilter=@system-service
 SystemCallErrorNumber=EPERM
@@ -143,6 +148,8 @@ WantedBy=multi-user.target
 
 **Always generate a timer + its companion service as a pair.**
 
+> **Naming rule:** The timer and service must share the same base name — `myapp-task.timer` activates `myapp-task.service` automatically. No `Requires=` needed in the timer.
+
 `/etc/systemd/system/myapp-task.service`:
 ```ini
 [Unit]
@@ -168,7 +175,6 @@ ProtectHome=yes
 ```ini
 [Unit]
 Description=Run My App Task daily at 2 AM
-Requires=myapp-task.service
 
 [Timer]
 OnCalendar=*-*-* 02:00:00   # daily at 2 AM
@@ -178,7 +184,8 @@ OnCalendar=*-*-* 02:00:00   # daily at 2 AM
 # OnUnitActiveSec=1h         # 1 hour after last run
 AccuracySec=1min
 RandomizedDelaySec=30s       # spread load — avoid thundering herd
-Persistent=true              # run missed timers after downtime
+Persistent=true              # run missed timers after downtime (use for backups, reports)
+# Persistent=false           # skip missed runs (use for metrics, health checks)
 
 [Install]
 WantedBy=timers.target
@@ -202,9 +209,18 @@ Verify expression: `systemd-analyze calendar "Mon *-*-* 03:00:00"`
 
 ## Socket Activation Unit
 
-Allows systemd to listen on a port and start the service only when a connection arrives.
+Allows systemd to listen on a port or Unix socket and start the service only when a connection arrives.
 
-`/etc/systemd/system/myapp.socket`:
+**`Accept=no` vs `Accept=yes`:**
+
+| Value | Behavior | Use case |
+|-------|----------|----------|
+| `Accept=no` | One service instance handles all connections | Long-lived servers (web apps, databases) |
+| `Accept=yes` | Spawn one service instance per connection | Simple per-connection handlers (inetd style) |
+
+Most modern apps use `Accept=no`.
+
+**TCP socket (`/etc/systemd/system/myapp.socket`):**
 ```ini
 [Unit]
 Description=My App Socket
@@ -213,6 +229,21 @@ Description=My App Socket
 ListenStream=8080
 Accept=no
 SocketUser=appuser
+
+[Install]
+WantedBy=sockets.target
+```
+
+**Unix domain socket (for local IPC — nginx, PHP-FPM, gunicorn):**
+```ini
+[Unit]
+Description=My App Unix Socket
+
+[Socket]
+ListenStream=/run/myapp/myapp.sock
+SocketMode=0660
+SocketUser=appuser
+SocketGroup=www-data
 
 [Install]
 WantedBy=sockets.target
@@ -232,6 +263,7 @@ ExecStart=/opt/myapp/bin/myapp
 StandardInput=socket
 NoNewPrivileges=yes
 PrivateTmp=yes
+RuntimeDirectory=myapp       # creates /run/myapp with correct ownership
 ```
 
 ---
