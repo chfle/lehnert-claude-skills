@@ -1,0 +1,7 @@
+{
+  "name": "linux-network-configurer",
+  "description": "Configures Linux networking — static IP, routing, VLANs, bonding, bridges, WireGuard, OpenVPN, iptables, nftables, firewalld, DNS, and network troubleshooting.",
+  "version": "1.0.0",
+  "author": { "name": "Lehnert" },
+  "keywords": ["network", "networking", "static-ip", "wireguard", "vpn", "iptables", "nftables", "vlan", "bonding", "bridge", "dns", "routing", "firewall", "linux"]
+}

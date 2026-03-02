@@ -32,6 +32,7 @@ The fastest way to get everything – one command registers the marketplace, one
 /plugin install linux-security-hardener@lehnert-claude-skills
 /plugin install linux-log-analyzer@lehnert-claude-skills
 /plugin install linux-monitoring-setup@lehnert-claude-skills
+/plugin install linux-network-configurer@lehnert-claude-skills
 ```
 
 **To install all active skills at once:**
@@ -96,6 +97,7 @@ Skills without a `commands/` directory are **helpers** – they are loaded autom
 | `linux-security-hardener` | Slash command | `/linux-security-hardener` |
 | `linux-log-analyzer` | Slash command | `/linux-log-analyzer` |
 | `linux-monitoring-setup` | Slash command | `/linux-monitoring-setup` |
+| `linux-network-configurer` | Slash command | `/linux-network-configurer` |
 
 **Rule of thumb:** If a skill is a standalone user-facing tool → give it a `commands/` file. If it's a helper or orchestrator → leave it as a pure skill.
 
@@ -168,6 +170,7 @@ claude plugin install /path/to/lehnert-claude-skills --scope user
 | `linux-security-hardener` | Generates a complete server hardening plan with SSH lockdown, firewall, fail2ban, sysctl, auditd, and a ready-to-run harden.sh script | ✅ Active |
 | `linux-log-analyzer` | Analyzes auth.log, syslog, nginx, Apache, journalctl, Docker, and fail2ban logs for errors, security threats, brute force, and anomalies | ✅ Active |
 | `linux-monitoring-setup` | Sets up Prometheus, Grafana, Node Exporter, Loki, Alertmanager, Uptime Kuma, or Netdata for any server or Docker host — writes all configs to disk | ✅ Active |
+| `linux-network-configurer` | Configures static IP, routing, VLANs, bonding, bridges, WireGuard VPN, iptables, nftables, DNS across NetworkManager, systemd-networkd, and ifupdown | ✅ Active |
 
 ### 🔒 Pentesting
 

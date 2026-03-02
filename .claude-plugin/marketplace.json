@@ -178,6 +178,15 @@
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["monitoring", "prometheus", "grafana", "loki", "alertmanager", "node-exporter", "uptime-kuma", "netdata", "cadvisor", "observability", "metrics", "alerts"]
+    },
+    {
+      "name": "linux-network-configurer",
+      "source": "./skills/linux-network-configurer",
+      "description": "Configures Linux networking — static IP, routing, VLANs, bonding, bridges, WireGuard, OpenVPN, iptables, nftables, firewalld, DNS, and network troubleshooting.",
+      "version": "1.0.0",
+      "author": { "name": "Lehnert" },
+      "category": "linux-sysadmin",
+      "keywords": ["network", "networking", "static-ip", "wireguard", "vpn", "iptables", "nftables", "vlan", "bonding", "bridge", "dns", "routing", "firewall", "linux"]
     }
   ]
 }

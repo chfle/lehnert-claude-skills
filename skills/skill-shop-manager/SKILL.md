@@ -45,6 +45,7 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | `linux-security-hardener` | Generates a complete server hardening plan with SSH, firewall, fail2ban, sysctl, auditd, and a ready-to-run harden.sh script | ✅ Active |
 | `linux-log-analyzer` | Analyzes auth.log, syslog, nginx, Apache, journalctl, Docker, and fail2ban logs for errors, security threats, and anomalies | ✅ Active |
 | `linux-monitoring-setup` | Sets up Prometheus+Grafana, Loki, Alertmanager, Uptime Kuma, or Netdata for any server or Docker host | ✅ Active |
+| `linux-network-configurer` | Configures static IP, VLANs, bonding, WireGuard, iptables, nftables, DNS across all Linux network stacks | ✅ Active |
 
 ### 🔒 Pentesting
 
@@ -110,6 +111,11 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | "Monitor my server / Docker host" | → `linux-monitoring-setup` |
 | "Set up uptime monitoring / status page" | → `linux-monitoring-setup` |
 | "I want alerts when disk is full or service is down" | → `linux-monitoring-setup` |
+| "Set a static IP on my Linux server" | → `linux-network-configurer` |
+| "Set up WireGuard VPN" | → `linux-network-configurer` |
+| "Configure iptables / nftables / firewalld" | → `linux-network-configurer` |
+| "Configure VLANs / bonding / bridge" | → `linux-network-configurer` |
+| "My network stopped working" | → `linux-network-configurer` |
 
 > No skill for your task yet? Say: **"Create the skill [name] for me"** – I'll build the folder and SKILL.md right away.
 
