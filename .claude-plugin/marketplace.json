@@ -66,7 +66,7 @@
       "name": "sw-use-case-coder",
       "source": "./skills/sw-use-case-coder",
       "description": "Generates production-ready code for selected use cases (UC-01, US-03, all MVP) from tech-stack.yaml and use-cases.md — writes files directly into workspace root.",
-      "version": "2.4.0",
+      "version": "2.5.0",
       "author": { "name": "Lehnert" },
       "category": "software-planning",
       "keywords": ["code-generation", "scaffolding", "use-cases", "nextjs", "nestjs", "spring", "fastapi", "prisma", "testcontainers"]
@@ -75,7 +75,7 @@
       "name": "sw-boilerplate",
       "source": "./skills/sw-boilerplate",
       "description": "Scaffolds a complete project from tech-stack.yaml into the workspace root — root configs, source structure, database files, Docker, and UI foundation in one command.",
-      "version": "1.3.0",
+      "version": "1.4.0",
       "author": { "name": "Lehnert" },
       "category": "software-development",
       "keywords": ["boilerplate", "scaffold", "project-setup", "orchestrator", "fullstack", "init"]
@@ -129,7 +129,7 @@
       "name": "linux-shell-scriptor",
       "source": "./skills/linux-shell-scriptor",
       "description": "Generates production-ready bash scripts for any Linux task from a plain English description — backups, monitoring, deployment, cron jobs, health checks, database maintenance.",
-      "version": "1.3.0",
+      "version": "1.4.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["bash", "shell", "script", "linux", "automation", "backup", "monitoring", "deployment", "cron", "sysadmin"]
@@ -147,7 +147,7 @@
       "name": "docker-compose-writer",
       "source": "./skills/docker-compose-writer",
       "description": "Generates or optimizes docker-compose.yml for any self-hosted app or cloud replacement (Google Photos→Immich, Gmail→Mailcow, ChatGPT→Ollama) — full stacks with health checks, named volumes, and .env setup.",
-      "version": "2.1.0",
+      "version": "2.2.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["docker", "docker-compose", "containers", "self-hosted", "homelab", "nginx", "postgres", "redis", "traefik", "devops", "infrastructure", "immich", "nextcloud", "jellyfin", "ollama"]
@@ -174,7 +174,7 @@
       "name": "linux-monitoring-setup",
       "source": "./skills/linux-monitoring-setup",
       "description": "Sets up a complete monitoring stack (Prometheus, Grafana, Node Exporter, Loki, Alertmanager, Uptime Kuma, Netdata) for any Linux server, Docker host, or application.",
-      "version": "1.3.0",
+      "version": "1.4.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["monitoring", "prometheus", "grafana", "loki", "alertmanager", "node-exporter", "uptime-kuma", "netdata", "cadvisor", "observability", "metrics", "alerts"]
@@ -192,7 +192,7 @@
       "name": "linux-backup-restore",
       "source": "./skills/linux-backup-restore",
       "description": "Designs and generates complete Linux backup solutions using restic, BorgBackup, rsync, or tar — with encryption, encryption key management, remote storage, retention policies, database backups, Docker volume backups, and restore procedures.",
-      "version": "1.5.0",
+      "version": "1.6.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["backup", "restore", "restic", "borgbackup", "rsync", "disaster-recovery", "database-backup", "docker-volumes", "s3", "3-2-1", "retention", "linux"]
@@ -210,7 +210,7 @@
       "name": "linux-cron-manager",
       "source": "./skills/linux-cron-manager",
       "description": "Generates production-ready cron jobs with /etc/cron.d/ entries and wrapper scripts featuring flock locking, logging, log rotation, and failure alerting.",
-      "version": "1.3.0",
+      "version": "1.4.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["cron", "crontab", "scheduling", "flock", "locking", "automation", "linux", "systemd-timer", "cron.d"]
@@ -219,7 +219,7 @@
       "name": "linux-selinux-helper",
       "source": "./skills/linux-selinux-helper",
       "description": "Diagnoses and fixes SELinux denials — file context relabeling, boolean toggles, port labeling, and custom policy modules. Never suggests disabling SELinux.",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["selinux", "avc", "denial", "policy", "semanage", "restorecon", "audit2allow", "boolean", "context", "rhel", "rocky", "fedora", "security"]
@@ -228,10 +228,19 @@
       "name": "linux-performance-tuner",
       "source": "./skills/linux-performance-tuner",
       "description": "Profiles a Linux system and generates tuned sysctl, CPU governor, I/O scheduler, and workload-specific configs for web, database, networking, HPC, or general workloads.",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["performance", "tuning", "sysctl", "cpu-governor", "io-scheduler", "kernel", "linux", "optimization", "profiling", "latency", "throughput", "bbr", "hugepages", "numa"]
+    },
+    {
+      "name": "linux-vuln-scanner",
+      "source": "./skills/linux-vuln-scanner",
+      "description": "Generates vulnerability scan scripts for Linux servers, Docker containers, and web apps using Trivy (CVE), nmap (ports), testssl.sh (TLS), and Nikto (web) — for authorized security assessments only.",
+      "version": "1.0.0",
+      "author": { "name": "Lehnert" },
+      "category": "pentesting",
+      "keywords": ["vuln", "cve", "trivy", "nmap", "nikto", "testssl", "security", "audit", "pentesting", "scan", "cvss", "openvas"]
     }
   ]
 }

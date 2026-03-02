@@ -1,7 +1,7 @@
 ---
 name: sw-boilerplate
 description: Use when user wants to scaffold a complete project boilerplate, says "create boilerplate", "set up the project", "generate the skeleton", or wants all project files created from requirements/tech-stack.yaml directly in the workspace root.
-version: 1.3.0
+version: 1.4.0
 author: Lehnert
 ---
 
@@ -18,7 +18,9 @@ Reads `requirements/tech-stack.yaml` and writes every project file directly into
 ## Required Input
 
 `requirements/tech-stack.yaml` must exist. If missing, stop:
-> `requirements/tech-stack.yaml` not found. Run `/sw-tech-stack-planner` first.
+> `requirements/tech-stack.yaml` not found.
+> Run `/sw-tech-stack-planner` first, or describe your stack directly:
+> `/sw-tech-stack-planner "Next.js + NestJS + PostgreSQL + Docker"`
 
 Read the full file before starting. Note: `frontend.framework`, `backend.framework`, `backend.language`, `database.primary`, `database.orm`, `database.cache`, `docker.services`, `deployment.reverse_proxy`, `frontend.ui_library`.
 

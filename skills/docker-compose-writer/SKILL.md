@@ -1,7 +1,7 @@
 ---
 name: docker-compose-writer
 description: Use when user wants to write, generate, create, or optimize a docker-compose.yml — for a new project, an existing stack, any self-hosted app, or when they want to replace a cloud service (Google Drive, Gmail, GitHub, Slack, Notion, ChatGPT, etc.) with a self-hosted alternative.
-version: 2.1.0
+version: 2.2.0
 author: Lehnert
 ---
 
@@ -411,6 +411,27 @@ After the user selects (or in Direct Mode), generate the **complete, working** s
 | Log limits | `logging: options: max-size: "10m" max-file: "3"` to prevent disk fill |
 | Security | `cap_drop: [ALL]`, read-only config mounts `:ro`, no `privileged: true` unless required |
 | Internal-only ports | Services not exposed to host must NOT have `ports:` — use Docker network |
+
+### Companion Service Health Check Templates
+
+When generating Redis as a companion service, always include a health check so dependent services use `condition: service_healthy`:
+
+```yaml
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    networks:
+      - app_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+```
+
+---
 
 ### App-Specific Requirements
 

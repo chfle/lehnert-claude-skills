@@ -1,7 +1,7 @@
 ---
 name: linux-shell-scriptor
 description: Use when user wants to write, generate, or create a bash or shell script for any Linux task — backups, monitoring, deployment, automation, cron jobs, health checks, system maintenance, log rotation, or any described sysadmin use case.
-version: 1.3.0
+version: 1.4.0
 author: Lehnert
 ---
 
@@ -57,7 +57,7 @@ Every script MUST contain all of the following:
 | Logging helpers | `log()`, `warn()`, `error()` functions writing to stderr with timestamps |
 | Argument parsing | `getopts` or manual flag loop with validation and `usage` on bad args |
 | Dependency check | `command -v <tool> >/dev/null` for every external command used |
-| Trap + cleanup | `trap cleanup EXIT` to remove temp files and restore state |
+| Trap + cleanup | `trap cleanup EXIT` to remove temp files and restore state; also `trap 'error "Script interrupted"; cleanup; exit 130' INT TERM` to handle kills |
 | Idempotent logic | Safe to run multiple times wherever possible |
 | Dry-run mode | `--dry-run` / `-n` flag for any script that modifies files or services |
 | No hardcoded secrets | Credentials via env vars or config files only; never inline |

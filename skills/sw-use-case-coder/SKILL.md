@@ -1,7 +1,7 @@
 ---
 name: sw-use-case-coder
 description: Use when user wants to generate code for a use case or user story, says "code UC-01", "implement US-03", "generate all MVP", "scaffold UC-05 UC-07", or wants production-ready files from use-cases.md and tech-stack.yaml written directly into the project root.
-version: 2.4.0
+version: 2.5.0
 author: Lehnert
 ---
 
@@ -72,6 +72,18 @@ Look up each ID in both `requirements/use-cases.md` and `requirements/user-stori
 
 Read `requirements/tech-stack.yaml` fully. Adapt every file to the detected language, framework, ORM, and test tooling. Never generate files for frameworks not in the stack.
 
+### Monorepo vs Single-App Paths
+
+Before generating any file path, read `project.structure` from `requirements/tech-stack.yaml`:
+
+| Value | Path prefix rule |
+|-------|-----------------|
+| `single-app` (or field absent) | Use paths as-is from the table below |
+| `monorepo` | Prefix frontend files with `apps/web/`, backend files with `apps/api/` |
+
+Example — Next.js in monorepo: `app/devices/page.tsx` → `apps/web/app/devices/page.tsx`
+Example — NestJS in monorepo: `src/devices/devices.service.ts` → `apps/api/src/devices/devices.service.ts`
+
 ### Generic path conventions
 
 | Stack | Real paths to write |
@@ -108,6 +120,8 @@ Read `requirements/tech-stack.yaml` fully. Adapt every file to the detected lang
 | Integration (Testcontainers) | `testcontainers: true` | `src/<feature>/<feature>.integration.spec.ts` |
 | E2E | `e2e` key present | `e2e/<feature>.spec.ts` |
 | API / Supertest | `api` key present | `src/<feature>/<feature>.api.spec.ts` |
+
+Apply the same monorepo prefix to all test paths: `apps/api/src/<feature>/...` for backend tests, `apps/web/...` for frontend tests.
 
 ---
 

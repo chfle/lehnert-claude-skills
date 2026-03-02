@@ -1,7 +1,7 @@
 ---
 name: linux-performance-tuner
 description: Use when user wants to tune Linux performance — kernel parameters, CPU governor, I/O scheduler, memory and swap settings, network stack tuning, database tuning (PostgreSQL, MySQL, Redis), high-throughput or low-latency optimization, profiling slow systems, or asks why their server is slow, has high load, or underperforms.
-version: 1.2.0
+version: 1.3.0
 author: Lehnert
 ---
 
@@ -108,7 +108,8 @@ After=multi-user.target
 
 [Service]
 Type=oneshot
-ExecStart=/bin/sh -c 'for f in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do echo performance > $f; done'
+ExecStart=/bin/sh -c 'for f in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do [ -w "$f" ] && echo performance > "$f"; done; true'
+# Note: Some systems (ARM, VMs, certain kernels) may not expose cpufreq — exit 0 always
 RemainAfterExit=yes
 
 [Install]

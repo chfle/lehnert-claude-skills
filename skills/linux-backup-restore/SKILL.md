@@ -1,7 +1,7 @@
 ---
 name: linux-backup-restore
 description: Use when user wants to back up a Linux server, design a backup strategy, write a backup script, set up automated backups, configure restic or borgbackup, restore from a backup, test backup integrity, back up databases, Docker volumes, or asks about the 3-2-1 backup rule or disaster recovery.
-version: 1.5.0
+version: 1.6.0
 author: Lehnert
 ---
 
@@ -103,6 +103,17 @@ restic init --repo s3:https://s3.amazonaws.com/bucket-name/myserver
 
 # SFTP / SSH
 restic init --repo sftp:user@backuphost:/backups/myserver
+
+# S3-compatible (MinIO, Wasabi, Linode Object Storage, Backblaze S3-compatible)
+# Set custom endpoint via environment variable:
+export AWS_ACCESS_KEY_ID=your_key
+export AWS_SECRET_ACCESS_KEY=your_secret
+# Wasabi (us-east-1):
+restic init --repo s3:https://s3.us-east-1.wasabisys.com/bucket-name/myserver
+# MinIO (self-hosted):
+restic init --repo s3:http://minio.example.com:9000/bucket-name/myserver
+# Linode (Newark):
+restic init --repo s3:https://us-east-1.linodeobjects.com/bucket-name/myserver
 
 # Backblaze B2
 export B2_ACCOUNT_ID=your_id

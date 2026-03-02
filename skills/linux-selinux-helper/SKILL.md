@@ -1,7 +1,7 @@
 ---
 name: linux-selinux-helper
 description: Use when user has an SELinux denial, AVC message, permission error on RHEL/Rocky/Alma/Fedora/CentOS, wants to write a custom SELinux policy module, needs to fix file contexts, label ports, manage SELinux booleans, troubleshoot why an application is blocked, or wants to understand SELinux modes, contexts, and policies.
-version: 1.2.0
+version: 1.3.0
 author: Lehnert
 ---
 
@@ -95,6 +95,8 @@ type=AVC msg=audit(1234567890.123:456): avc:  denied  { write } for  pid=1234
 | `scontext=...httpd_t...` | The **source context** — the process's SELinux label |
 | `tcontext=...default_t...` | The **target context** — the file/resource's SELinux label |
 | `tclass=file` | The **object class** (file, dir, tcp_socket, process, etc.) |
+
+⚠️ **Check scontext first:** If `scontext` contains `unconfined_u:` (e.g. `unconfined_u:unconfined_r:unconfined_t:s0`), that domain has **unrestricted SELinux access** — policy fixes won't help because the domain bypasses enforcement. Verify the system is actually enforcing: `getenforce` (must return `Enforcing`). If the scontext is expected (e.g. a custom app not yet labeled), you need to create a proper domain type.
 
 The fix strategy depends on the mismatch:
 - Wrong **file context** → `semanage fcontext` + `restorecon`

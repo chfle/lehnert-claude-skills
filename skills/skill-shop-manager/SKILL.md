@@ -51,7 +51,7 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 
 | Skill | Description | Status |
 |-------|-------------|--------|
-| *(no skills yet)* | | |
+| `linux-vuln-scanner` | Scans servers, containers, and web apps for CVEs using Trivy, nmap, testssl.sh, and Nikto — authorized assessments only | ✅ Active |
 
 ---
 
@@ -140,6 +140,11 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | "Set CPU governor to performance" | → `linux-performance-tuner` |
 | "Optimize for PostgreSQL / web / HPC" | → `linux-performance-tuner` |
 | "Profile where my server is spending time" | → `linux-performance-tuner` |
+| "Scan my server for vulnerabilities / CVEs" | → `linux-vuln-scanner` |
+| "What ports are open on my server?" | → `linux-vuln-scanner` |
+| "Audit my SSL/TLS configuration" | → `linux-vuln-scanner` |
+| "Run a web app security scan" | → `linux-vuln-scanner` |
+| "Check my Docker images for CVEs" | → `linux-vuln-scanner` |
 
 ---
 

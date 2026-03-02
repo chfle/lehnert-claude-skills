@@ -1,7 +1,7 @@
 ---
 name: linux-monitoring-setup
 description: Use when user wants to set up monitoring, observability, alerting, dashboards, uptime checks, metrics collection, or log aggregation for a Linux server, Docker stack, application, or infrastructure — including Prometheus, Grafana, Node Exporter, Loki, Alertmanager, Uptime Kuma, Netdata, or custom bash-based monitoring scripts.
-version: 1.3.0
+version: 1.4.0
 author: Lehnert
 ---
 
@@ -227,6 +227,49 @@ Add to Stack A:
     command: -config.file=/etc/promtail/config.yaml
     networks:
       - monitoring
+
+Always generate `promtail/promtail-config.yaml` when Promtail is included:
+
+```yaml
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+
+scrape_configs:
+  - job_name: system
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: varlogs
+          host: ${HOSTNAME}
+          __path__: /var/log/*.log
+
+  - job_name: docker
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: docker
+          host: ${HOSTNAME}
+          __path__: /var/lib/docker/containers/*/*log
+    pipeline_stages:
+      - json:
+          expressions:
+            log: log
+            stream: stream
+            time: time
+      - labels:
+          stream:
+      - output:
+          source: log
+```
 
   alertmanager:
     image: prom/alertmanager:v0.27.0

@@ -33,6 +33,7 @@ The fastest way to get everything – one command registers the marketplace, one
 /plugin install linux-cron-manager@lehnert-claude-skills
 /plugin install linux-selinux-helper@lehnert-claude-skills
 /plugin install linux-performance-tuner@lehnert-claude-skills
+/plugin install linux-vuln-scanner@lehnert-claude-skills
 ```
 
 **To install all active skills at once:**
@@ -176,7 +177,7 @@ claude plugin install /path/to/lehnert-claude-skills --scope user
 
 | Skill | Description | Status |
 |-------|-------------|--------|
-| *(coming soon)* | | |
+| `linux-vuln-scanner` | Scans Linux servers, Docker containers, and web apps for CVEs and security issues using Trivy, nmap, testssl.sh, and Nikto — authorized security assessments only | ✅ Active |
 
 ---
 

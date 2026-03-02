@@ -1,7 +1,7 @@
 ---
 name: linux-cron-manager
 description: Use when user wants to schedule a task with cron, write a crontab entry, create a /etc/cron.d/ file, set up a cron job with locking and logging, convert a cron job to a systemd timer, debug a cron job that isn't running, or understand cron syntax and environment behavior.
-version: 1.3.0
+version: 1.4.0
 author: Lehnert
 ---
 
@@ -44,6 +44,8 @@ Generates production-ready cron entries and /etc/cron.d/ files with proper envir
 ---
 
 ## Cron Syntax Reference
+
+> ⚠️ **Timezone:** Cron uses the **system timezone** (from `/etc/timezone`). To override per-job, add `TZ=America/New_York` at the top of the `/etc/cron.d/` file — this affects all entries in that file only.
 
 ```
 ┌──────────── minute       (0–59)

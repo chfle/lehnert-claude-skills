@@ -1,0 +1,9 @@
+{
+  "name": "linux-vuln-scanner",
+  "source": "./skills/linux-vuln-scanner",
+  "description": "Scans Linux servers, Docker containers, and web apps for CVEs and security issues using Trivy, nmap, testssl.sh, and Nikto.",
+  "version": "1.0.0",
+  "author": { "name": "Lehnert" },
+  "category": "pentesting",
+  "keywords": ["vuln", "cve", "trivy", "nmap", "nikto", "testssl", "security", "audit", "pentesting", "scan"]
+}
