@@ -1,7 +1,7 @@
 {
   "name": "linux-shell-scriptor",
-  "version": "1.0.0",
   "description": "Generates production-ready bash scripts for any Linux task from a plain English description.",
+  "version": "1.0.0",
   "author": { "name": "Lehnert" },
-  "skillFile": "SKILL.md"
+  "keywords": ["bash", "shell", "script", "linux", "automation", "backup", "monitoring", "deployment", "cron", "sysadmin"]
 }
