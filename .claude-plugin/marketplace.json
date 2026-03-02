@@ -66,7 +66,7 @@
       "name": "sw-use-case-coder",
       "source": "./skills/sw-use-case-coder",
       "description": "Generates production-ready code for selected use cases (UC-01, US-03, all MVP) from tech-stack.yaml and use-cases.md — writes files directly into workspace root.",
-      "version": "2.7.0",
+      "version": "2.8.0",
       "author": { "name": "Lehnert" },
       "category": "software-planning",
       "keywords": ["code-generation", "scaffolding", "use-cases", "nextjs", "nestjs", "spring", "fastapi", "prisma", "testcontainers"]
@@ -147,7 +147,7 @@
       "name": "docker-compose-writer",
       "source": "./skills/docker-compose-writer",
       "description": "Generates or optimizes docker-compose.yml for any self-hosted app or cloud replacement (Google Photos→Immich, Gmail→Mailcow, ChatGPT→Ollama) — full stacks with health checks, named volumes, and .env setup.",
-      "version": "2.4.0",
+      "version": "2.5.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["docker", "docker-compose", "containers", "self-hosted", "homelab", "nginx", "postgres", "redis", "traefik", "devops", "infrastructure", "immich", "nextcloud", "jellyfin", "ollama"]

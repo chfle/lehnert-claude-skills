@@ -1,7 +1,7 @@
 ---
 name: docker-compose-writer
 description: Use when user wants to write, generate, create, or optimize a docker-compose.yml — for a new project, an existing stack, any self-hosted app, or when they want to replace a cloud service (Google Drive, Gmail, GitHub, Slack, Notion, ChatGPT, etc.) with a self-hosted alternative.
-version: 2.4.0
+version: 2.5.0
 author: Lehnert
 ---
 
@@ -48,6 +48,9 @@ First, map "I want to replace X" requests to the right category:
 | Goodreads / e-book library | Books → Calibre-Web, Kavita |
 | DNS / ad blocking | Network → Pi-hole, AdGuard Home |
 | Okta / Auth0 / SSO | Identity → Authelia, Keycloak |
+| ngrok / Cloudflare Tunnel | Tunnels → cloudflared, Pangolin |
+| No open ports / CGNAT problem | Tunnels → cloudflared (free), Tailscale |
+| Auto-update containers | Developer Tools → Watchtower |
 
 Then decide mode:
 
@@ -230,6 +233,31 @@ Never ask follow-up questions during selection — user picks a number, then gen
 | **AdGuard Home** | DNS ad blocker with modern UI, DoH/DoT support | 64MB+ | Same as Pi-hole, more modern UI |
 | **Unbound** | Validating, recursive DNS resolver | 32MB+ | Privacy-focused recursive DNS |
 | **WireGuard (wg-easy)** | WireGuard VPN with simple web UI | 32MB+ | Easy VPN setup with UI |
+| **DDNS Updater** | Automatic dynamic DNS updater (DuckDNS, Cloudflare, Namecheap, 80+ providers) | 16MB+ | Dynamic IP home servers |
+
+---
+
+### 🚇 Tunnels & Remote Access
+
+Use when the server is behind CGNAT, ISP blocks ports 80/443, or you don't want to open firewall ports.
+
+| App | Description | RAM | Best for |
+|-----|-------------|-----|----------|
+| **Cloudflare Tunnel** (`cloudflared`) | Zero-trust tunnel — exposes services via Cloudflare without opening any ports; free | 32MB+ | No open ports, CGNAT, Cloudflare DNS users |
+| **Tailscale** | Mesh VPN with subnet routing; access homelab from anywhere | 32MB+ | Private remote access, no public exposure |
+| **Pangolin + Newt** | Self-hosted tunnel server (open-source Cloudflare Tunnel alternative) | 64MB+ | Full control, no external dependency |
+
+**Cloudflare Tunnel pattern:**
+```yaml
+services:
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TUNNEL_TOKEN}
+    networks:
+      - app_network
+```
+Token from: Cloudflare Zero Trust → Networks → Tunnels → Create tunnel → Docker
 
 ---
 
@@ -389,6 +417,13 @@ Never ask follow-up questions during selection — user picks a number, then gen
 | **SearXNG** | Privacy-respecting meta search engine | 128MB+ | Self-hosted search |
 | **Shlink** | URL shortener with analytics | 128MB+ | Link shortening |
 | **Infisical** | Open-source secrets manager (Vault alternative) | 512MB+ | App secrets management |
+| **Watchtower** | Automatically updates Docker images when new versions are published | 16MB+ | Auto-update homelab containers |
+| **Dockge** | Compose stack manager UI (alternative to Portainer) | 32MB+ | Simple compose file management |
+| **Changedetection.io** | Website change monitoring with alerts | 64MB+ | Price tracking, content monitoring |
+| **Scrutiny** | Hard drive S.M.A.R.T. monitoring with web UI | 64MB+ | Disk health alerts |
+| **Speedtest Tracker** | Scheduled internet speed tests with history dashboard | 64MB+ | ISP speed monitoring |
+
+*Watchtower note: By default updates all containers. Use `--label-enable` flag and add `com.centurylinklabs.watchtower.enable: "true"` only to containers you want auto-updated.*
 
 ---
 
@@ -411,6 +446,7 @@ After the user selects (or in Direct Mode), generate the **complete, working** s
 | Log limits | `logging: options: max-size: "10m" max-file: "3"` to prevent disk fill |
 | Security | `cap_drop: [ALL]`, read-only config mounts `:ro`, no `privileged: true` unless required |
 | Internal-only ports | Services not exposed to host must NOT have `ports:` — use Docker network |
+| Resource limits | For production, add `deploy.resources.limits: {cpus: "1.0", memory: 512M}` to prevent runaway containers consuming the whole host |
 
 ### Companion Service Health Check Templates
 
@@ -479,6 +515,48 @@ Install guide: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit
 
 ---
 
+### Traefik Middleware Labels (add when Traefik is in the stack)
+
+When generating services behind Traefik, offer these middleware patterns for exposed services:
+
+**Basic Auth** (protect internal tools — pgAdmin, Grafana, etc.):
+```yaml
+labels:
+  traefik.http.middlewares.myapp-auth.basicauth.users: "${BASIC_AUTH_USERS}"
+  # Generate hash: echo $(htpasswd -nB admin) | sed -e s/\\$/\\$\\$/g
+  traefik.http.routers.myapp.middlewares: "myapp-auth@docker"
+```
+
+**Rate Limiting** (protect public-facing APIs):
+```yaml
+labels:
+  traefik.http.middlewares.myapp-ratelimit.ratelimit.average: "100"
+  traefik.http.middlewares.myapp-ratelimit.ratelimit.burst: "50"
+  traefik.http.middlewares.myapp-ratelimit.ratelimit.period: "1m"
+  traefik.http.routers.myapp.middlewares: "myapp-ratelimit@docker"
+```
+
+**Force HTTPS Redirect** (HTTP → HTTPS on port 80):
+```yaml
+labels:
+  traefik.http.middlewares.redirect-https.redirectscheme.scheme: "https"
+  traefik.http.middlewares.redirect-https.redirectscheme.permanent: "true"
+  traefik.http.routers.myapp-http.rule: "Host(`${DOMAIN}`)"
+  traefik.http.routers.myapp-http.entrypoints: "web"
+  traefik.http.routers.myapp-http.middlewares: "redirect-https@docker"
+```
+
+**IP Allowlist** (restrict to specific IPs — e.g. internal only):
+```yaml
+labels:
+  traefik.http.middlewares.myapp-ipallowlist.ipallowlist.sourcerange: "192.168.1.0/24,10.0.0.0/8"
+  traefik.http.routers.myapp.middlewares: "myapp-ipallowlist@docker"
+```
+
+Middlewares can be chained: `middlewares: "redirect-https@docker,myapp-auth@docker"`
+
+---
+
 ## Step 4 — Write Files Silently
 
 Do NOT print the compose file or .env.example content in chat. Write them to disk silently.
@@ -516,6 +594,11 @@ Do NOT print the compose file or .env.example content in chat. Write them to dis
   docker compose pull && docker compose up -d    # update to latest images
   docker compose down                            # stop (data preserved)
   docker compose down -v                         # ⚠️  stop + DELETE ALL DATA
+
+💾 Backup volumes (before updating or migrating):
+  docker run --rm -v [volume_name]:/data -v $(pwd):/backup alpine \
+    tar czf /backup/[volume_name]-$(date +%Y%m%d).tar.gz -C /data .
+  # Restore: tar xzf [volume_name]-YYYYMMDD.tar.gz -C /data
 
 🌐 Access: http://localhost:[PORT]
 [default login credentials if applicable]

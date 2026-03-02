@@ -1,7 +1,7 @@
 ---
 name: sw-use-case-coder
 description: Use when user wants to generate code for a use case or user story, says "code UC-01", "implement US-03", "generate all MVP", "scaffold UC-05 UC-07", or wants production-ready files from use-cases.md and tech-stack.yaml written directly into the project root.
-version: 2.7.0
+version: 2.8.0
 author: Lehnert
 ---
 
@@ -106,21 +106,62 @@ Example — NestJS in monorepo: `src/devices/devices.service.ts` → `apps/api/s
 - Use `ui_library` value (shadcn/ui, Tailwind, MUI) for component styling
 - Add `'use client'` in Next.js only when component uses state, effects, or event handlers
 - DTOs and schemas contain the exact fields from the use case main flow
-- Acceptance criteria from use-cases.md become `// TODO: AC-X: <text>` comments in E2E test files; for unit/integration tests, use them to guide mock setup and assertions rather than repeating them as TODO comments
-- No hardcoded secrets – use `process.env.VAR`, `os.environ`, `@Value`, etc.
-- Use `@/` alias for Next.js; relative imports for NestJS and other frameworks
-- Prisma models include `@@map("table_name")` and all required relations
+- **No hardcoded secrets** — use the environment variable pattern for the detected language:
+
+| Language | Pattern |
+|----------|---------|
+| TypeScript / JS | `process.env.VAR_NAME` |
+| Python | `os.environ["VAR_NAME"]` or `os.getenv("VAR_NAME")` |
+| Java (Spring) | `@Value("${VAR_NAME}")` |
+| Go | `os.Getenv("VAR_NAME")` |
+| Rust | `std::env::var("VAR_NAME").expect("VAR_NAME not set")` |
+| PHP | `$_ENV["VAR_NAME"]` |
+
+- **Import conventions per framework**: `@/` alias for Next.js; relative imports within module for NestJS; absolute package path from `go.mod` for Go; standard Java package imports for Spring; absolute from project root for FastAPI
+
+- **ORM model table naming** — use the convention for the detected ORM:
+
+| ORM | Table mapping |
+|-----|--------------|
+| Prisma | `@@map("table_name")` + all required `@relation` fields |
+| SQLAlchemy | `__tablename__ = "table_name"` |
+| GORM | Model name auto-maps to snake_case plural; use `gorm:"column:col_name"` for custom field names |
+| Spring JPA / Hibernate | `@Table(name = "table_name")` on entity class |
+| TypeORM | `@Entity("table_name")` on entity class |
+| Eloquent (Laravel) | `protected $table = "table_name"` |
+
+- **Acceptance criteria** from use-cases.md become TODO comments in E2E test files using the language-appropriate comment syntax (`// TODO: AC-X:` for C-family languages, `# TODO: AC-X:` for Python/Ruby/Shell); for unit/integration tests use them to guide mock setup and assertions — do not repeat them as literal comments
 - **Iterative**: if a file already exists, edit and improve it — add or enhance functions rather than replacing the entire file. For test files, always regenerate with all acceptance criteria covered. Never delete existing working logic.
-- **Migrations are additive**: each use case appends to the schema/migration history — never modify or delete an existing migration file. Flyway: new `V<n+1>__add_<feature>.sql`. Alembic: new version file. Prisma: append models only. If a conflict is detected, stop and report it. After appending Prisma models, remind the user to run `npx prisma migrate dev --name add_<feature>` to generate and apply the migration.
+- **Migrations are additive** — each use case appends only new migration files; never modify or delete existing ones. If a conflict is detected, stop and report it.
+
+| ORM | New migration pattern | Post-write command to show user |
+|-----|----------------------|---------------------------------|
+| Prisma | Append model to `prisma/schema.prisma` | `npx prisma migrate dev --name add_<feature>` |
+| Flyway | New `V<n+1>__add_<feature>.sql` in `src/main/resources/db/migration/` | Applied automatically on startup |
+| Alembic | New `alembic/versions/<n>_add_<feature>.py` | `alembic upgrade head` |
+| GORM | Add struct to `internal/models/`; register in AutoMigrate call | `db.AutoMigrate(&Feature{})` |
+| TypeORM | Generate via `typeorm migration:generate` | `typeorm migration:run` |
+| Liquibase | New changeset in `db/changelog/` | Applied automatically on startup |
 
 ### Tests to generate
 
-| Type | Condition | Path |
-|------|-----------|------|
-| Unit | Always | `src/<feature>/<feature>.service.spec.ts` or language equivalent |
-| Integration (Testcontainers) | `testcontainers: true` | `src/<feature>/<feature>.integration.spec.ts` |
-| E2E | `e2e` key present | `e2e/<feature>.spec.ts` |
-| API / Supertest | `api` key present | `src/<feature>/<feature>.api.spec.ts` |
+| Type | Condition | Generate when |
+|------|-----------|---------------|
+| Unit | Always | For every use case |
+| Integration (Testcontainers) | `testcontainers: true` in tech-stack.yaml | DB-level integration tests |
+| E2E | `e2e` key present | Full flow from UI to DB |
+| API / Contract | `api` key present | HTTP endpoint tests |
+
+**Test path by language** — use the convention for the detected backend/frontend language:
+
+| Language / Framework | Unit test | Integration test | E2E test |
+|----------------------|-----------|-----------------|---------|
+| TypeScript (Jest/Vitest) | `src/<f>/<f>.service.spec.ts` | `src/<f>/<f>.integration.spec.ts` | `e2e/<f>.spec.ts` |
+| Python (pytest) | `tests/unit/test_<f>.py` | `tests/integration/test_<f>.py` | `tests/e2e/test_<f>.py` |
+| Java (JUnit 5) | `src/test/java/<pkg>/<F>Test.java` | `src/test/java/<pkg>/<F>IT.java` | `src/test/java/<pkg>/<F>E2ETest.java` |
+| Go (testing) | `internal/<f>/<f>_test.go` (same package) | `tests/<f>_integration_test.go` | `tests/<f>_e2e_test.go` |
+| Rust (cargo test) | Inline `#[cfg(test)]` in `src/<f>.rs` | `tests/<f>_integration.rs` | `tests/<f>_e2e.rs` |
+| PHP (PHPUnit) | `tests/Unit/<F>Test.php` | `tests/Feature/<F>Test.php` | `tests/Feature/<F>E2ETest.php` |
 
 Apply the same monorepo prefix to all test paths: `apps/api/src/<feature>/...` for backend tests, `apps/web/...` for frontend tests.
 
