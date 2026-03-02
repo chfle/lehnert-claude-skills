@@ -1,7 +1,7 @@
 ---
 name: linux-log-analyzer
 description: Use when user wants to analyze, review, parse, or understand Linux log files — auth.log, syslog, kern.log, nginx access or error logs, Apache logs, journalctl output, fail2ban logs, Docker container logs, cron logs, or any system or application log — to find errors, anomalies, security events, brute force attempts, crashes, or performance issues.
-version: 1.1.0
+version: 1.2.0
 author: Lehnert
 ---
 
@@ -26,9 +26,9 @@ Analyzes any Linux log content and produces a structured report: log type detect
 
 ## When NOT to Use
 
-- User wants to set up centralized log management → use `linux-monitoring-setup`
-- User wants to write a script that parses logs → use `linux-shell-scriptor`
-- User wants to audit a config file → use `linux-config-auditor`
+- User wants to set up centralized log management → use /linux-monitoring-setup
+- User wants to write a script that parses logs → use /linux-shell-scriptor
+- User wants to audit a config file → use /linux-config-auditor
 
 ---
 

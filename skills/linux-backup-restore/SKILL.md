@@ -1,7 +1,7 @@
 ---
 name: linux-backup-restore
 description: Use when user wants to back up a Linux server, design a backup strategy, write a backup script, set up automated backups, configure restic or borgbackup, restore from a backup, test backup integrity, back up databases, Docker volumes, or asks about the 3-2-1 backup rule or disaster recovery.
-version: 1.1.0
+version: 1.2.0
 author: Lehnert
 ---
 
@@ -253,18 +253,19 @@ log() { echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" | tee -a "$LOG_FILE"; }
 mkdir -p "$BACKUP_DIR"
 
 log "Dumping $DB_NAME"
-pg_dump -U "$DB_USER" -Fc "$DB_NAME" \
-  | gzip > "${BACKUP_DIR}/${DB_NAME}_${DATE}.dump.gz"
+# -Fc = custom format with built-in zlib compression — do NOT pipe through gzip
+# (pg_restore cannot read double-compressed files)
+pg_dump -U "$DB_USER" -Fc "$DB_NAME" > "${BACKUP_DIR}/${DB_NAME}_${DATE}.dump"
 
 # Verify the dump is readable
-pg_restore --list "${BACKUP_DIR}/${DB_NAME}_${DATE}.dump.gz" > /dev/null \
+pg_restore --list "${BACKUP_DIR}/${DB_NAME}_${DATE}.dump" > /dev/null \
   && log "Dump verified OK" \
   || { log "ERROR: Dump verification failed"; exit 1; }
 
 # Retain last 14 dumps
-find "$BACKUP_DIR" -name "${DB_NAME}_*.dump.gz" -mtime +14 -delete
+find "$BACKUP_DIR" -name "${DB_NAME}_*.dump" -mtime +14 -delete
 
-log "PostgreSQL backup complete: ${DB_NAME}_${DATE}.dump.gz"
+log "PostgreSQL backup complete: ${DB_NAME}_${DATE}.dump"
 ```
 
 **Restore PostgreSQL:**
@@ -272,7 +273,7 @@ log "PostgreSQL backup complete: ${DB_NAME}_${DATE}.dump.gz"
 # Drop and recreate the database
 dropdb -U "$DB_USER" "$DB_NAME"
 createdb -U "$DB_USER" "$DB_NAME"
-pg_restore -U "$DB_USER" -d "$DB_NAME" backup.dump.gz
+pg_restore -U "$DB_USER" -d "$DB_NAME" backup.dump
 ```
 
 **MySQL / MariaDB:**

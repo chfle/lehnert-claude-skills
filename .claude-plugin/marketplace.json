@@ -165,7 +165,7 @@
       "name": "linux-log-analyzer",
       "source": "./skills/linux-log-analyzer",
       "description": "Analyzes Linux log files (auth.log, syslog, nginx, Apache, journalctl, Docker, fail2ban) for errors, security threats, brute force attacks, crashes, and anomalies.",
-      "version": "1.0.0",
+      "version": "1.2.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["logs", "log-analysis", "security", "auth.log", "nginx", "syslog", "journalctl", "docker", "brute-force", "anomaly", "linux"]
@@ -174,7 +174,7 @@
       "name": "linux-monitoring-setup",
       "source": "./skills/linux-monitoring-setup",
       "description": "Sets up a complete monitoring stack (Prometheus, Grafana, Node Exporter, Loki, Alertmanager, Uptime Kuma, Netdata) for any Linux server, Docker host, or application.",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["monitoring", "prometheus", "grafana", "loki", "alertmanager", "node-exporter", "uptime-kuma", "netdata", "cadvisor", "observability", "metrics", "alerts"]
@@ -192,7 +192,7 @@
       "name": "linux-backup-restore",
       "source": "./skills/linux-backup-restore",
       "description": "Designs and generates complete Linux backup solutions using restic, BorgBackup, rsync, or tar — with encryption, encryption key management, remote storage, retention policies, database backups, Docker volume backups, and restore procedures.",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["backup", "restore", "restic", "borgbackup", "rsync", "disaster-recovery", "database-backup", "docker-volumes", "s3", "3-2-1", "retention", "linux"]
@@ -210,7 +210,7 @@
       "name": "linux-cron-manager",
       "source": "./skills/linux-cron-manager",
       "description": "Generates production-ready cron jobs with /etc/cron.d/ entries and wrapper scripts featuring flock locking, logging, log rotation, and failure alerting.",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["cron", "crontab", "scheduling", "flock", "locking", "automation", "linux", "systemd-timer", "cron.d"]

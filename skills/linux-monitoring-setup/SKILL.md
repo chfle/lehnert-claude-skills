@@ -1,7 +1,7 @@
 ---
 name: linux-monitoring-setup
 description: Use when user wants to set up monitoring, observability, alerting, dashboards, uptime checks, metrics collection, or log aggregation for a Linux server, Docker stack, application, or infrastructure — including Prometheus, Grafana, Node Exporter, Loki, Alertmanager, Uptime Kuma, Netdata, or custom bash-based monitoring scripts.
-version: 1.1.0
+version: 1.2.0
 author: Lehnert
 ---
 
@@ -184,6 +184,11 @@ scrape_configs:
   - job_name: 'node'
     static_configs:
       - targets: ['node_exporter:9100']
+
+  # Add application-specific scrape targets below:
+  # - job_name: 'myapp'
+  #   static_configs:
+  #     - targets: ['myapp:8080']   # must expose /metrics endpoint
 ```
 
 **Grafana dashboard IDs to import:**

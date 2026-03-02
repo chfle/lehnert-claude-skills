@@ -1,7 +1,7 @@
 ---
 name: linux-cron-manager
 description: Use when user wants to schedule a task with cron, write a crontab entry, create a /etc/cron.d/ file, set up a cron job with locking and logging, convert a cron job to a systemd timer, debug a cron job that isn't running, or understand cron syntax and environment behavior.
-version: 1.1.0
+version: 1.2.0
 author: Lehnert
 ---
 
@@ -92,6 +92,7 @@ Validate any expression at: `https://crontab.guru`
 SHELL=/bin/bash
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 MAILTO=""
+HOME=/home/appuser   # cron doesn't source profile — set HOME explicitly to avoid "~" surprises
 
 0 2 * * *  appuser  /usr/bin/flock -n /var/lock/myapp-task.lock /opt/myapp/tasks/run-task.sh
 ```
