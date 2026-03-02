@@ -1,0 +1,7 @@
+{
+  "name": "linux-shell-scriptor",
+  "version": "1.0.0",
+  "description": "Generates production-ready bash scripts for any Linux task from a plain English description.",
+  "author": { "name": "Lehnert" },
+  "skillFile": "SKILL.md"
+}

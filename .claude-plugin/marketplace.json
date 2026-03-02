@@ -124,6 +124,15 @@
       "author": { "name": "Lehnert" },
       "category": "software-development",
       "keywords": ["boilerplate", "ui", "tailwind", "shadcn", "styles", "layout", "components"]
+    },
+    {
+      "name": "linux-shell-scriptor",
+      "source": "./skills/linux-shell-scriptor",
+      "description": "Generates production-ready bash scripts for any Linux task from a plain English description — backups, monitoring, deployment, cron jobs, health checks, maintenance.",
+      "version": "1.0.0",
+      "author": { "name": "Lehnert" },
+      "category": "linux-sysadmin",
+      "keywords": ["bash", "shell", "script", "linux", "automation", "backup", "monitoring", "deployment", "cron", "sysadmin"]
     }
   ]
 }

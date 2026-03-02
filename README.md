@@ -26,6 +26,7 @@ The fastest way to get everything – one command registers the marketplace, one
 /plugin install sw-boilerplate-docker@lehnert-claude-skills
 /plugin install sw-boilerplate-ui@lehnert-claude-skills
 /plugin install sw-diagram-creator@lehnert-claude-skills
+/plugin install linux-shell-scriptor@lehnert-claude-skills
 ```
 
 **To install all active skills at once:**
@@ -150,7 +151,7 @@ claude plugin install /path/to/lehnert-claude-skills --scope user
 
 | Skill | Description | Status |
 |-------|-------------|--------|
-| *(coming soon)* | | |
+| `linux-shell-scriptor` | Generates production-ready bash scripts for backups, monitoring, deployment, cron jobs, and any sysadmin task from a plain description | ✅ Active |
 
 ### 🔒 Pentesting
 

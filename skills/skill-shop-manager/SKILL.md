@@ -39,7 +39,7 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 
 | Skill | Description | Status |
 |-------|-------------|--------|
-| *(no skills yet)* | | |
+| `linux-shell-scriptor` | Generates production-ready bash scripts for backups, monitoring, deployment, cron jobs, and any sysadmin task | ✅ Active |
 
 ### 🔒 Pentesting
 
@@ -78,6 +78,12 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | "Create docker-compose.yml" | → `sw-boilerplate-docker` |
 | "Set up Prisma / database files" | → `sw-boilerplate-db` |
 | "Create Tailwind / shadcn setup" | → `sw-boilerplate-ui` |
+
+| "Write a bash script for backups" | → `linux-shell-scriptor` |
+| "Create a shell script to monitor disk space" | → `linux-shell-scriptor` |
+| "Generate a deployment script" | → `linux-shell-scriptor` |
+| "Script to clean up old log files" | → `linux-shell-scriptor` |
+| "Automate this sysadmin task with bash" | → `linux-shell-scriptor` |
 
 > No skill for your task yet? Say: **"Create the skill [name] for me"** – I'll build the folder and SKILL.md right away.
 
