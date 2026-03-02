@@ -289,6 +289,50 @@ mysqldump \
 gunzip < backup.sql.gz | mysql -u root -p"${MYSQL_ROOT_PASSWORD}"
 ```
 
+**MongoDB:**
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+BACKUP_DIR="/var/backups/mongodb"
+DATE=$(date +%Y%m%d_%H%M%S)
+LOG_FILE="/var/log/mongo-backup.log"
+
+log() { echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" | tee -a "$LOG_FILE"; }
+
+mkdir -p "$BACKUP_DIR"
+
+log "Dumping all MongoDB databases"
+mongodump \
+  --host "${MONGO_HOST:-localhost}" \
+  --port "${MONGO_PORT:-27017}" \
+  --username "${MONGO_USER:?}" \
+  --password "${MONGO_PASSWORD:?}" \
+  --authenticationDatabase admin \
+  --out "${BACKUP_DIR}/dump_${DATE}"
+
+log "Compressing dump"
+tar czf "${BACKUP_DIR}/mongo_${DATE}.tar.gz" -C "${BACKUP_DIR}" "dump_${DATE}"
+rm -rf "${BACKUP_DIR}/dump_${DATE}"
+
+# Retain last 14 dumps
+find "$BACKUP_DIR" -name "mongo_*.tar.gz" -mtime +14 -delete
+
+log "MongoDB backup complete: mongo_${DATE}.tar.gz"
+```
+
+```bash
+# Restore MongoDB
+tar xzf mongo_YYYYMMDD.tar.gz
+mongorestore \
+  --host "${MONGO_HOST:-localhost}" \
+  --username "${MONGO_USER}" \
+  --password "${MONGO_PASSWORD}" \
+  --authenticationDatabase admin \
+  --drop \
+  dump_YYYYMMDD/
+```
+
 ---
 
 ### Docker Volume Backup

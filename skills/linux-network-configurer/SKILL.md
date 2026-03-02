@@ -66,12 +66,14 @@ If the user specifies their distro, auto-detect:
 
 | Distro | Default stack |
 |--------|--------------|
-| Ubuntu Desktop | NetworkManager |
-| Ubuntu Server 20.04+ | systemd-networkd (Netplan) |
-| Debian | ifupdown or NetworkManager |
+| Ubuntu Desktop 20.04+ | NetworkManager (with Netplan frontend) |
+| Ubuntu Server 20.04+ | systemd-networkd (with Netplan frontend) |
+| Debian 11+ | NetworkManager or ifupdown |
 | RHEL / Rocky / Alma / CentOS | NetworkManager |
 | Arch Linux | systemd-networkd or NetworkManager |
 | Alpine Linux | ifupdown (`/etc/network/interfaces`) |
+
+**Netplan** (Ubuntu 18.04+): Netplan is a YAML frontend that writes to either NetworkManager or systemd-networkd. Always prefer Netplan on Ubuntu — it survives upgrades better than editing lower-level configs directly. Use `netplan try` instead of `netplan apply` — auto-reverts after 120s if no confirmation.
 
 ---
 
@@ -395,6 +397,38 @@ table inet filter {
 ```
 
 Apply: `nft -f /etc/nftables.conf && systemctl enable nftables`
+
+---
+
+### Tailscale VPN (easier alternative to WireGuard)
+
+Use when the user wants a zero-config mesh VPN without managing a server.
+
+```bash
+# Install (Ubuntu/Debian)
+curl -fsSL https://tailscale.com/install.sh | sh
+
+# Authenticate and connect
+tailscale up
+
+# Advertise this machine as a subnet router (optional — exposes LAN)
+echo 'net.ipv4.ip_forward = 1' >> /etc/sysctl.d/99-tailscale.conf
+sysctl -p /etc/sysctl.d/99-tailscale.conf
+tailscale up --advertise-routes=192.168.1.0/24
+
+# Enable exit node (route all client traffic through this server)
+tailscale up --advertise-exit-node
+
+# Check status
+tailscale status
+tailscale ip          # your Tailscale IP (100.x.x.x range)
+```
+
+**Key differences from WireGuard:**
+- No server to configure — Tailscale manages the coordination
+- Devices connect directly peer-to-peer (DERP relay as fallback)
+- Access control defined in Tailscale admin console, not config files
+- Requires Tailscale account (free tier: 100 devices)
 
 ---
 

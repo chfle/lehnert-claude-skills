@@ -315,6 +315,14 @@ sudo -u appuser /opt/myapp/bin/myapp --config /etc/myapp/config.yaml
 
 # 8. Check security restrictions blocking the service
 systemd-analyze security myservice.service
+
+# 9. See what slowed boot (identify long-starting services)
+systemd-analyze blame
+systemd-analyze critical-chain myservice.service
+
+# 10. Inspect cgroup resource usage (live)
+systemd-cgls
+systemctl status myservice.service   # shows CPU + memory under cgroup
 ```
 
 **Common failure causes:**

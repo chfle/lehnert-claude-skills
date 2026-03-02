@@ -45,6 +45,9 @@ Audits any Linux configuration file against security best practices, performance
 | `sudoers` / `visudo` | NOPASSWD, wildcards, command scope, user/group grants |
 | `sysctl.conf` | Network hardening params, kernel pointer restriction, core dump settings |
 | `/etc/security/limits.conf` | Open file limits, process limits for services |
+| `pg_hba.conf` | Peer/md5/scram auth methods, host access rules, trust entries |
+| `mysql/my.cnf` | bind-address, skip-networking, max_connections, log_error, SSL settings |
+| `redis.conf` | requirepass, bind, protected-mode, ACL, TLS, dangerous commands |
 | Generic / unknown | Best-effort structural review, flag obvious anti-patterns |
 
 ---
@@ -108,6 +111,20 @@ Always close with:
 > **Full script:** Use `/linux-shell-scriptor` to automate applying these changes
 > **OS hardening:** Use `/linux-security-hardener` for a full system-level review
 > **Monitor:** Use `/linux-monitoring-setup` to detect anomalies after reconfiguring
+
+---
+
+## Output Format
+
+Write findings to `./audit/` in the current working directory:
+
+```
+audit/
+  report-<type>-<YYYY-MM-DD>.md    ← full findings report
+  fixed-<filename>                 ← corrected config (changed lines only)
+```
+
+Then print the findings summary table and corrected snippet directly in chat (they are short enough to be useful inline). The full report is written to disk for reference.
 
 ---
 

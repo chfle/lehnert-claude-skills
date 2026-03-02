@@ -340,7 +340,8 @@ Then print ONLY this to chat:
 ⚠️  Test SSH in a second session before closing your current one!
     If SSH breaks: sudo sshd -t  to check the config.
 
-💡 Next: Run /linux-config-auditor on your nginx/sshd after hardening to verify.
+💡 Next: Run /linux-log-analyzer on auth.log after hardening to verify fail2ban is working.
+💡 Then: /linux-monitoring-setup to get alerts for future intrusion attempts.
 ```
 
 ---

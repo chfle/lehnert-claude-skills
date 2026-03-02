@@ -120,31 +120,30 @@ These are non-negotiable and must appear in every generated script:
 
 ## Output Format
 
-1. Print the complete script in a single fenced `bash` code block — copy-paste ready
-2. Below the script, list any **assumptions made** (distro, user, paths, thresholds)
-3. Show the **save and run commands:**
+1. Write the script to `./scripts/<task-name>.sh`
+2. **Also print** the script in a fenced `bash` code block so the user can review it before running
+3. Below the script, list any **assumptions made** (distro, user, paths, thresholds)
+4. Show:
 
 ```bash
-# Save script
-cat > ~/scripts/your-script.sh << 'EOF'
-[paste script here]
-EOF
-chmod +x ~/scripts/your-script.sh
-
 # Syntax check before first run
-bash -n ~/scripts/your-script.sh
+bash -n scripts/your-script.sh
+
+# Make executable
+chmod +x scripts/your-script.sh
 
 # Test with dry-run (if script supports it)
-~/scripts/your-script.sh --dry-run
+./scripts/your-script.sh --dry-run
 ```
 
-4. Suggest next steps based on script type
+5. Suggest next steps based on script type
 
 ---
 
 ## Next Steps (always include after output)
 
-> **Syntax check:** `bash -n your-script.sh`
-> **If recurring:** Add to cron with `/linux-cron-manager` or convert to a systemd timer with `/linux-systemd-manager`
-> **If security-sensitive:** Review the script with `/linux-security-hardener`
+> **Syntax check:** `bash -n scripts/your-script.sh`
+> **ShellCheck:** `shellcheck scripts/your-script.sh` (install: `apt install shellcheck`)
+> **If recurring:** Add to cron with `/linux-cron-manager` or a systemd timer with `/linux-systemd-manager`
+> **If security-sensitive:** Review the host with `/linux-security-hardener`
 > **If it reads config files:** Audit those configs with `/linux-config-auditor`

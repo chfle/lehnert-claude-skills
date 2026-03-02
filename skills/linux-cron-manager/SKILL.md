@@ -121,8 +121,9 @@ error() { echo "[$(date '+%Y-%m-%d %H:%M:%S')] [ERROR] $*" | tee -a "$LOG_FILE" 
 if [[ -f "$LOG_FILE" ]]; then
   LOG_SIZE_MB=$(du -m "$LOG_FILE" | cut -f1)
   if [[ "$LOG_SIZE_MB" -ge "$MAX_LOG_SIZE_MB" ]]; then
-    mv "$LOG_FILE" "${LOG_FILE}.$(date +%Y%m%d)"
-    gzip "${LOG_FILE}.$(date +%Y%m%d)"
+    ARCHIVED_LOG="${LOG_FILE}.$(date +%Y%m%d_%H%M%S)"
+    mv "$LOG_FILE" "$ARCHIVED_LOG"
+    gzip "$ARCHIVED_LOG"
   fi
 fi
 
@@ -256,12 +257,20 @@ stat /etc/cron.d/myfile          # must be owned by root, mode 644
 
 When to switch to systemd timers instead of cron:
 
-| Use cron when | Use systemd timer when |
-|---------------|----------------------|
-| Simple schedule, no dependencies | Need `After=` dependencies |
-| Script already works standalone | Need resource limits (MemoryMax, CPUQuota) |
-| Quick setup needed | Need detailed logging via journalctl |
-| No systemd available (Alpine, containers) | Need `Persistent=true` for missed runs |
+| Use cron when | Use systemd timer when | Use Anacron when |
+|---------------|----------------------|-----------------|
+| Simple schedule, no dependencies | Need `After=` dependencies | System isn't always on (laptop, desktop) |
+| Script already works standalone | Need resource limits (MemoryMax, CPUQuota) | Daily/weekly tasks that must run even after downtime |
+| Quick setup needed | Need detailed logging via journalctl | No systemd available and `Persistent=true` is needed |
+| No systemd available (Alpine, containers) | Need `Persistent=true` for missed runs | — |
+
+**Anacron** (`/etc/anacrontab`) — runs jobs that were missed while the system was off:
+```
+# period  delay  job-id         command
+1         5      daily-backup   /opt/backup/backup.sh
+7         10     weekly-report  /opt/reports/weekly.sh
+```
+Install: `apt install anacron` / `dnf install cronie-anacron`
 
 **Conversion example:**
 

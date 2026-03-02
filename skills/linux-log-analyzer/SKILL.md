@@ -64,7 +64,9 @@ Auto-detect from content patterns. Never ask the user what log type it is unless
 | `fail2ban` | `fail2ban.actions`, `Ban`, `Unban`, `Found` |
 | `docker` | Container name prefix, `level=`, JSON log format |
 | `cron` | `CRON[`, `CMD`, `crond` |
-| `mysql/postgres` | `ERROR`, `FATAL`, `PANIC`, query patterns |
+| `mysql/postgres` | `ERROR`, `FATAL`, `PANIC`, query patterns, `slow query` |
+| `mongodb` | `SEVERE`, `ERROR`, `WARNING`, `WiredTiger`, `getLastError`, `connection refused` |
+| `redis` | `WARNING`, `NOTICE`, `#`, `ERR`, `maxmemory-policy`, `RDB/AOF` |
 | `ufw/iptables` | `UFW BLOCK`, `IN=`, `OUT=`, `SRC=`, `DST=` |
 
 ---

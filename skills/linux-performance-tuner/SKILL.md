@@ -306,6 +306,62 @@ chrt -f 50 /path/to/realtime-process
 
 ---
 
+### Profile 6 — Storage / I/O Heavy
+
+For file servers, NFS, object storage, and large file processing workloads.
+
+**I/O scheduler** (critical — use BFQ for HDDs, mq-deadline for SSDs):
+```bash
+# For spinning HDDs — BFQ provides best fairness under mixed load
+echo bfq > /sys/block/sda/queue/scheduler
+echo 256 > /sys/block/sda/queue/nr_requests
+
+# For SSDs/NVMe
+echo mq-deadline > /sys/block/nvme0n1/queue/scheduler
+echo 64 > /sys/block/nvme0n1/queue/nr_requests
+
+# Check which scheduler is active
+cat /sys/block/sda/queue/scheduler
+```
+
+**Kernel (`/etc/sysctl.d/99-storage.conf`):**
+```ini
+# Maximize page cache use — don't swap until absolutely necessary
+vm.swappiness = 1
+
+# Allow more dirty pages in memory before flushing to disk
+vm.dirty_ratio = 40
+vm.dirty_background_ratio = 10
+vm.dirty_expire_centisecs = 3000
+vm.dirty_writeback_centisecs = 500
+
+# Increase file descriptor and inode cache limits
+fs.file-max = 4194304
+fs.inotify.max_user_watches = 524288
+
+# Increase read-ahead for large sequential I/O
+# (adjust per workload — too high hurts random I/O)
+# blockdev --setra 8192 /dev/sda   # set 4MB read-ahead
+```
+
+**NFS-specific tuning:**
+```bash
+# Increase NFS server threads (default 8 — try 32–64 for heavy load)
+echo 32 > /proc/fs/nfsd/threads
+
+# Optimize NFS client mount options
+# Add to /etc/fstab:
+# server:/export /mnt/nfs nfs rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,_netdev 0 0
+```
+
+**ulimits (`/etc/security/limits.d/99-storage.conf`):**
+```
+*    soft nofile 262144
+*    hard nofile 1048576
+```
+
+---
+
 ## Profiling Tools Reference
 
 Use these to identify the bottleneck before tuning:

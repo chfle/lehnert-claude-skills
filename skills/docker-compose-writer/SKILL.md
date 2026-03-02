@@ -126,13 +126,14 @@ Extras to suggest alongside: **pgAdmin** (PostgreSQL UI), **RedisInsight** (Redi
 | 2 | **Drone CI** | Container-native CI with pipeline-as-code | Modern container-first pipelines |
 | 3 | **Jenkins** | Battle-tested, massively extensible CI server | Complex pipelines, many plugins needed |
 
-### 🎬 Media
+### 🎬 Media & Photos
 
 | # | App | Description | Best for |
 |---|-----|-------------|----------|
 | 1 | **Jellyfin** | Fully open-source media server, no premium features | Personal media streaming, privacy-first |
 | 2 | **Plex** | Feature-rich media server with mobile apps and remote access | Best client support, polished UX |
 | 3 | **Navidrome** | Lightweight music streaming server (Subsonic-compatible) | Music-only, very fast and minimal |
+| 4 | **Immich** | Self-hosted Google Photos replacement — auto-backup, face recognition, albums | Photo/video backup from phone |
 
 ### ✅ Project Management & Productivity
 
@@ -166,6 +167,14 @@ Extras to suggest alongside: **pgAdmin** (PostgreSQL UI), **RedisInsight** (Redi
 | 3 | **Stirling PDF** | 50+ PDF operations in a self-hosted web UI | PDF processing without cloud tools |
 | 4 | **IT-Tools** | Collection of developer utility tools in a web UI | Quick dev utilities |
 
+### 🔔 Notifications & Communication
+
+| # | App | Description | Best for |
+|---|-----|-------------|----------|
+| 1 | **Ntfy** | Simple pub/sub push notification server — send alerts to any device | Server alerts, cron failure notifications |
+| 2 | **Gotify** | Self-hosted push notifications with Android app | Android push notifications |
+| 3 | **Mattermost** | Open-source Slack alternative — channels, DMs, integrations | Team chat |
+
 ---
 
 ## Step 3 — Generate the Compose Stack
@@ -176,7 +185,7 @@ After the user selects an option (or in Direct Mode), generate the full stack im
 
 | Element | Rule |
 |---------|------|
-| Compose version | `version: '3.8'` minimum |
+| Compose version | `version: '3.8'` minimum (optional in Compose V2 — omit it for modern setups) |
 | Named networks | At least one; never rely on default bridge |
 | Named volumes | All persistent data in named volumes — no bind mounts for DB data |
 | Health checks | On every service others `depends_on` |
