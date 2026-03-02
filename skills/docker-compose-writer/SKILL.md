@@ -1,7 +1,7 @@
 ---
 name: docker-compose-writer
-description: Use when user wants to write, generate, create, or optimize a docker-compose.yml — for a new project, an existing stack, a specific app description, or when asked to add services like databases, caches, reverse proxies, monitoring, or message queues to an existing compose file.
-version: 1.0.0
+description: Use when user wants to write, generate, create, or optimize a docker-compose.yml — for a new project, an existing stack, a self-hosted app, a database, or when asked to set up tools like note-taking apps, password managers, media servers, monitoring, git hosting, file storage, CI/CD, analytics, or any service that runs in Docker.
+version: 1.1.0
 author: Lehnert
 ---
 
@@ -9,252 +9,282 @@ author: Lehnert
 
 ## Overview
 
-Generates or optimizes production-ready `docker-compose.yml` files from a project description or an existing compose file. Covers service definitions, networking, volumes, health checks, environment variable management, resource limits, and security hardening — following Docker Compose v3.8+ best practices.
+Two modes:
 
-**Language:** Respond in the user's language. YAML keys, comments, and service names default to English.
+**Selection Mode** — User asks for a category ("I need a database", "I want a note-taking app", "set up monitoring"). Present 3–4 real options with a short description. User picks one. Generate the full stack.
 
----
+**Direct Mode** — User names a specific tool or pastes an existing compose. Generate or optimize immediately, no questions.
 
-## When to Use
-
-- User describes a project and wants a docker-compose.yml generated
-- User has an existing compose file and wants it improved or extended
-- User wants to add a service (database, Redis, nginx, Prometheus, etc.) to a stack
-- User asks "how do I set up X with Docker Compose?"
-- User wants a dev vs. production compose split
-
-## When NOT to Use
-
-- User wants Kubernetes manifests → use a dedicated k8s skill
-- User wants a Dockerfile only → generate it directly without this skill
-- User wants the full project boilerplate including compose → use `sw-boilerplate-docker`
+**Language:** Respond in the user's language. YAML keys and comments always in English.
 
 ---
 
-## Clarification Protocol
+## Step 1 — Detect Mode
 
-Ask at most **one** clarifying question before generating. Start with a best-effort compose and note assumptions if the description is clear enough.
-
-| Missing info | Question to ask |
-|-------------|----------------|
-| Environment target | "Is this for local development, staging, or production?" |
-| Database type | "Which database? (PostgreSQL, MySQL, MongoDB, SQLite…)" |
-| Existing images vs. Dockerfiles | "Are you using prebuilt images or building from local Dockerfiles?" |
-| Reverse proxy needed | "Do you need a reverse proxy (nginx, Traefik) in front of the services?" |
-| Secrets management | "Should secrets (passwords, keys) use Docker secrets, env files, or inline env vars?" |
+| User says | Mode |
+|-----------|------|
+| Names a specific tool ("Vaultwarden", "Gitea", "Nextcloud") | Direct → generate immediately |
+| Pastes an existing compose file | Direct → optimize it |
+| Names a category ("a database", "monitoring", "a wiki") | Selection → show options |
+| Describes a need ("I want to store files", "I need to track uptime") | Selection → map to category → show options |
+| Describes a custom app stack ("Next.js + Postgres + Redis") | Direct → generate immediately |
 
 ---
 
-## Output Modes
+## Step 2 — Selection Mode: Present Options
 
-### Mode A — Generate from description
-User describes their stack → produce a complete, annotated `docker-compose.yml`.
+When in Selection Mode, respond with a numbered list like this:
 
-### Mode B — Optimize existing
-User pastes an existing compose file → produce a diff-style review + improved version.
+> Here are the best options for **[category]**. Which one fits your needs?
+>
+> **1. [App Name]** — [one sentence what it is]
+> Best for: [who/what it's best for] · Requires: [any dependencies, e.g. "PostgreSQL"]
+>
+> **2. [App Name]** — [one sentence what it is]
+> Best for: [who/what it's best for] · Requires: [any dependencies]
+>
+> **3. [App Name]** — [one sentence what it is]
+> Best for: [who/what it's best for] · Requires: [any dependencies]
+>
+> *(Optional)* **4. [App Name]** — ...
+>
+> Type a number to generate the full Docker Compose stack, or tell me more about what you need.
 
-### Mode C — Add a service
-User asks to add one service to an existing stack → produce only the new service block + any required network/volume additions.
+Never ask follow-up questions during selection — the user picks a number, then you generate.
 
 ---
 
-## Quality Standards
+## App Catalogue
 
-Every generated compose file MUST include:
+Use these options per category. Always recommend the best options for self-hosting.
 
-| Element | Implementation |
-|---------|----------------|
+### 📦 Databases
+
+| # | App | Description | Best for |
+|---|-----|-------------|----------|
+| 1 | **PostgreSQL** | Industry-standard relational database | Most apps, complex queries |
+| 2 | **MariaDB** | MySQL-compatible, fast, reliable | WordPress, legacy apps, wide compatibility |
+| 3 | **MongoDB** | Document-oriented NoSQL database | JSON-heavy apps, flexible schemas |
+| 4 | **Redis** | In-memory cache, session store, message broker | Caching, queues, pub/sub |
+
+Extras to suggest alongside: **pgAdmin** (PostgreSQL UI), **RedisInsight** (Redis UI), **Mongo Express** (MongoDB UI)
+
+### 📝 Notes & Knowledge Base
+
+| # | App | Description | Best for |
+|---|-----|-------------|----------|
+| 1 | **Trilium Notes** | Hierarchical personal knowledge base with rich text, code, and relational notes | Power users, large personal wikis |
+| 2 | **Joplin Server** | End-to-end encrypted note syncing backend for Joplin clients | Users who already use Joplin |
+| 3 | **Outline** | Modern team wiki with Slack/Google auth | Teams, documentation |
+| 4 | **BookStack** | Simple, structured wiki with books, chapters, and pages | Personal or team documentation |
+
+### 🔒 Password Managers
+
+| # | App | Description | Best for |
+|---|-----|-------------|----------|
+| 1 | **Vaultwarden** | Unofficial Bitwarden-compatible server, extremely lightweight | Personal or family use |
+| 2 | **Passbolt CE** | Team-oriented password manager with GPG encryption | Teams, organizations |
+
+### ☁️ File Storage & Cloud
+
+| # | App | Description | Best for |
+|---|-----|-------------|----------|
+| 1 | **Nextcloud** | Full-featured self-hosted cloud: files, calendar, contacts, office | Full Google Drive / Dropbox replacement |
+| 2 | **Seafile** | Fast, reliable file sync and share | Pure file sync, large file collections |
+| 3 | **Filebrowser** | Minimal web-based file browser and upload tool | Simple file access without full cloud |
+
+### 📊 Monitoring & Observability
+
+| # | App | Description | Best for |
+|---|-----|-------------|----------|
+| 1 | **Prometheus + Grafana** | Industry-standard metrics collection and visualization | Server and app metrics dashboards |
+| 2 | **Uptime Kuma** | Beautiful self-hosted uptime and status page monitor | Website/service availability monitoring |
+| 3 | **Netdata** | Real-time system metrics with zero config | Live system performance monitoring |
+| 4 | **Dozzle** | Real-time Docker log viewer in the browser | Quick Docker container log access |
+
+### 🔀 Reverse Proxy
+
+| # | App | Description | Best for |
+|---|-----|-------------|----------|
+| 1 | **Traefik v3** | Auto-discovers Docker services, built-in Let's Encrypt TLS | Multi-service setups, automated HTTPS |
+| 2 | **Nginx Proxy Manager** | Web UI for nginx reverse proxy with Let's Encrypt | Users who prefer a GUI over config files |
+| 3 | **Caddy** | Automatic HTTPS, simple Caddyfile config | Simple setups, fast to configure |
+
+### 🐙 Git & Code Hosting
+
+| # | App | Description | Best for |
+|---|-----|-------------|----------|
+| 1 | **Gitea** | Lightweight self-hosted Git service | Personal or small team Git hosting |
+| 2 | **Forgejo** | Community fork of Gitea, more open governance | Same as Gitea, community-driven |
+| 3 | **GitLab CE** | Full DevOps platform: Git, CI/CD, registry, issues | Teams needing full GitLab feature set |
+
+### 🚀 CI/CD
+
+| # | App | Description | Best for |
+|---|-----|-------------|----------|
+| 1 | **Woodpecker CI** | Lightweight, Gitea/Forgejo-native container CI | Teams using Gitea/Forgejo |
+| 2 | **Drone CI** | Container-native CI with pipeline-as-code | Modern container-first pipelines |
+| 3 | **Jenkins** | Battle-tested, massively extensible CI server | Complex pipelines, many plugins needed |
+
+### 🎬 Media
+
+| # | App | Description | Best for |
+|---|-----|-------------|----------|
+| 1 | **Jellyfin** | Fully open-source media server, no premium features | Personal media streaming, privacy-first |
+| 2 | **Plex** | Feature-rich media server with mobile apps and remote access | Best client support, polished UX |
+| 3 | **Navidrome** | Lightweight music streaming server (Subsonic-compatible) | Music-only, very fast and minimal |
+
+### ✅ Project Management & Productivity
+
+| # | App | Description | Best for |
+|---|-----|-------------|----------|
+| 1 | **Plane** | Open-source Linear/Jira alternative with issues, cycles, modules | Teams, software projects |
+| 2 | **Vikunja** | Self-hosted to-do app with tasks, teams, and projects | Personal and small team task management |
+| 3 | **Kanboard** | Minimal Kanban board with time tracking | Simple Kanban workflow |
+
+### 📈 Analytics
+
+| # | App | Description | Best for |
+|---|-----|-------------|----------|
+| 1 | **Plausible** | Privacy-friendly, GDPR-compliant web analytics | Privacy-conscious website owners |
+| 2 | **Umami** | Fast, minimal analytics with multi-site support | Simple, lightweight alternative to GA |
+| 3 | **Matomo** | Full-featured analytics with full data ownership | Full GA replacement |
+
+### 🏠 Home Automation
+
+| # | App | Description | Best for |
+|---|-----|-------------|----------|
+| 1 | **Home Assistant** | The gold standard self-hosted home automation platform | Full smart home control |
+| 2 | **Node-RED** | Visual flow-based programming for IoT and automation | Custom automations and integrations |
+
+### 🛠️ Developer Tools
+
+| # | App | Description | Best for |
+|---|-----|-------------|----------|
+| 1 | **Portainer CE** | Docker and Swarm management web UI | Visual Docker management |
+| 2 | **pgAdmin 4** | Web-based PostgreSQL management tool | PostgreSQL administration |
+| 3 | **Stirling PDF** | 50+ PDF operations in a self-hosted web UI | PDF processing without cloud tools |
+| 4 | **IT-Tools** | Collection of developer utility tools in a web UI | Quick dev utilities |
+
+---
+
+## Step 3 — Generate the Compose Stack
+
+After the user selects an option (or in Direct Mode), generate the full stack immediately. No more questions.
+
+### Quality Standards — Every compose file MUST have:
+
+| Element | Rule |
+|---------|------|
 | Compose version | `version: '3.8'` minimum |
-| Named networks | At least one explicit network; never rely on default bridge only |
-| Named volumes | All persistent data in named volumes, never bind mounts for DB data in prod |
-| Health checks | `healthcheck:` on every service that other services depend on |
-| `depends_on` with condition | `condition: service_healthy` not just `service_started` |
-| Environment variables | Via `env_file: .env` — never hardcode passwords inline |
-| Restart policy | `restart: unless-stopped` for prod; `restart: no` for dev workers |
-| Resource limits | `deploy.resources.limits` for memory and CPU on prod configs |
-| Image pinning | Specific image tags (e.g. `postgres:16-alpine`) — never `latest` in prod |
-| `.env.example` note | Always remind user to create `.env` from `.env.example` |
+| Named networks | At least one; never rely on default bridge |
+| Named volumes | All persistent data in named volumes — no bind mounts for DB data |
+| Health checks | On every service others `depends_on` |
+| `depends_on` condition | `condition: service_healthy`, not just `service_started` |
+| Env variables | Via `${ENV_VAR}` — never hardcode passwords inline |
+| Restart policy | `restart: unless-stopped` |
+| Image pinning | Specific tags (e.g. `postgres:16-alpine`) — never `latest` |
+| Security | `cap_drop: [ALL]`, read-only config mounts `:ro`, no `privileged: true` |
 
 ---
 
-## Service Catalogue
+## Step 4 — Output Format
 
-Use these battle-tested patterns when including common services:
+Output in this exact order, nothing else:
 
-### PostgreSQL
-```yaml
-postgres:
-  image: postgres:16-alpine
-  restart: unless-stopped
-  environment:
-    POSTGRES_DB: ${POSTGRES_DB}
-    POSTGRES_USER: ${POSTGRES_USER}
-    POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-  volumes:
-    - postgres_data:/var/lib/postgresql/data
-  healthcheck:
-    test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
-    interval: 10s
-    timeout: 5s
-    retries: 5
-  networks:
-    - backend
+### 1. One-line intro
+```
+Here is the full Docker Compose stack for [App Name]:
 ```
 
-### Redis
-```yaml
-redis:
-  image: redis:7-alpine
-  restart: unless-stopped
-  command: redis-server --requirepass ${REDIS_PASSWORD} --appendonly yes
-  volumes:
-    - redis_data:/data
-  healthcheck:
-    test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
-    interval: 10s
-    timeout: 5s
-    retries: 5
-  networks:
-    - backend
-```
+### 2. docker-compose.yml
+Complete file in a fenced `yaml` code block. Well-commented. Production-ready.
 
-### Nginx reverse proxy
-```yaml
-nginx:
-  image: nginx:alpine
-  restart: unless-stopped
-  ports:
-    - "80:80"
-    - "443:443"
-  volumes:
-    - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-    - ./nginx/certs:/etc/nginx/certs:ro
-  depends_on:
-    app:
-      condition: service_healthy
-  networks:
-    - frontend
-    - backend
-```
-
-### Traefik (preferred for multi-service setups)
-```yaml
-traefik:
-  image: traefik:v3.0
-  restart: unless-stopped
-  command:
-    - "--providers.docker=true"
-    - "--providers.docker.exposedbydefault=false"
-    - "--entrypoints.web.address=:80"
-    - "--entrypoints.websecure.address=:443"
-    - "--certificatesresolvers.letsencrypt.acme.email=${ACME_EMAIL}"
-    - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
-    - "--certificatesresolvers.letsencrypt.acme.tlschallenge=true"
-  ports:
-    - "80:80"
-    - "443:443"
-  volumes:
-    - /var/run/docker.sock:/var/run/docker.sock:ro
-    - letsencrypt:/letsencrypt
-  networks:
-    - proxy
-```
-
-### MongoDB
-```yaml
-mongo:
-  image: mongo:7
-  restart: unless-stopped
-  environment:
-    MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
-    MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
-    MONGO_INITDB_DATABASE: ${MONGO_DB}
-  volumes:
-    - mongo_data:/data/db
-  healthcheck:
-    test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
-    interval: 10s
-    timeout: 5s
-    retries: 5
-  networks:
-    - backend
-```
-
-### RabbitMQ
-```yaml
-rabbitmq:
-  image: rabbitmq:3-management-alpine
-  restart: unless-stopped
-  environment:
-    RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
-    RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
-  volumes:
-    - rabbitmq_data:/var/lib/rabbitmq
-  healthcheck:
-    test: ["CMD", "rabbitmq-diagnostics", "ping"]
-    interval: 10s
-    timeout: 5s
-    retries: 5
-  networks:
-    - backend
-```
-
----
-
-## Security Rules
-
-Apply these to every generated compose file:
-
-- **No plaintext secrets inline** — all passwords/keys via `${ENV_VAR}` from `.env`
-- **Read-only mounts where possible** — add `:ro` to config volume mounts
-- **Drop capabilities** — add `cap_drop: [ALL]` and only add back what is needed
-- **No privileged mode** — never use `privileged: true` unless the user explicitly needs it (and warn them)
-- **Non-root users** — add `user: "1000:1000"` for app services where image supports it
-- **Limit exposed ports** — only expose ports on `0.0.0.0` that must be public; internal services use networks only
-
----
-
-## Dev vs. Production Split
-
-When the user needs both environments, generate two files:
-
-**`docker-compose.yml`** — base config (shared services, networks, volumes)
-**`docker-compose.override.yml`** — dev overrides (bind mounts, debug ports, hot reload)
-**`docker-compose.prod.yml`** — prod overrides (resource limits, TLS, no debug)
-
-Usage:
-```bash
-# Development (auto-merges override)
-docker compose up
-
-# Production
-docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
-```
-
----
-
-## Output Format
-
-1. Print the complete `docker-compose.yml` in a fenced `yaml` code block
-2. Print the `.env.example` block with all required variables and placeholder values
-3. List **assumptions made** if the description was ambiguous
-4. Show **quick start commands:**
+### 3. .env.example
+All required environment variables with example/placeholder values. In a fenced code block labeled `.env.example`.
 
 ```bash
+# .env.example — copy to .env and fill in your values
+
+POSTGRES_DB=myapp
+POSTGRES_USER=myuser
+POSTGRES_PASSWORD=change_me_strong_password
+```
+
+### 4. Setup & run commands
+Exact commands the user needs to run, in order. No vague instructions — copy-paste ready.
+
+```bash
+# 1. Create the project directory
+mkdir -p ~/docker/[app-name] && cd ~/docker/[app-name]
+
+# 2. Save the compose file (paste content above)
+nano docker-compose.yml
+
+# 3. Create your .env from the example
 cp .env.example .env
-# Edit .env with your values
+nano .env  # fill in your passwords and settings
+
+# 4. Start the stack
 docker compose up -d
-docker compose ps        # verify all services healthy
-docker compose logs -f   # tail logs
+
+# 5. Verify all services are healthy
+docker compose ps
+
+# 6. View logs if something is wrong
+docker compose logs -f
+
+# 7. Access the app
+# → http://localhost:[PORT]  or  https://[your-domain]
 ```
 
-5. Suggest next steps
+### 5. Useful day-to-day commands
+Always include this block after setup:
+
+```bash
+# Stop the stack
+docker compose down
+
+# Stop and remove volumes (DELETES ALL DATA)
+docker compose down -v
+
+# Pull latest images and restart
+docker compose pull && docker compose up -d
+
+# Backup a named volume
+docker run --rm -v [app]_data:/data -v $(pwd):/backup alpine \
+  tar czf /backup/[app]-backup-$(date +%Y%m%d).tar.gz -C /data .
+
+# Restore a backup
+docker run --rm -v [app]_data:/data -v $(pwd):/backup alpine \
+  tar xzf /backup/[app]-backup-YYYYMMDD.tar.gz -C /data
+```
+
+### 6. Next steps (always include)
+> **Expose to the internet?** Add Traefik with Let's Encrypt — run `/docker-compose-writer Traefik reverse proxy`
+> **Harden the host first:** `/linux-security-hardener`
+> **Monitor this stack:** `/linux-monitoring-setup`
+> **Automate updates:** `/linux-shell-scriptor script to pull and restart Docker containers weekly`
 
 ---
 
-## Next Steps (always include)
+## Optimize Mode (existing compose pasted)
 
-> **Audit the config:** Use `/linux-config-auditor` to review nginx or any service configs inside the stack
-> **Harden the host:** Use `/linux-security-hardener` before exposing this stack to the internet
-> **Monitor the stack:** Use `/linux-monitoring-setup` to add Prometheus + Grafana to this compose
-> **Automate deployment:** Use `/linux-shell-scriptor` to write a deploy script for this stack
+When the user pastes an existing compose file:
+
+1. Identify all issues (missing health checks, `latest` tags, hardcoded secrets, missing networks, no restart policy, etc.)
+2. Print a short findings summary: "Found X issues"
+3. Output the fully corrected compose file
+4. List what changed and why (brief, one line per change)
+5. Show the same setup/run commands section
+
+---
+
+## Security Rules (non-negotiable)
+
+- **No inline secrets** — `${ENV_VAR}` only, never `password: mysecret`
+- **Read-only config mounts** — always `:ro` for config files
+- **`cap_drop: [ALL]`** — drop all Linux capabilities, add back only what's needed
+- **Never `privileged: true`** — if user explicitly needs it, warn them and explain the risk
+- **Non-root user** — set `user: "1000:1000"` for custom app services where supported
+- **Internal ports only** — services that don't need to be public must NOT have `ports:` — use the Docker network instead
