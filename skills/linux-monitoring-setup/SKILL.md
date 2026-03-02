@@ -1,7 +1,7 @@
 ---
 name: linux-monitoring-setup
 description: Use when user wants to set up monitoring, observability, alerting, dashboards, uptime checks, metrics collection, or log aggregation for a Linux server, Docker stack, application, or infrastructure — including Prometheus, Grafana, Node Exporter, Loki, Alertmanager, Uptime Kuma, Netdata, or custom bash-based monitoring scripts.
-version: 1.0.0
+version: 1.1.0
 author: Lehnert
 ---
 
@@ -44,9 +44,16 @@ Ask at most **two** questions if the answers aren't clear from the request.
 - Everything — full-stack observability
 
 **Question 2**: "How much infrastructure do you want to run for monitoring?"
-- **Lightweight** — minimal resource use, 1–2 containers or a simple bash script
-- **Standard** — Prometheus + Grafana stack, ~500MB RAM, industry standard
-- **Full** — metrics + logs + traces + alerts, enterprise-grade
+
+| Tier | RAM | Containers | Best for |
+|------|-----|------------|---------|
+| **Lightweight** | ~100–150MB | 1–2 | Low-resource VPS, quick visibility |
+| **Standard** | ~400–600MB | 3–4 | Most servers — Prometheus + Grafana |
+| **Full** | ~1–2GB | 6–8 | Prod infra — metrics + logs + alerts |
+
+- **Lightweight** — Netdata or Uptime Kuma or a bash monitoring script
+- **Standard** — Prometheus + Grafana + Node Exporter (industry standard)
+- **Full** — metrics + logs + traces + alerts (Prometheus + Grafana + Loki + Alertmanager)
 
 If the user just says "set up monitoring for my server", default to **Standard — Prometheus + Grafana** for a single Linux server.
 
@@ -97,8 +104,6 @@ Present: **Uptime Kuma** or **Gatus** (config-file-driven, more powerful).
 
 **docker-compose.yml pattern:**
 ```yaml
-version: '3.8'
-
 services:
   prometheus:
     image: prom/prometheus:v2.51.0
@@ -233,7 +238,6 @@ Add to Stack A:
 ### Stack C — Uptime Kuma (Lightweight uptime monitoring)
 
 ```yaml
-version: '3.8'
 services:
   uptime-kuma:
     image: louislam/uptime-kuma:1
@@ -257,7 +261,6 @@ volumes:
 ### Stack D — Netdata (Zero-config real-time monitoring)
 
 ```yaml
-version: '3.8'
 services:
   netdata:
     image: netdata/netdata:stable

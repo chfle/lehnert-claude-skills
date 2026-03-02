@@ -28,12 +28,7 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | Skill | Description | Status |
 |-------|-------------|--------|
 | `sw-use-case-coder` | Generates production-ready code for selected use cases from tech-stack.yaml and use-cases.md | ✅ Active |
-| `sw-boilerplate` | Orchestrates all boilerplate sub-skills to scaffold a complete project from tech-stack.yaml into the workspace root | ✅ Active |
-| `sw-boilerplate-root` | Creates root config files (package.json, tsconfig.json, pom.xml etc.) from tech-stack.yaml | ✅ Active |
-| `sw-boilerplate-structure` | Creates source code skeleton (entry points, modules, controllers) from tech-stack.yaml | ✅ Active |
-| `sw-boilerplate-db` | Creates database and ORM files (Prisma schema, Flyway migration, SQLAlchemy) from tech-stack.yaml | ✅ Active |
-| `sw-boilerplate-docker` | Creates Docker infrastructure files (docker-compose.yml, Dockerfiles, Traefik) from tech-stack.yaml | ✅ Active |
-| `sw-boilerplate-ui` | Creates UI foundation files (Tailwind, shadcn/ui, globals.css, layout) from tech-stack.yaml | ✅ Active |
+| `sw-boilerplate` | Scaffolds a complete project from tech-stack.yaml into the workspace root (root files, source structure, DB, Docker, UI — all in one command) | ✅ Active |
 
 ### 🐧 Linux & Sysadmin
 
@@ -85,10 +80,10 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | "Scaffold files for a use case" | → `sw-use-case-coder` |
 | "Create project boilerplate" | → `sw-boilerplate` |
 | "Set up the project skeleton" | → `sw-boilerplate` |
-| "Generate package.json / tsconfig" | → `sw-boilerplate-root` |
-| "Create docker-compose.yml" | → `sw-boilerplate-docker` |
-| "Set up Prisma / database files" | → `sw-boilerplate-db` |
-| "Create Tailwind / shadcn setup" | → `sw-boilerplate-ui` |
+| "Generate package.json / tsconfig" | → `sw-boilerplate` |
+| "Create docker-compose.yml for my project" | → `sw-boilerplate` |
+| "Set up Prisma / database files" | → `sw-boilerplate` |
+| "Create Tailwind / shadcn setup" | → `sw-boilerplate` |
 
 | "Write a bash script for backups" | → `linux-shell-scriptor` |
 | "Create a shell script to monitor disk space" | → `linux-shell-scriptor` |
@@ -104,6 +99,9 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | "Add PostgreSQL / Redis / nginx to my compose file" | → `docker-compose-writer` |
 | "Optimize my existing docker-compose.yml" | → `docker-compose-writer` |
 | "Set up a Docker stack for my app" | → `docker-compose-writer` |
+| "I want to self-host X" / "replace Google Y" | → `docker-compose-writer` |
+| "Set up Nextcloud / Immich / Jellyfin / Gitea" | → `docker-compose-writer` |
+| "Self-hosted AI / local ChatGPT" | → `docker-compose-writer` |
 | "Harden my Linux server" | → `linux-security-hardener` |
 | "Secure a fresh VPS" | → `linux-security-hardener` |
 | "Lock down SSH / set up a firewall" | → `linux-security-hardener` |
@@ -142,6 +140,20 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | "Set CPU governor to performance" | → `linux-performance-tuner` |
 | "Optimize for PostgreSQL / web / HPC" | → `linux-performance-tuner` |
 | "Profile where my server is spending time" | → `linux-performance-tuner` |
+
+---
+
+## New Here? Common Starting Points
+
+| Goal | Recommended path |
+|------|-----------------|
+| **Build a new web app from scratch** | `sw-idea-analyzer` → `sw-user-story-creator` → `sw-use-case-creator` → `sw-tech-stack-planner` → `sw-boilerplate` → `sw-use-case-coder` |
+| **Self-host an app (Nextcloud, Jellyfin, etc.)** | `docker-compose-writer` |
+| **Harden a fresh server / VPS** | `linux-security-hardener` |
+| **Something is broken on my server** | `linux-log-analyzer` |
+| **Set up backups** | `linux-backup-restore` |
+| **Monitor my server** | `linux-monitoring-setup` |
+| **Write a bash script** | `linux-shell-scriptor` |
 
 > No skill for your task yet? Say: **"Create the skill [name] for me"** – I'll build the folder and SKILL.md right away.
 

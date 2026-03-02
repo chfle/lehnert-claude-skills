@@ -1,7 +1,7 @@
 ---
 name: sw-tech-stack-planner
 description: Use when user wants a tech stack recommendation, technology choices, docker-compose setup, or architecture decisions for a software project – reads vision.md, user-stories.md, use-cases.md and generates requirements/tech-stack.yaml silently.
-version: 1.0.0
+version: 1.1.0
 author: Lehnert
 ---
 
@@ -150,7 +150,7 @@ deployment:
   registry: ""
 
 docker:
-  compose_version: "3.9"
+  compose_version: ""  # leave empty — Compose V2 doesn't require a version field
   services: []       # list all service names
   volumes: []
   networks: []
@@ -192,5 +192,5 @@ One optional summary sentence max (e.g. "Recommended Next.js 15 + NestJS + Postg
 ## Next Skill
 
 > ▶ **Next steps:**
-> - Run `/sw-use-case-coder UC-001` to generate production-ready code for a specific use case
-> - Run `/sw-use-case-coder all MVP` to scaffold all MVP use cases at once
+> - Run `/sw-boilerplate` to scaffold the full project skeleton from this tech-stack.yaml
+> - Then run `/sw-use-case-coder UC-001` (or `all MVP`) to generate production-ready code for use cases

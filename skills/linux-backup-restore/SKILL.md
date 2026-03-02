@@ -1,7 +1,7 @@
 ---
 name: linux-backup-restore
 description: Use when user wants to back up a Linux server, design a backup strategy, write a backup script, set up automated backups, configure restic or borgbackup, restore from a backup, test backup integrity, back up databases, Docker volumes, or asks about the 3-2-1 backup rule or disaster recovery.
-version: 1.0.0
+version: 1.1.0
 author: Lehnert
 ---
 
@@ -430,6 +430,32 @@ log "=== TEST COMPLETE: All checks passed ==="
 
 ---
 
+## Encryption Key Management
+
+**Always include guidance on storing encryption credentials safely.** A lost password = permanently unrecoverable backup.
+
+| Tool | Key variable | Storage guidance |
+|------|-------------|-----------------|
+| restic | `RESTIC_PASSWORD` | Store in `/root/.restic-env` (chmod 400) or a password manager; print and store offline |
+| BorgBackup | `BORG_PASSPHRASE` | Same — store in `/root/.borg-env` (chmod 400); write the passphrase down and store in a safe |
+
+**`/root/.restic-env` pattern (source this before running backup commands):**
+```bash
+export RESTIC_REPOSITORY="/mnt/backups/myserver"
+export RESTIC_PASSWORD="your-strong-passphrase-here"
+# For S3:
+# export AWS_ACCESS_KEY_ID="..."
+# export AWS_SECRET_ACCESS_KEY="..."
+```
+```bash
+chmod 400 /root/.restic-env
+# source it: . /root/.restic-env
+```
+
+**Warn the user explicitly:** If you lose `RESTIC_PASSWORD` or `BORG_PASSPHRASE`, all backups are permanently inaccessible — even if the files exist. Test the password in a restore drill before relying on it.
+
+---
+
 ## 3-2-1 Backup Rule
 
 Always explain and enforce this when generating a backup strategy:
@@ -481,5 +507,7 @@ Then print ONLY:
   ./backup/test-restore.sh
 
 💡 Follow the 3-2-1 rule: local + remote/cloud copy + test regularly.
+⚠️  Store your encryption password safely — if lost, backups are unrecoverable.
 💡 Next: /linux-cron-manager to create a systemd timer for automated backups.
+💡 Next: /linux-monitoring-setup to alert when backups fail or disk fills up.
 ```

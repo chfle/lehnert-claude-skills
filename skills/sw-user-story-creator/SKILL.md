@@ -1,7 +1,7 @@
 ---
 name: sw-user-story-creator
 description: Use when user wants to create user stories, acceptance criteria, or a requirements document from a software idea, vision.md, or sw-idea-analyzer output – generates a complete structured requirements/user-stories.md file.
-version: 1.0.0
+version: 1.3.0
 author: Lehnert
 ---
 
@@ -50,6 +50,8 @@ Every story follows this exact structure:
 - Benefit = measurable or observable outcome
 - Each story gets 3–5 acceptance criteria minimum
 - MVP = required for the first working version; Nice-to-have = can be deferred
+- IDs start at `US-001` and increment sequentially across the entire document (never reset per epic)
+- If appending to an existing `user-stories.md`, read the last ID used and continue from there
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 name: linux-cron-manager
 description: Use when user wants to schedule a task with cron, write a crontab entry, create a /etc/cron.d/ file, set up a cron job with locking and logging, convert a cron job to a systemd timer, debug a cron job that isn't running, or understand cron syntax and environment behavior.
-version: 1.0.0
+version: 1.1.0
 author: Lehnert
 ---
 
@@ -238,6 +238,8 @@ stat /etc/cron.d/myfile          # must be owned by root, mode 644
 # File must NOT have a .sh extension — cron ignores them
 # File must NOT be world-writable
 ```
+
+**The #1 reason cron jobs "silently do nothing":** output (stdout + stderr) is discarded unless captured. Always write logs inside the wrapper script using the `log()` function above, or add `>> /var/log/cron/myapp.log 2>&1` to the cron entry.
 
 **Common reasons cron jobs silently do nothing:**
 
