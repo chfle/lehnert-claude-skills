@@ -30,6 +30,7 @@ The fastest way to get everything – one command registers the marketplace, one
 /plugin install linux-config-auditor@lehnert-claude-skills
 /plugin install docker-compose-writer@lehnert-claude-skills
 /plugin install linux-security-hardener@lehnert-claude-skills
+/plugin install linux-log-analyzer@lehnert-claude-skills
 ```
 
 **To install all active skills at once:**
@@ -92,6 +93,7 @@ Skills without a `commands/` directory are **helpers** – they are loaded autom
 | `linux-config-auditor` | Slash command | `/linux-config-auditor` |
 | `docker-compose-writer` | Slash command | `/docker-compose-writer` |
 | `linux-security-hardener` | Slash command | `/linux-security-hardener` |
+| `linux-log-analyzer` | Slash command | `/linux-log-analyzer` |
 
 **Rule of thumb:** If a skill is a standalone user-facing tool → give it a `commands/` file. If it's a helper or orchestrator → leave it as a pure skill.
 
@@ -162,6 +164,7 @@ claude plugin install /path/to/lehnert-claude-skills --scope user
 | `linux-config-auditor` | Audits nginx, Apache, sshd, systemd units, iptables, fail2ban, sudoers, and sysctl configs for security issues, misconfigs, and performance gaps | ✅ Active |
 | `docker-compose-writer` | Generates or optimizes docker-compose.yml from a project description or existing stack — health checks, named volumes, env management, security hardening | ✅ Active |
 | `linux-security-hardener` | Generates a complete server hardening plan with SSH lockdown, firewall, fail2ban, sysctl, auditd, and a ready-to-run harden.sh script | ✅ Active |
+| `linux-log-analyzer` | Analyzes auth.log, syslog, nginx, Apache, journalctl, Docker, and fail2ban logs for errors, security threats, brute force, and anomalies | ✅ Active |
 
 ### 🔒 Pentesting
 

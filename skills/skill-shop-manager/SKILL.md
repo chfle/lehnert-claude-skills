@@ -43,6 +43,7 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | `linux-config-auditor` | Audits nginx, sshd, systemd units, iptables, fail2ban, sudoers, sysctl for security issues and performance gaps | ✅ Active |
 | `docker-compose-writer` | Generates or optimizes docker-compose.yml from a project description or existing stack | ✅ Active |
 | `linux-security-hardener` | Generates a complete server hardening plan with SSH, firewall, fail2ban, sysctl, auditd, and a ready-to-run harden.sh script | ✅ Active |
+| `linux-log-analyzer` | Analyzes auth.log, syslog, nginx, Apache, journalctl, Docker, and fail2ban logs for errors, security threats, and anomalies | ✅ Active |
 
 ### 🔒 Pentesting
 
@@ -100,6 +101,10 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | "Secure a fresh VPS" | → `linux-security-hardener` |
 | "Lock down SSH / set up a firewall" | → `linux-security-hardener` |
 | "CIS benchmark / security checklist for my server" | → `linux-security-hardener` |
+| "Analyze my auth.log / nginx logs" | → `linux-log-analyzer` |
+| "Find brute force attacks in my logs" | → `linux-log-analyzer` |
+| "Why did my service crash? Check the logs" | → `linux-log-analyzer` |
+| "What's happening on my server? Check syslog" | → `linux-log-analyzer` |
 
 > No skill for your task yet? Say: **"Create the skill [name] for me"** – I'll build the folder and SKILL.md right away.
 

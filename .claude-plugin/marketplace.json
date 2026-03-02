@@ -160,6 +160,15 @@
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["security", "hardening", "linux", "ssh", "firewall", "fail2ban", "sysctl", "auditd", "cis", "vps", "server"]
+    },
+    {
+      "name": "linux-log-analyzer",
+      "source": "./skills/linux-log-analyzer",
+      "description": "Analyzes Linux log files (auth.log, syslog, nginx, Apache, journalctl, Docker, fail2ban) for errors, security threats, brute force attacks, crashes, and anomalies.",
+      "version": "1.0.0",
+      "author": { "name": "Lehnert" },
+      "category": "linux-sysadmin",
+      "keywords": ["logs", "log-analysis", "security", "auth.log", "nginx", "syslog", "journalctl", "docker", "brute-force", "anomaly", "linux"]
     }
   ]
 }
