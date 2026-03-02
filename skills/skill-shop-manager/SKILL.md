@@ -42,6 +42,7 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | `linux-shell-scriptor` | Generates production-ready bash scripts for backups, monitoring, deployment, cron jobs, and any sysadmin task | ✅ Active |
 | `linux-config-auditor` | Audits nginx, sshd, systemd units, iptables, fail2ban, sudoers, sysctl for security issues and performance gaps | ✅ Active |
 | `docker-compose-writer` | Generates or optimizes docker-compose.yml from a project description or existing stack | ✅ Active |
+| `linux-security-hardener` | Generates a complete server hardening plan with SSH, firewall, fail2ban, sysctl, auditd, and a ready-to-run harden.sh script | ✅ Active |
 
 ### 🔒 Pentesting
 
@@ -95,6 +96,10 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | "Add PostgreSQL / Redis / nginx to my compose file" | → `docker-compose-writer` |
 | "Optimize my existing docker-compose.yml" | → `docker-compose-writer` |
 | "Set up a Docker stack for my app" | → `docker-compose-writer` |
+| "Harden my Linux server" | → `linux-security-hardener` |
+| "Secure a fresh VPS" | → `linux-security-hardener` |
+| "Lock down SSH / set up a firewall" | → `linux-security-hardener` |
+| "CIS benchmark / security checklist for my server" | → `linux-security-hardener` |
 
 > No skill for your task yet? Say: **"Create the skill [name] for me"** – I'll build the folder and SKILL.md right away.
 
