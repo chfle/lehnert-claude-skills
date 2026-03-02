@@ -44,6 +44,7 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | `docker-compose-writer` | Generates or optimizes docker-compose.yml from a project description or existing stack | ✅ Active |
 | `linux-security-hardener` | Generates a complete server hardening plan with SSH, firewall, fail2ban, sysctl, auditd, and a ready-to-run harden.sh script | ✅ Active |
 | `linux-log-analyzer` | Analyzes auth.log, syslog, nginx, Apache, journalctl, Docker, and fail2ban logs for errors, security threats, and anomalies | ✅ Active |
+| `linux-monitoring-setup` | Sets up Prometheus+Grafana, Loki, Alertmanager, Uptime Kuma, or Netdata for any server or Docker host | ✅ Active |
 
 ### 🔒 Pentesting
 
@@ -105,6 +106,10 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | "Find brute force attacks in my logs" | → `linux-log-analyzer` |
 | "Why did my service crash? Check the logs" | → `linux-log-analyzer` |
 | "What's happening on my server? Check syslog" | → `linux-log-analyzer` |
+| "Set up Prometheus and Grafana" | → `linux-monitoring-setup` |
+| "Monitor my server / Docker host" | → `linux-monitoring-setup` |
+| "Set up uptime monitoring / status page" | → `linux-monitoring-setup` |
+| "I want alerts when disk is full or service is down" | → `linux-monitoring-setup` |
 
 > No skill for your task yet? Say: **"Create the skill [name] for me"** – I'll build the folder and SKILL.md right away.
 

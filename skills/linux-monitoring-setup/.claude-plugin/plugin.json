@@ -1,0 +1,7 @@
+{
+  "name": "linux-monitoring-setup",
+  "description": "Sets up a complete monitoring stack (Prometheus, Grafana, Node Exporter, Loki, Alertmanager, Uptime Kuma, Netdata) for any Linux server, Docker host, or application.",
+  "version": "1.0.0",
+  "author": { "name": "Lehnert" },
+  "keywords": ["monitoring", "prometheus", "grafana", "loki", "alertmanager", "node-exporter", "uptime-kuma", "netdata", "cadvisor", "observability", "metrics", "alerts"]
+}

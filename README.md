@@ -31,6 +31,7 @@ The fastest way to get everything – one command registers the marketplace, one
 /plugin install docker-compose-writer@lehnert-claude-skills
 /plugin install linux-security-hardener@lehnert-claude-skills
 /plugin install linux-log-analyzer@lehnert-claude-skills
+/plugin install linux-monitoring-setup@lehnert-claude-skills
 ```
 
 **To install all active skills at once:**
@@ -94,6 +95,7 @@ Skills without a `commands/` directory are **helpers** – they are loaded autom
 | `docker-compose-writer` | Slash command | `/docker-compose-writer` |
 | `linux-security-hardener` | Slash command | `/linux-security-hardener` |
 | `linux-log-analyzer` | Slash command | `/linux-log-analyzer` |
+| `linux-monitoring-setup` | Slash command | `/linux-monitoring-setup` |
 
 **Rule of thumb:** If a skill is a standalone user-facing tool → give it a `commands/` file. If it's a helper or orchestrator → leave it as a pure skill.
 
@@ -165,6 +167,7 @@ claude plugin install /path/to/lehnert-claude-skills --scope user
 | `docker-compose-writer` | Generates or optimizes docker-compose.yml from a project description or existing stack — health checks, named volumes, env management, security hardening | ✅ Active |
 | `linux-security-hardener` | Generates a complete server hardening plan with SSH lockdown, firewall, fail2ban, sysctl, auditd, and a ready-to-run harden.sh script | ✅ Active |
 | `linux-log-analyzer` | Analyzes auth.log, syslog, nginx, Apache, journalctl, Docker, and fail2ban logs for errors, security threats, brute force, and anomalies | ✅ Active |
+| `linux-monitoring-setup` | Sets up Prometheus, Grafana, Node Exporter, Loki, Alertmanager, Uptime Kuma, or Netdata for any server or Docker host — writes all configs to disk | ✅ Active |
 
 ### 🔒 Pentesting
 
