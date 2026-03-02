@@ -1,6 +1,8 @@
 ---
 name: linux-config-auditor
 description: Use when user wants to audit, review, analyze, or improve a Linux config file — nginx, Apache, sshd_config, systemd service/timer/socket units, iptables, nftables, firewalld, fail2ban, sudoers, /etc/security/limits.conf, sysctl.conf, or any server config — for security issues, misconfigurations, performance problems, or compliance gaps.
+version: 1.0.0
+author: Lehnert
 ---
 
 # Linux Config Auditor

@@ -1,15 +1,37 @@
-Audit a Linux config file using the linux-config-auditor skill.
+# /linux-config-auditor
 
-If the user provided config content or a config type as an argument, use it directly.
-If no argument was given, ask: "Paste the config file content you want audited, or tell me the config type (e.g. nginx, sshd, systemd unit, iptables, sudoers)."
+Audit a Linux config file for security issues, misconfigurations, and performance gaps.
+
+## Usage
+
+```
+/linux-config-auditor <config type or paste config content>
+```
+
+## Examples
+
+```
+/linux-config-auditor sshd_config
+/linux-config-auditor [paste nginx vhost content]
+/linux-config-auditor [paste systemd service unit]
+/linux-config-auditor iptables rules
+```
+
+## Supported Configs
+
+`nginx`, `apache`, `sshd_config`, `systemd` service/timer/socket, `iptables`, `nftables`, `firewalld`, `fail2ban`, `sudoers`, `sysctl.conf`, `/etc/security/limits.conf`
+
+## Behavior
+
+If config content or a config type is provided as an argument, use it directly.
+If no argument is given, ask: "Paste the config file content you want audited, or describe the config type."
 
 Then run the full linux-config-auditor workflow:
-1. Identify the config type from the content or user's description
-2. Run the audit across three lenses: Security → Performance → Compliance/Best Practice
-3. Output the findings in this exact structure:
-   - Summary header: config name, count of critical / warnings / info / passed
-   - Findings table with severity (🔴 Critical / 🟠 Warning / 🟡 Info / ✅ OK), the setting or line, the issue, and the fix
-   - Fixed config snippet containing only the changed lines with inline comments
-   - Next steps (apply fixes, link to related skills)
+1. Identify the config type from content or description
+2. Audit across three lenses: Security → Performance → Compliance/Best Practice
+3. Output the findings summary (critical / warnings / info / passed count)
+4. Print the findings table: severity (🔴/🟠/🟡/✅), setting, issue, fix
+5. Print a corrected snippet with only the changed lines and inline comments
+6. Suggest next steps
 
 $ARGUMENTS

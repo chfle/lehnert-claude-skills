@@ -1,6 +1,8 @@
 ---
 name: linux-shell-scriptor
 description: Use when user wants to write, generate, or create a bash or shell script for any Linux task — backups, monitoring, deployment, automation, cron jobs, health checks, system maintenance, log rotation, or any described sysadmin use case.
+version: 1.0.0
+author: Lehnert
 ---
 
 # Linux Shell Scriptor

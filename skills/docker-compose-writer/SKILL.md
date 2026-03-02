@@ -1,6 +1,8 @@
 ---
 name: docker-compose-writer
 description: Use when user wants to write, generate, create, or optimize a docker-compose.yml — for a new project, an existing stack, a specific app description, or when asked to add services like databases, caches, reverse proxies, monitoring, or message queues to an existing compose file.
+version: 1.0.0
+author: Lehnert
 ---
 
 # Docker Compose Writer
