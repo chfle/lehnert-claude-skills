@@ -49,6 +49,7 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | `linux-backup-restore` | Generates backup solutions with restic, BorgBackup, rsync, or tar — encryption, remote/cloud storage, DB/Docker backups, retention, restore | ✅ Active |
 | `linux-systemd-manager` | Creates, debugs, and hardens systemd services, timers, sockets, and path units — with sandboxing, resource limits, and restart policies | ✅ Active |
 | `linux-cron-manager` | Generates cron jobs with /etc/cron.d/ entries and wrapper scripts — flock locking, logging, failure alerting, debugging | ✅ Active |
+| `linux-selinux-helper` | Diagnoses and fixes SELinux denials — file contexts, booleans, port labels, custom policy modules | ✅ Active |
 
 ### 🔒 Pentesting
 
@@ -131,6 +132,10 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | "My cron job isn't running" | → `linux-cron-manager` |
 | "Cron job with locking and logging" | → `linux-cron-manager` |
 | "Convert cron to systemd timer" | → `linux-cron-manager` |
+| "SELinux is blocking my app" | → `linux-selinux-helper` |
+| "AVC denial / permission denied on RHEL/Rocky" | → `linux-selinux-helper` |
+| "Fix SELinux file context / restorecon" | → `linux-selinux-helper` |
+| "Write a custom SELinux policy module" | → `linux-selinux-helper` |
 
 > No skill for your task yet? Say: **"Create the skill [name] for me"** – I'll build the folder and SKILL.md right away.
 

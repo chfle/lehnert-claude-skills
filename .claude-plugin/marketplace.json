@@ -214,6 +214,15 @@
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["cron", "crontab", "scheduling", "flock", "locking", "automation", "linux", "systemd-timer", "cron.d"]
+    },
+    {
+      "name": "linux-selinux-helper",
+      "source": "./skills/linux-selinux-helper",
+      "description": "Diagnoses and fixes SELinux denials — file context relabeling, boolean toggles, port labeling, and custom policy modules. Never suggests disabling SELinux.",
+      "version": "1.0.0",
+      "author": { "name": "Lehnert" },
+      "category": "linux-sysadmin",
+      "keywords": ["selinux", "avc", "denial", "policy", "semanage", "restorecon", "audit2allow", "boolean", "context", "rhel", "rocky", "fedora", "security"]
     }
   ]
 }
