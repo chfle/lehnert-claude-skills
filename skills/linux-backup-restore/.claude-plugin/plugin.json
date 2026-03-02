@@ -1,0 +1,7 @@
+{
+  "name": "linux-backup-restore",
+  "description": "Designs and generates complete Linux backup solutions using restic, BorgBackup, rsync, or tar — with encryption, remote storage, retention policies, database backups, Docker volume backups, and restore procedures.",
+  "version": "1.0.0",
+  "author": { "name": "Lehnert" },
+  "keywords": ["backup", "restore", "restic", "borgbackup", "rsync", "disaster-recovery", "database-backup", "docker-volumes", "s3", "3-2-1", "retention", "linux"]
+}

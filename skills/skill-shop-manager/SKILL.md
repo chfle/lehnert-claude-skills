@@ -46,6 +46,7 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | `linux-log-analyzer` | Analyzes auth.log, syslog, nginx, Apache, journalctl, Docker, and fail2ban logs for errors, security threats, and anomalies | ✅ Active |
 | `linux-monitoring-setup` | Sets up Prometheus+Grafana, Loki, Alertmanager, Uptime Kuma, or Netdata for any server or Docker host | ✅ Active |
 | `linux-network-configurer` | Configures static IP, VLANs, bonding, WireGuard, iptables, nftables, DNS across all Linux network stacks | ✅ Active |
+| `linux-backup-restore` | Generates backup solutions with restic, BorgBackup, rsync, or tar — encryption, remote/cloud storage, DB/Docker backups, retention, restore | ✅ Active |
 
 ### 🔒 Pentesting
 
@@ -116,6 +117,10 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | "Configure iptables / nftables / firewalld" | → `linux-network-configurer` |
 | "Configure VLANs / bonding / bridge" | → `linux-network-configurer` |
 | "My network stopped working" | → `linux-network-configurer` |
+| "Back up my server / files / database" | → `linux-backup-restore` |
+| "Set up automated backups with restic or borg" | → `linux-backup-restore` |
+| "Restore from a backup" | → `linux-backup-restore` |
+| "Back up Docker volumes to S3 / Backblaze" | → `linux-backup-restore` |
 
 > No skill for your task yet? Say: **"Create the skill [name] for me"** – I'll build the folder and SKILL.md right away.
 
