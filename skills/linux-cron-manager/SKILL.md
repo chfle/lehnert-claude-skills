@@ -1,7 +1,7 @@
 ---
 name: linux-cron-manager
 description: Use when user wants to schedule a task with cron, write a crontab entry, create a /etc/cron.d/ file, set up a cron job with locking and logging, convert a cron job to a systemd timer, debug a cron job that isn't running, or understand cron syntax and environment behavior.
-version: 1.2.0
+version: 1.3.0
 author: Lehnert
 ---
 
@@ -306,7 +306,9 @@ Then print ONLY:
   sudo chmod 644 /etc/cron.d/myapp-task
   sudo chown root:root /etc/cron.d/myapp-task
   sudo cp cron/run-task.sh /opt/myapp/tasks/run-task.sh
-  sudo chmod +x /opt/myapp/tasks/run-task.sh
+  sudo chmod 755 /opt/myapp/tasks/run-task.sh
+  sudo chown appuser:appuser /opt/myapp/tasks/run-task.sh
+  sudo systemctl reload cron          # tell cron to pick up the new /etc/cron.d/ file
 
 ▶ Verify cron picked it up:
   grep myapp-task /var/log/syslog

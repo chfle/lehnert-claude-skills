@@ -1,7 +1,7 @@
 ---
 name: sw-tech-stack-planner
 description: Use when user wants a tech stack recommendation, technology choices, docker-compose setup, or architecture decisions for a software project – reads vision.md, user-stories.md, use-cases.md and generates requirements/tech-stack.yaml silently.
-version: 1.1.0
+version: 1.2.0
 author: Lehnert
 ---
 
@@ -32,6 +32,20 @@ If none exist and no input is given, stop and respond:
 ---
 
 ## Stack Selection Rules
+
+### Single-App vs Monorepo
+
+| Use single-app when | Use monorepo when |
+|---------------------|-------------------|
+| Only one frontend or one backend | Frontend + backend share types or are developed together |
+| Simple project, one deployment unit | Multiple apps (web + mobile, web + API + worker) |
+| Starter / hobby project | Team works across all parts simultaneously |
+| No shared code between services | Shared packages (shared types, UI lib, utils) |
+
+Default to **single-app**. Only recommend monorepo when the use cases clearly show multiple co-deployed apps.
+Set `structure: monorepo` in tech-stack.yaml and note the implied workspace setup (`apps/web/`, `apps/api/`, `packages/`) so `/sw-boilerplate` generates the right root layout.
+
+---
 
 ### Always Docker-First
 
@@ -110,6 +124,7 @@ Write `requirements/tech-stack.yaml` with these exact sections:
 project:
   name: ""
   type: ""           # web-app | api | mobile | cli | fullstack
+  structure: ""      # single-app | monorepo
   complexity: ""     # simple | medium | complex
 
 frontend:

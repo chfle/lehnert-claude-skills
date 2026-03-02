@@ -1,7 +1,7 @@
 ---
 name: sw-boilerplate
 description: Use when user wants to scaffold a complete project boilerplate, says "create boilerplate", "set up the project", "generate the skeleton", or wants all project files created from requirements/tech-stack.yaml directly in the workspace root.
-version: 1.2.0
+version: 1.3.0
 author: Lehnert
 ---
 
@@ -26,13 +26,15 @@ Read the full file before starting. Note: `frontend.framework`, `backend.framewo
 
 ## Module 1 – Root Config (always runs, interactive)
 
-**Before doing anything else**, ask the user exactly this question and wait for their reply:
+**Before doing anything else**, determine which root files apply to the detected stack, then ask the user exactly this question (substituting `[files]` with the actual list) and wait for their reply:
 
 ---
 
-Do you want to create the root files (package.json, pom.xml, build.gradle, Makefile, pyproject.toml etc.) yourself?
+Do you want to create the root config files yourself?
 
-1. Yes, I will create them myself – show me the exact content based on tech-stack.yaml
+Based on your `tech-stack.yaml`, I will create: **[files]** (e.g. for NestJS+Next.js: `package.json`, `tsconfig.json`, `tsconfig.build.json`, `nest-cli.json`, `next.config.ts`, `.eslintrc.js`, `.prettierrc`, `.env.example`, `.gitignore`)
+
+1. Yes, I will create them myself – show me the exact content
 2. No, generate them for me
    ⚠️ Warning: Generated library versions might not be the latest. After generation I recommend running pnpm update / ./mvnw versions:use-latest-releases or equivalent.
 

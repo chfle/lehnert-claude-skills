@@ -157,6 +157,38 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 
 > No skill for your task yet? Say: **"Create the skill [name] for me"** – I'll build the folder and SKILL.md right away.
 
+---
+
+## How Skills Chain Together (Software Development Pipeline)
+
+Skills pass information through **files on disk**, not through chat history. Each skill reads what the previous one wrote and writes its own output. You can run them in separate conversations — they always pick up from disk.
+
+```
+/sw-idea-analyzer
+  └─ writes → requirements/vision.md
+
+/sw-user-story-creator        (reads vision.md)
+  └─ writes → requirements/user-stories.md
+
+/sw-use-case-creator          (reads vision.md + user-stories.md)
+  └─ writes → requirements/use-cases.md
+
+/sw-tech-stack-planner        (reads vision.md + user-stories.md + use-cases.md)
+  └─ writes → requirements/tech-stack.yaml
+
+/sw-boilerplate               (reads tech-stack.yaml)
+  └─ writes → all root config files, src/, docker-compose.yml, Dockerfile, etc.
+              directly into the workspace root
+
+/sw-use-case-coder UC-001     (reads tech-stack.yaml + use-cases.md)
+  └─ writes → production-ready code for each use case into the workspace root
+```
+
+**Key rules:**
+- Every skill writes files **silently** (no file content in chat, just a ✅ confirmation)
+- If a required input file is missing, the skill stops and tells you which skill to run first
+- You can run any skill standalone by passing a description directly (no prior files needed)
+
 ## Adding a New Skill
 
 Just say:

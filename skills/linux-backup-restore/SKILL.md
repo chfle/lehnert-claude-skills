@@ -1,7 +1,7 @@
 ---
 name: linux-backup-restore
 description: Use when user wants to back up a Linux server, design a backup strategy, write a backup script, set up automated backups, configure restic or borgbackup, restore from a backup, test backup integrity, back up databases, Docker volumes, or asks about the 3-2-1 backup rule or disaster recovery.
-version: 1.4.0
+version: 1.5.0
 author: Lehnert
 ---
 
@@ -476,7 +476,7 @@ Write all scripts to `./backup/` in the current working directory:
 ```
 backup/
   backup.sh          ← main backup script
-  test-restore.sh    ← test restore script (run monthly)
+  test-restore.sh    ← restore test script (auto-generated — run monthly to verify backups work)
   .env.example       ← required env vars (repo path, password, etc.)
   README.md          ← what each script does, restore steps
 ```
