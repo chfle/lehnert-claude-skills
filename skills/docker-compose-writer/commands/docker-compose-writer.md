@@ -25,11 +25,9 @@ If the user names a **specific tool** (Gitea, Nextcloud, Jellyfin, etc.) or desc
 
 If the user names a **category** ("database", "note-taking", "monitoring", "file storage", "CI/CD") or describes a **need** ("I want to self-host my files", "I need uptime monitoring") → present 3–4 real options with descriptions, let the user pick a number, then generate the full stack.
 
-After the user picks (or for direct mode), output in this order:
-1. Complete `docker-compose.yml` in a fenced yaml block
-2. `.env.example` with all required variables
-3. Step-by-step setup and run commands (copy-paste ready)
-4. Day-to-day management commands (stop, backup, update)
-5. Next steps
+After the user picks (or for direct mode):
+1. Write `docker-compose.yml` and `.env.example` silently to `./[app-name]/`
+2. Print only: confirmation line, `cd` + start commands, useful day-to-day commands, and the access URL
+3. Do NOT print the compose file or .env content in chat
 
 $ARGUMENTS

@@ -1,7 +1,7 @@
 ---
 name: docker-compose-writer
 description: Use when user wants to write, generate, create, or optimize a docker-compose.yml — for a new project, an existing stack, a self-hosted app, a database, or when asked to set up tools like note-taking apps, password managers, media servers, monitoring, git hosting, file storage, CI/CD, analytics, or any service that runs in Docker.
-version: 1.1.0
+version: 1.2.0
 author: Lehnert
 ---
 
@@ -188,83 +188,61 @@ After the user selects an option (or in Direct Mode), generate the full stack im
 
 ---
 
-## Step 4 — Output Format
+## Step 4 — Write Files Silently
 
-Output in this exact order, nothing else:
+Do NOT print the compose file or .env.example content in chat. Write them to disk silently.
 
-### 1. One-line intro
+### File locations
+
+Write all files into a subdirectory named after the app (kebab-case), relative to the current working directory:
+
 ```
-Here is the full Docker Compose stack for [App Name]:
-```
-
-### 2. docker-compose.yml
-Complete file in a fenced `yaml` code block. Well-commented. Production-ready.
-
-### 3. .env.example
-All required environment variables with example/placeholder values. In a fenced code block labeled `.env.example`.
-
-```bash
-# .env.example — copy to .env and fill in your values
-
-POSTGRES_DB=myapp
-POSTGRES_USER=myuser
-POSTGRES_PASSWORD=change_me_strong_password
+[app-name]/
+  docker-compose.yml
+  .env.example
 ```
 
-### 4. Setup & run commands
-Exact commands the user needs to run, in order. No vague instructions — copy-paste ready.
+Example: for Vaultwarden → `vaultwarden/docker-compose.yml` and `vaultwarden/.env.example`.
 
-```bash
-# 1. Create the project directory
-mkdir -p ~/docker/[app-name] && cd ~/docker/[app-name]
+For custom stacks without a single app name, use a descriptive folder name (e.g. `nextjs-stack/`).
 
-# 2. Save the compose file (paste content above)
-nano docker-compose.yml
+### Steps
+1. Create the directory if it doesn't exist
+2. Write `docker-compose.yml` — complete, well-commented, production-ready
+3. Write `.env.example` — all required variables with placeholder values and comments
 
-# 3. Create your .env from the example
-cp .env.example .env
-nano .env  # fill in your passwords and settings
+### Output — print ONLY this after writing:
 
-# 4. Start the stack
-docker compose up -d
+```
+✅ [App Name] stack created in ./[app-name]/
 
-# 5. Verify all services are healthy
-docker compose ps
+▶ To start:
+  cd [app-name]
+  cp .env.example .env && nano .env
+  docker compose up -d
 
-# 6. View logs if something is wrong
-docker compose logs -f
+📋 Useful commands:
+  docker compose ps          # check service health
+  docker compose logs -f     # tail all logs
+  docker compose pull && docker compose up -d   # update to latest images
+  docker compose down        # stop
+  docker compose down -v     # stop + DELETE ALL DATA
 
-# 7. Access the app
-# → http://localhost:[PORT]  or  https://[your-domain]
+🌐 Access: http://localhost:[PORT]
 ```
 
-### 5. Useful day-to-day commands
-Always include this block after setup:
+Replace `[PORT]` with the actual default port of the app. If the app uses a domain (e.g. Traefik), print `https://[your-domain]` instead.
 
-```bash
-# Stop the stack
-docker compose down
-
-# Stop and remove volumes (DELETES ALL DATA)
-docker compose down -v
-
-# Pull latest images and restart
-docker compose pull && docker compose up -d
-
-# Backup a named volume
-docker run --rm -v [app]_data:/data -v $(pwd):/backup alpine \
-  tar czf /backup/[app]-backup-$(date +%Y%m%d).tar.gz -C /data .
-
-# Restore a backup
-docker run --rm -v [app]_data:/data -v $(pwd):/backup alpine \
-  tar xzf /backup/[app]-backup-YYYYMMDD.tar.gz -C /data
+If multiple services have UIs, list each:
+```
+🌐 App:      http://localhost:8080
+🌐 Admin UI: http://localhost:9000
 ```
 
-### 6. Next steps (always include)
-> **Expose to the internet?** Add Traefik with Let's Encrypt — run `/docker-compose-writer Traefik reverse proxy`
-> **Harden the host first:** `/linux-security-hardener`
-> **Monitor this stack:** `/linux-monitoring-setup`
-> **Automate updates:** `/linux-shell-scriptor script to pull and restart Docker containers weekly`
+Then always end with:
+```
+💡 Next: cd [app-name] && cp .env.example .env — edit passwords before starting.
+```
 
 ---
 
@@ -272,11 +250,16 @@ docker run --rm -v [app]_data:/data -v $(pwd):/backup alpine \
 
 When the user pastes an existing compose file:
 
-1. Identify all issues (missing health checks, `latest` tags, hardcoded secrets, missing networks, no restart policy, etc.)
-2. Print a short findings summary: "Found X issues"
-3. Output the fully corrected compose file
-4. List what changed and why (brief, one line per change)
-5. Show the same setup/run commands section
+1. Identify all issues silently (missing health checks, `latest` tags, hardcoded secrets, missing networks, no restart policy, etc.)
+2. Write the fixed `docker-compose.yml` to `./[detected-app-name]/docker-compose.yml`
+3. Print only:
+
+```
+✅ Optimized compose written to ./[app-name]/docker-compose.yml
+   Fixed X issues: [comma-separated list of what changed]
+
+🌐 Access: http://localhost:[PORT]
+```
 
 ---
 
