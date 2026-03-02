@@ -1,7 +1,7 @@
 ---
 name: sw-idea-analyzer
 description: Use when user shares a software idea, app concept, startup idea, or product vision and wants it analyzed for feasibility, broken down into features, assessed for risks, or needs a structured evaluation before starting development.
-version: 1.6.0
+version: 1.7.0
 author: Lehnert
 ---
 
@@ -103,9 +103,9 @@ List 2–3 existing alternatives and explain the differentiation angle:
 
 ## Output Rules
 
-- **Never print the analysis to the console.** All output goes to files only.
+- **Never print the analysis to the chat.** All output goes to files only.
 - Do not show tables, sections, or any analysis content in the chat.
-- The only console output allowed is the final confirmation line.
+- The only chat output allowed is the final confirmation line.
 - Always use the user's input language in the file content.
 - Use tables for structured data (features, risks, competition) inside the file.
 - Never generate code.
@@ -115,12 +115,12 @@ List 2–3 existing alternatives and explain the differentiation angle:
 
 ## File Output
 
-After completing the full analysis, write everything to `requirements/vision.md`. Print nothing to the console except the confirmation.
+After completing the full analysis, write everything to `requirements/vision.md`. Print nothing to the chat except the confirmation.
 
 **Steps:**
 1. If `requirements/` does not exist, create it first: `mkdir -p requirements`
 2. Write the complete structured analysis (all 8 sections, clean Markdown) to `requirements/vision.md`
-3. Print only these lines to the console:
+3. Print only these lines to the chat:
 
 > ✅ Analysis complete. Please review: `requirements/vision.md`
 >

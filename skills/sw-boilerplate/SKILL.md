@@ -1,7 +1,7 @@
 ---
 name: sw-boilerplate
 description: Use when user wants to scaffold a complete project boilerplate, says "create boilerplate", "set up the project", "generate the skeleton", or wants all project files created from requirements/tech-stack.yaml directly in the workspace root.
-version: 1.1.0
+version: 1.2.0
 author: Lehnert
 ---
 
@@ -219,3 +219,13 @@ To test: <dynamic command>
 | Docker-first (docker.services non-empty) | `docker compose up` |
 
 When `docker.services` is non-empty, always prefer `docker compose up`.
+
+---
+
+## Next Skill
+
+After boilerplate generation, scaffold implementation for your use cases:
+
+> ▶ **Next steps:**
+> - Commit first: `git add . && git commit -m "chore: init project boilerplate"`
+> - Run `/sw-use-case-coder UC-001` (or `all MVP`) to generate production-ready implementation

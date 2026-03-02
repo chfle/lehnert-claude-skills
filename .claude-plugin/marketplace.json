@@ -21,7 +21,7 @@
       "name": "sw-idea-analyzer",
       "source": "./skills/sw-idea-analyzer",
       "description": "Analyzes software ideas for feasibility, target audience, core features, technical complexity, risks, and MVP scope – pure planning, no code generation.",
-      "version": "1.6.0",
+      "version": "1.7.0",
       "author": { "name": "Lehnert" },
       "category": "software-planning",
       "keywords": ["idea", "analysis", "feasibility", "mvp", "planning", "startup"]
@@ -39,7 +39,7 @@
       "name": "sw-user-story-creator",
       "source": "./skills/sw-user-story-creator",
       "description": "Generates a complete user story document with acceptance criteria and priorities from requirements/vision.md or any software description.",
-      "version": "1.3.0",
+      "version": "1.4.0",
       "author": { "name": "Lehnert" },
       "category": "software-planning",
       "keywords": ["user-stories", "requirements", "acceptance-criteria", "agile", "planning", "vision"]
@@ -48,7 +48,7 @@
       "name": "sw-use-case-creator",
       "source": "./skills/sw-use-case-creator",
       "description": "Generates a complete use case document with actors, flows, exceptions, and acceptance criteria from user-stories.md, vision.md, or any software description.",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "author": { "name": "Lehnert" },
       "category": "software-planning",
       "keywords": ["use-cases", "requirements", "actors", "flows", "specifications", "planning"]
@@ -66,7 +66,7 @@
       "name": "sw-use-case-coder",
       "source": "./skills/sw-use-case-coder",
       "description": "Generates production-ready code for selected use cases (UC-01, US-03, all MVP) from tech-stack.yaml and use-cases.md — writes files directly into workspace root.",
-      "version": "2.3.0",
+      "version": "2.4.0",
       "author": { "name": "Lehnert" },
       "category": "software-planning",
       "keywords": ["code-generation", "scaffolding", "use-cases", "nextjs", "nestjs", "spring", "fastapi", "prisma", "testcontainers"]
@@ -75,7 +75,7 @@
       "name": "sw-boilerplate",
       "source": "./skills/sw-boilerplate",
       "description": "Scaffolds a complete project from tech-stack.yaml into the workspace root — root configs, source structure, database files, Docker, and UI foundation in one command.",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "author": { "name": "Lehnert" },
       "category": "software-development",
       "keywords": ["boilerplate", "scaffold", "project-setup", "orchestrator", "fullstack", "init"]

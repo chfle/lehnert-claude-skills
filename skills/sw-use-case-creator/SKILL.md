@@ -1,7 +1,7 @@
 ---
 name: sw-use-case-creator
 description: Use when user wants to create use cases, detailed system behavior specs, actor flows, or a use case document from user-stories.md, vision.md, or any software description – generates requirements/use-cases.md silently.
-version: 1.1.0
+version: 1.2.0
 author: Lehnert
 ---
 
@@ -64,7 +64,7 @@ Every use case follows this exact structure:
 - Exceptions = error states the system must handle
 - Acceptance criteria = link back to user story IDs where possible
 - IDs start at `UC-001` and increment sequentially across the entire document
-- If appending to an existing `use-cases.md`, read the last ID used and continue from there
+- If `requirements/use-cases.md` already exists: read the entire file, find the highest `UC-XXX` ID, continue from the next number, and **append** new use cases to the end — never modify existing content
 
 ---
 

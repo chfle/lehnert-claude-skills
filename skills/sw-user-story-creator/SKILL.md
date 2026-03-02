@@ -1,7 +1,7 @@
 ---
 name: sw-user-story-creator
 description: Use when user wants to create user stories, acceptance criteria, or a requirements document from a software idea, vision.md, or sw-idea-analyzer output – generates a complete structured requirements/user-stories.md file.
-version: 1.3.0
+version: 1.4.0
 author: Lehnert
 ---
 
@@ -51,7 +51,7 @@ Every story follows this exact structure:
 - Each story gets 3–5 acceptance criteria minimum
 - MVP = required for the first working version; Nice-to-have = can be deferred
 - IDs start at `US-001` and increment sequentially across the entire document (never reset per epic)
-- If appending to an existing `user-stories.md`, read the last ID used and continue from there
+- If `requirements/user-stories.md` already exists: read the entire file, find the highest `US-XXX` ID, continue from the next number, and **append** new epics/stories to the end — never modify existing content
 
 ---
 
@@ -126,5 +126,6 @@ One optional sentence max summarizing what was generated (e.g. "Generated 12 use
 ## Next Skill
 
 > ▶ **Next steps:**
-> - Run `/sw-use-case-creator` to expand user stories into detailed use cases with actor flows and exceptions
-> - Run `/sw-diagram-creator` to visualize the architecture
+> 1. Run `/sw-use-case-creator` to expand user stories into detailed use cases with actor flows and exceptions
+> 2. Run `/sw-tech-stack-planner` to select the tech stack and generate `requirements/tech-stack.yaml`
+> 3. Optionally run `/sw-diagram-creator` to visualize the architecture

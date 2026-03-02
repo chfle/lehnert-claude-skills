@@ -1,7 +1,7 @@
 ---
 name: sw-use-case-coder
 description: Use when user wants to generate code for a use case or user story, says "code UC-01", "implement US-03", "generate all MVP", "scaffold UC-05 UC-07", or wants production-ready files from use-cases.md and tech-stack.yaml written directly into the project root.
-version: 2.3.0
+version: 2.4.0
 author: Lehnert
 ---
 
@@ -98,7 +98,7 @@ Read `requirements/tech-stack.yaml` fully. Adapt every file to the detected lang
 - No hardcoded secrets – use `process.env.VAR`, `os.environ`, `@Value`, etc.
 - Use `@/` alias for Next.js; relative imports for NestJS and other frameworks
 - Prisma models include `@@map("table_name")` and all required relations
-- **Iterative**: if a file already exists, edit and improve it – do not overwrite working code blindly
+- **Iterative**: if a file already exists, edit and improve it — add or enhance functions rather than replacing the entire file. For test files, always regenerate with all acceptance criteria covered. Never delete existing working logic.
 
 ### Tests to generate
 
@@ -188,3 +188,14 @@ Final output:
 To test: pnpm install && pnpm dev
 💡 Tip: Run git add . && git commit -m "feat: implement US-01" to allow easy reset on mistakes.
 ```
+
+---
+
+## Next Skill
+
+After code generation, test and commit your work:
+
+> ▶ **Next steps:**
+> - Commit: `git add . && git commit -m "feat: implement [use-case IDs]"`
+> - Run the test suite to verify: `pnpm test` / `./mvnw test` / `pytest` (based on your stack)
+> - Run `/sw-use-case-coder` again with the next use case to continue building out the application
