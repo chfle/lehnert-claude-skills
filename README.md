@@ -28,6 +28,7 @@ The fastest way to get everything – one command registers the marketplace, one
 /plugin install sw-diagram-creator@lehnert-claude-skills
 /plugin install linux-shell-scriptor@lehnert-claude-skills
 /plugin install linux-config-auditor@lehnert-claude-skills
+/plugin install docker-compose-writer@lehnert-claude-skills
 ```
 
 **To install all active skills at once:**
@@ -88,6 +89,7 @@ Skills without a `commands/` directory are **helpers** – they are loaded autom
 | `sw-boilerplate-ui` | Slash command | `/sw-boilerplate-ui` |
 | `linux-shell-scriptor` | Slash command | `/linux-shell-scriptor` |
 | `linux-config-auditor` | Slash command | `/linux-config-auditor` |
+| `docker-compose-writer` | Slash command | `/docker-compose-writer` |
 
 **Rule of thumb:** If a skill is a standalone user-facing tool → give it a `commands/` file. If it's a helper or orchestrator → leave it as a pure skill.
 
@@ -156,6 +158,7 @@ claude plugin install /path/to/lehnert-claude-skills --scope user
 |-------|-------------|--------|
 | `linux-shell-scriptor` | Generates production-ready bash scripts for backups, monitoring, deployment, cron jobs, and any sysadmin task from a plain description | ✅ Active |
 | `linux-config-auditor` | Audits nginx, Apache, sshd, systemd units, iptables, fail2ban, sudoers, and sysctl configs for security issues, misconfigs, and performance gaps | ✅ Active |
+| `docker-compose-writer` | Generates or optimizes docker-compose.yml from a project description or existing stack — health checks, named volumes, env management, security hardening | ✅ Active |
 
 ### 🔒 Pentesting
 

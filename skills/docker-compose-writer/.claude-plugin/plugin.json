@@ -1,0 +1,7 @@
+{
+  "name": "docker-compose-writer",
+  "version": "1.0.0",
+  "description": "Generates or optimizes docker-compose.yml files from a project description or existing stack — with health checks, named volumes, env management, and security hardening.",
+  "author": { "name": "Lehnert" },
+  "skillFile": "SKILL.md"
+}

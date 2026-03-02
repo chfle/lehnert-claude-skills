@@ -41,6 +41,7 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 |-------|-------------|--------|
 | `linux-shell-scriptor` | Generates production-ready bash scripts for backups, monitoring, deployment, cron jobs, and any sysadmin task | ✅ Active |
 | `linux-config-auditor` | Audits nginx, sshd, systemd units, iptables, fail2ban, sudoers, sysctl for security issues and performance gaps | ✅ Active |
+| `docker-compose-writer` | Generates or optimizes docker-compose.yml from a project description or existing stack | ✅ Active |
 
 ### 🔒 Pentesting
 
@@ -90,6 +91,10 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | "Review my iptables / firewall rules" | → `linux-config-auditor` |
 | "Check my systemd service for security issues" | → `linux-config-auditor` |
 | "Audit my sudoers file" | → `linux-config-auditor` |
+| "Write a docker-compose.yml for my project" | → `docker-compose-writer` |
+| "Add PostgreSQL / Redis / nginx to my compose file" | → `docker-compose-writer` |
+| "Optimize my existing docker-compose.yml" | → `docker-compose-writer` |
+| "Set up a Docker stack for my app" | → `docker-compose-writer` |
 
 > No skill for your task yet? Say: **"Create the skill [name] for me"** – I'll build the folder and SKILL.md right away.
 

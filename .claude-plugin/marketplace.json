@@ -142,6 +142,15 @@
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["audit", "security", "nginx", "sshd", "systemd", "iptables", "firewall", "config", "hardening", "compliance", "cis"]
+    },
+    {
+      "name": "docker-compose-writer",
+      "source": "./skills/docker-compose-writer",
+      "description": "Generates or optimizes docker-compose.yml from a project description or existing stack — health checks, named volumes, env management, security hardening.",
+      "version": "1.0.0",
+      "author": { "name": "Lehnert" },
+      "category": "linux-sysadmin",
+      "keywords": ["docker", "docker-compose", "containers", "services", "nginx", "postgres", "redis", "traefik", "devops", "infrastructure"]
     }
   ]
 }
