@@ -1,7 +1,7 @@
 ---
 name: linux-security-hardener
 description: Use when user wants to harden a Linux server, secure a fresh VPS, follow CIS benchmarks, reduce attack surface, lock down SSH, configure a firewall, set up fail2ban, disable unused services, configure auditd, or asks how to make a Linux system more secure.
-version: 1.0.0
+version: 1.1.0
 author: Lehnert
 ---
 
@@ -25,9 +25,9 @@ Produces a complete, prioritized server hardening plan tailored to the user's OS
 
 ## When NOT to Use
 
-- User wants to audit a single config file → `linux-config-auditor`
-- User wants to write a script for a specific task → `linux-shell-scriptor`
-- User wants SELinux-specific help → `linux-selinux-helper`
+- User wants to audit a single config file → /linux-config-auditor
+- User wants to write a script for a specific task → /linux-shell-scriptor
+- User wants SELinux-specific help → /linux-selinux-helper
 
 ---
 
@@ -193,7 +193,7 @@ Generate `/etc/sysctl.d/99-hardening.conf`:
 
 ```ini
 # Network hardening
-net.ipv4.ip_forward = 0
+net.ipv4.ip_forward = 0        # EXCEPTION: set to 1 for Docker hosts, VPN servers, and routers
 net.ipv4.conf.all.send_redirects = 0
 net.ipv4.conf.default.send_redirects = 0
 net.ipv4.conf.all.accept_redirects = 0
@@ -205,8 +205,9 @@ net.ipv4.conf.default.log_martians = 1
 net.ipv4.icmp_echo_ignore_broadcasts = 1
 net.ipv4.icmp_ignore_bogus_error_responses = 1
 net.ipv4.tcp_syncookies = 1
-net.ipv6.conf.all.disable_ipv6 = 1        # only if IPv6 not needed
-net.ipv6.conf.default.disable_ipv6 = 1
+# Disable IPv6 only if user confirmed they don't need it (ask first — default is KEEP enabled)
+# net.ipv6.conf.all.disable_ipv6 = 1
+# net.ipv6.conf.default.disable_ipv6 = 1
 
 # Kernel hardening
 kernel.randomize_va_space = 2

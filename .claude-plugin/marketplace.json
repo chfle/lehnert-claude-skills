@@ -30,7 +30,7 @@
       "name": "sw-diagram-creator",
       "source": "./skills/sw-diagram-creator",
       "description": "Generates ready-to-copy Mermaid, PlantUML, and ASCII diagrams from any software description, idea, or sw-idea-analyzer output.",
-      "version": "1.4.0",
+      "version": "1.5.0",
       "author": { "name": "Lehnert" },
       "category": "software-planning",
       "keywords": ["diagram", "mermaid", "plantuml", "architecture", "erd", "flowchart", "sequence", "c4", "visualization"]
@@ -138,7 +138,7 @@
       "name": "linux-config-auditor",
       "source": "./skills/linux-config-auditor",
       "description": "Audits Linux config files (nginx, Apache, sshd, systemd units, iptables, nftables, fail2ban, sudoers, sysctl, pg_hba.conf, my.cnf, redis.conf) for security issues, misconfigurations, and performance gaps.",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["audit", "security", "nginx", "sshd", "systemd", "iptables", "firewall", "config", "hardening", "compliance", "cis"]
@@ -156,7 +156,7 @@
       "name": "linux-security-hardener",
       "source": "./skills/linux-security-hardener",
       "description": "Generates a complete Linux server hardening plan with ready-to-apply scripts and configs covering SSH, firewall, fail2ban, sysctl, auditd, and user security.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["security", "hardening", "linux", "ssh", "firewall", "fail2ban", "sysctl", "auditd", "cis", "vps", "server"]

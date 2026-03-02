@@ -1,7 +1,7 @@
 ---
 name: sw-diagram-creator
 description: Use when user wants to create, generate, or visualize a diagram from an idea, requirement, sw-idea-analyzer output, or any description – supports Mermaid flowchart, sequence, class, ERD, C4, gantt, mindmap, PlantUML, and ASCII art fallback.
-version: 1.4.0
+version: 1.5.0
 author: Lehnert
 ---
 
@@ -167,6 +167,7 @@ After generating every diagram, always save it to `requirements/diagrams/` in th
 At the end of every diagram, suggest the most logical next step:
 
 > **Suggested next skill:**
-> - Have features laid out visually? → Run **`/sw-user-story-creator`** to turn them into user stories
+> - Have features laid out visually? → Run **`/sw-user-story-creator`** to turn them into user stories (or **`/sw-use-case-creator`** for detailed flows)
 > - Want to pick a tech stack? → Run **`/sw-tech-stack-planner`** to choose frameworks and databases
+> - Ready to scaffold the project? → Run **`/sw-boilerplate`** then **`/sw-use-case-coder`** to generate code
 > - Starting from scratch? → Run **`/sw-idea-analyzer`** first to analyze your idea before diagramming

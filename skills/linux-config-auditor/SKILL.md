@@ -1,7 +1,7 @@
 ---
 name: linux-config-auditor
 description: Use when user wants to audit, review, analyze, or improve a Linux config file — nginx, Apache, sshd_config, systemd service/timer/socket units, iptables, nftables, firewalld, fail2ban, sudoers, /etc/security/limits.conf, sysctl.conf, or any server config — for security issues, misconfigurations, performance problems, or compliance gaps.
-version: 1.1.0
+version: 1.2.0
 author: Lehnert
 ---
 
@@ -25,9 +25,9 @@ Audits any Linux configuration file against security best practices, performance
 
 ## When NOT to Use
 
-- User wants a script to automate the fix → use `linux-shell-scriptor`
+- User wants a script to automate the fix → use /linux-shell-scriptor
 - User wants to generate a config from scratch → generate directly without this skill
-- User wants to harden the whole OS (not just one config) → use `linux-security-hardener`
+- User wants to harden the whole OS (not just one config) → use /linux-security-hardener
 
 ---
 
@@ -114,7 +114,7 @@ Always close with:
 
 ---
 
-## Output Format
+## File Output
 
 Write findings to `./audit/` in the current working directory:
 
