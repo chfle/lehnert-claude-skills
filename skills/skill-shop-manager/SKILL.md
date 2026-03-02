@@ -48,6 +48,7 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | `linux-network-configurer` | Configures static IP, VLANs, bonding, WireGuard, iptables, nftables, DNS across all Linux network stacks | ✅ Active |
 | `linux-backup-restore` | Generates backup solutions with restic, BorgBackup, rsync, or tar — encryption, remote/cloud storage, DB/Docker backups, retention, restore | ✅ Active |
 | `linux-systemd-manager` | Creates, debugs, and hardens systemd services, timers, sockets, and path units — with sandboxing, resource limits, and restart policies | ✅ Active |
+| `linux-cron-manager` | Generates cron jobs with /etc/cron.d/ entries and wrapper scripts — flock locking, logging, failure alerting, debugging | ✅ Active |
 
 ### 🔒 Pentesting
 
@@ -126,6 +127,10 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | "Create a systemd timer (cron replacement)" | → `linux-systemd-manager` |
 | "My systemd service keeps failing / crashing" | → `linux-systemd-manager` |
 | "Harden my systemd service unit" | → `linux-systemd-manager` |
+| "Schedule a cron job" | → `linux-cron-manager` |
+| "My cron job isn't running" | → `linux-cron-manager` |
+| "Cron job with locking and logging" | → `linux-cron-manager` |
+| "Convert cron to systemd timer" | → `linux-cron-manager` |
 
 > No skill for your task yet? Say: **"Create the skill [name] for me"** – I'll build the folder and SKILL.md right away.
 

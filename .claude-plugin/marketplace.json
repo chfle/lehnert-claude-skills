@@ -205,6 +205,15 @@
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["systemd", "service", "timer", "socket", "unit", "journalctl", "autostart", "boot", "scheduling", "sandboxing", "linux"]
+    },
+    {
+      "name": "linux-cron-manager",
+      "source": "./skills/linux-cron-manager",
+      "description": "Generates production-ready cron jobs with /etc/cron.d/ entries and wrapper scripts featuring flock locking, logging, log rotation, and failure alerting.",
+      "version": "1.0.0",
+      "author": { "name": "Lehnert" },
+      "category": "linux-sysadmin",
+      "keywords": ["cron", "crontab", "scheduling", "flock", "locking", "automation", "linux", "systemd-timer", "cron.d"]
     }
   ]
 }

@@ -1,0 +1,7 @@
+{
+  "name": "linux-cron-manager",
+  "description": "Generates production-ready cron jobs with /etc/cron.d/ entries and wrapper scripts featuring flock locking, logging, log rotation, and failure alerting.",
+  "version": "1.0.0",
+  "author": { "name": "Lehnert" },
+  "keywords": ["cron", "crontab", "scheduling", "flock", "locking", "automation", "linux", "systemd-timer", "cron.d"]
+}

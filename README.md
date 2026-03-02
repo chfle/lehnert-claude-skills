@@ -35,6 +35,7 @@ The fastest way to get everything – one command registers the marketplace, one
 /plugin install linux-network-configurer@lehnert-claude-skills
 /plugin install linux-backup-restore@lehnert-claude-skills
 /plugin install linux-systemd-manager@lehnert-claude-skills
+/plugin install linux-cron-manager@lehnert-claude-skills
 ```
 
 **To install all active skills at once:**
@@ -102,6 +103,7 @@ Skills without a `commands/` directory are **helpers** – they are loaded autom
 | `linux-network-configurer` | Slash command | `/linux-network-configurer` |
 | `linux-backup-restore` | Slash command | `/linux-backup-restore` |
 | `linux-systemd-manager` | Slash command | `/linux-systemd-manager` |
+| `linux-cron-manager` | Slash command | `/linux-cron-manager` |
 
 **Rule of thumb:** If a skill is a standalone user-facing tool → give it a `commands/` file. If it's a helper or orchestrator → leave it as a pure skill.
 
@@ -177,6 +179,7 @@ claude plugin install /path/to/lehnert-claude-skills --scope user
 | `linux-network-configurer` | Configures static IP, routing, VLANs, bonding, bridges, WireGuard VPN, iptables, nftables, DNS across NetworkManager, systemd-networkd, and ifupdown | ✅ Active |
 | `linux-backup-restore` | Generates complete backup solutions with restic, BorgBackup, rsync, or tar — encryption, remote storage, DB/Docker backups, retention, and restore procedures | ✅ Active |
 | `linux-systemd-manager` | Creates, debugs, and hardens systemd services, timers, sockets, and path units — with sandboxing, resource limits, and restart policies | ✅ Active |
+| `linux-cron-manager` | Generates cron jobs with /etc/cron.d/ entries and wrapper scripts — flock locking, logging, log rotation, failure alerting, and cron debugging | ✅ Active |
 
 ### 🔒 Pentesting
 
