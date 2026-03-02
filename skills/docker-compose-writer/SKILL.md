@@ -1,7 +1,7 @@
 ---
 name: docker-compose-writer
 description: Use when user wants to write, generate, create, or optimize a docker-compose.yml — for a new project, an existing stack, any self-hosted app, or when they want to replace a cloud service (Google Drive, Gmail, GitHub, Slack, Notion, ChatGPT, etc.) with a self-hosted alternative.
-version: 2.0.0
+version: 2.1.0
 author: Lehnert
 ---
 
@@ -437,6 +437,7 @@ Some apps require specific companion services — always include them:
 
 Ask if user has NVIDIA GPU. If yes, add to the service:
 ```yaml
+runtime: nvidia       # Required — separate from deploy.resources
 deploy:
   resources:
     reservations:
@@ -445,7 +446,13 @@ deploy:
           count: all
           capabilities: [gpu]
 ```
-Requirements: NVIDIA Container Toolkit must be installed on host.
+
+Requirements:
+- NVIDIA Container Toolkit must be installed on host (both `runtime:` and `deploy:` require it)
+- After install: `sudo systemctl restart docker`
+- Test GPU access: `docker run --rm --runtime=nvidia nvidia/cuda:12.0-base nvidia-smi`
+
+Install guide: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html
 
 ---
 

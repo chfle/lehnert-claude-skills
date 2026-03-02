@@ -1,7 +1,7 @@
 ---
 name: linux-network-configurer
 description: Use when user wants to configure Linux networking — static IP, network interfaces, routing, iptables, nftables, firewalld, VLANs, bonding, WireGuard VPN, OpenVPN, DNS, bridge interfaces, network namespaces, or asks how to set up, troubleshoot, or change any network setting on a Linux system.
-version: 1.1.0
+version: 1.2.0
 author: Lehnert
 ---
 
@@ -566,3 +566,9 @@ netplan try
 netplan apply   # or press Enter if prompted
 # If locked out — wait 120s, netplan will revert automatically
 ```
+
+> ⚠️ **Netplan try timer details:**
+> - The 120-second countdown starts immediately and **cannot be paused or extended**
+> - The revert will fire even if your SSH session is still active — you'll lose the connection
+> - **Always test in a SECOND SSH session** before the timer expires
+> - If the SECOND session can't connect: wait 120s for automatic revert, do NOT close the first session

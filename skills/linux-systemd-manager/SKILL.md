@@ -1,7 +1,7 @@
 ---
 name: linux-systemd-manager
 description: Use when user wants to create, edit, debug, or optimize a systemd service, timer, socket, mount, or path unit — or asks how to run something as a service, auto-restart a process, schedule tasks with systemd timers, understand journalctl output, troubleshoot a failed unit, or manage systemd targets and dependencies.
-version: 1.1.0
+version: 1.2.0
 author: Lehnert
 ---
 
@@ -27,7 +27,7 @@ Writes, debugs, and optimizes systemd units of all types. Covers service sandbox
 
 ## When NOT to Use
 
-- User only wants simple cron scheduling → `linux-cron-manager`
+- User only wants simple cron scheduling → /linux-cron-manager
 - User wants to audit a service config file → `linux-config-auditor`
 - User wants to write the application being run → `linux-shell-scriptor`
 

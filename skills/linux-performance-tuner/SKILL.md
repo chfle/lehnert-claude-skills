@@ -1,7 +1,7 @@
 ---
 name: linux-performance-tuner
 description: Use when user wants to tune Linux performance — kernel parameters, CPU governor, I/O scheduler, memory and swap settings, network stack tuning, database tuning (PostgreSQL, MySQL, Redis), high-throughput or low-latency optimization, profiling slow systems, or asks why their server is slow, has high load, or underperforms.
-version: 1.1.0
+version: 1.2.0
 author: Lehnert
 ---
 
@@ -361,6 +361,48 @@ echo 32 > /proc/fs/nfsd/threads
 ```
 *    soft nofile 262144
 *    hard nofile 1048576
+```
+
+---
+
+### Profile 7 — Redis Cache / Message Broker
+
+**Kernel (`/etc/sysctl.d/99-redis.conf`):**
+```ini
+# Redis requires vm.overcommit_memory=1 to avoid fork() failures during saves
+vm.overcommit_memory = 1
+
+# Disable swap — Redis in swap = terrible latency
+vm.swappiness = 0
+
+# High connection counts
+net.core.somaxconn = 65535
+```
+
+**Disable Transparent Huge Pages** (causes Redis latency spikes):
+```bash
+echo never > /sys/kernel/mm/transparent_hugepage/enabled
+echo never > /sys/kernel/mm/transparent_hugepage/defrag
+
+# Persist via systemd or rc.local
+```
+
+**Key redis.conf settings:**
+
+| Parameter | Value | Notes |
+|-----------|-------|-------|
+| `maxmemory` | 70–80% of available RAM | Leave headroom for OS and fork() |
+| `maxmemory-policy` | `allkeys-lru` (cache) / `noeviction` (queue) | `allkeys-lru` for pure cache |
+| `appendonly` | `yes` (durability) / `no` (pure cache) | AOF adds ~10-30% write overhead |
+| `save ""` | Disable RDB | For pure cache — saves only waste I/O |
+| `hz` | `10` (default) | Increase to `100` only for sub-ms latency needs |
+| `bind` | `127.0.0.1` | Never bind to 0.0.0.0 without auth |
+
+**Check Redis health:**
+```bash
+redis-cli info stats | grep -E "evicted|rejected|keyspace"
+redis-cli info memory | grep -E "used_memory_human|maxmemory_human"
+redis-cli --latency -h localhost -p 6379
 ```
 
 ---

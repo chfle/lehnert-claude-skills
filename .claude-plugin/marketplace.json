@@ -129,7 +129,7 @@
       "name": "linux-shell-scriptor",
       "source": "./skills/linux-shell-scriptor",
       "description": "Generates production-ready bash scripts for any Linux task from a plain English description — backups, monitoring, deployment, cron jobs, health checks, database maintenance.",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["bash", "shell", "script", "linux", "automation", "backup", "monitoring", "deployment", "cron", "sysadmin"]
@@ -138,7 +138,7 @@
       "name": "linux-config-auditor",
       "source": "./skills/linux-config-auditor",
       "description": "Audits Linux config files (nginx, Apache, sshd, systemd units, iptables, nftables, fail2ban, sudoers, sysctl, pg_hba.conf, my.cnf, redis.conf) for security issues, misconfigurations, and performance gaps.",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["audit", "security", "nginx", "sshd", "systemd", "iptables", "firewall", "config", "hardening", "compliance", "cis"]
@@ -147,7 +147,7 @@
       "name": "docker-compose-writer",
       "source": "./skills/docker-compose-writer",
       "description": "Generates or optimizes docker-compose.yml for any self-hosted app or cloud replacement (Google Photos→Immich, Gmail→Mailcow, ChatGPT→Ollama) — full stacks with health checks, named volumes, and .env setup.",
-      "version": "2.0.0",
+      "version": "2.1.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["docker", "docker-compose", "containers", "self-hosted", "homelab", "nginx", "postgres", "redis", "traefik", "devops", "infrastructure", "immich", "nextcloud", "jellyfin", "ollama"]
@@ -174,7 +174,7 @@
       "name": "linux-monitoring-setup",
       "source": "./skills/linux-monitoring-setup",
       "description": "Sets up a complete monitoring stack (Prometheus, Grafana, Node Exporter, Loki, Alertmanager, Uptime Kuma, Netdata) for any Linux server, Docker host, or application.",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["monitoring", "prometheus", "grafana", "loki", "alertmanager", "node-exporter", "uptime-kuma", "netdata", "cadvisor", "observability", "metrics", "alerts"]
@@ -183,7 +183,7 @@
       "name": "linux-network-configurer",
       "source": "./skills/linux-network-configurer",
       "description": "Configures Linux networking — static IP, routing, VLANs, bonding, bridges, WireGuard, OpenVPN, iptables, nftables, firewalld, DNS, and network troubleshooting.",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["network", "networking", "static-ip", "wireguard", "vpn", "iptables", "nftables", "vlan", "bonding", "bridge", "dns", "routing", "firewall", "linux"]
@@ -192,7 +192,7 @@
       "name": "linux-backup-restore",
       "source": "./skills/linux-backup-restore",
       "description": "Designs and generates complete Linux backup solutions using restic, BorgBackup, rsync, or tar — with encryption, encryption key management, remote storage, retention policies, database backups, Docker volume backups, and restore procedures.",
-      "version": "1.3.0",
+      "version": "1.4.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["backup", "restore", "restic", "borgbackup", "rsync", "disaster-recovery", "database-backup", "docker-volumes", "s3", "3-2-1", "retention", "linux"]
@@ -201,7 +201,7 @@
       "name": "linux-systemd-manager",
       "source": "./skills/linux-systemd-manager",
       "description": "Creates, debugs, and hardens systemd service, timer, socket, path, and mount units — with sandboxing, resource limits, restart policies, and timer scheduling.",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["systemd", "service", "timer", "socket", "unit", "journalctl", "autostart", "boot", "scheduling", "sandboxing", "linux"]
@@ -219,7 +219,7 @@
       "name": "linux-selinux-helper",
       "source": "./skills/linux-selinux-helper",
       "description": "Diagnoses and fixes SELinux denials — file context relabeling, boolean toggles, port labeling, and custom policy modules. Never suggests disabling SELinux.",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["selinux", "avc", "denial", "policy", "semanage", "restorecon", "audit2allow", "boolean", "context", "rhel", "rocky", "fedora", "security"]
@@ -228,7 +228,7 @@
       "name": "linux-performance-tuner",
       "source": "./skills/linux-performance-tuner",
       "description": "Profiles a Linux system and generates tuned sysctl, CPU governor, I/O scheduler, and workload-specific configs for web, database, networking, HPC, or general workloads.",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["performance", "tuning", "sysctl", "cpu-governor", "io-scheduler", "kernel", "linux", "optimization", "profiling", "latency", "throughput", "bbr", "hugepages", "numa"]

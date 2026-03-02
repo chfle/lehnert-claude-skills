@@ -1,7 +1,7 @@
 ---
 name: linux-config-auditor
 description: Use when user wants to audit, review, analyze, or improve a Linux config file — nginx, Apache, sshd_config, systemd service/timer/socket units, iptables, nftables, firewalld, fail2ban, sudoers, /etc/security/limits.conf, sysctl.conf, or any server config — for security issues, misconfigurations, performance problems, or compliance gaps.
-version: 1.2.0
+version: 1.3.0
 author: Lehnert
 ---
 
@@ -91,6 +91,12 @@ Severity scale:
 - 🟠 **Warning** — weakens security posture or common attack vector
 - 🟡 **Info** — performance gap, minor misconfiguration, or style deviation
 - ✅ **OK** — explicitly confirmed as correct, shown for reassurance
+
+**What to include in the table:**
+- 🔴 Critical: always include every finding
+- 🟠 Warning: always include every finding
+- 🟡 Info: include only if 3 or more items; otherwise merge into summary
+- ✅ OK: include 1–2 highlights only (the most important security settings that are correctly configured)
 
 ### Fixed Config Snippet
 

@@ -1,7 +1,7 @@
 ---
 name: linux-shell-scriptor
 description: Use when user wants to write, generate, or create a bash or shell script for any Linux task — backups, monitoring, deployment, automation, cron jobs, health checks, system maintenance, log rotation, or any described sysadmin use case.
-version: 1.2.0
+version: 1.3.0
 author: Lehnert
 ---
 
@@ -108,6 +108,19 @@ Every script MUST contain all of the following:
 - MySQL: `mysqldump`, optimize tables, check binary log size
 - Redis: `redis-cli INFO`, `BGSAVE`, key count / memory stats
 - Sends result summary to log file; alerts on non-zero exit
+
+### TLS Certificate Expiry Monitoring
+- Checks each domain with `openssl s_client` / `openssl x509 -enddate`
+- Calculates days until expiry
+- Sends email alert if expiry < 30 days (warning) or < 7 days (critical)
+- Logs results; exits 0 on success, 1 on critical
+- Can trigger `certbot renew` automatically if installed
+
+### Service Health Check with Auto-Recovery
+- Uses `systemctl is-active` to check service status
+- Restarts failed service once, waits 10s, checks again
+- Sends alert if still down after restart attempt
+- Logs all restart events with timestamp
 
 ---
 

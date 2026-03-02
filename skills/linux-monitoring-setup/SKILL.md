@@ -1,7 +1,7 @@
 ---
 name: linux-monitoring-setup
 description: Use when user wants to set up monitoring, observability, alerting, dashboards, uptime checks, metrics collection, or log aggregation for a Linux server, Docker stack, application, or infrastructure — including Prometheus, Grafana, Node Exporter, Loki, Alertmanager, Uptime Kuma, Netdata, or custom bash-based monitoring scripts.
-version: 1.2.0
+version: 1.3.0
 author: Lehnert
 ---
 
@@ -374,6 +374,50 @@ groups:
         annotations:
           summary: "High system load on {{ $labels.instance }}"
 ```
+
+---
+
+## Alertmanager Configuration
+
+When Alertmanager is included, always generate `alertmanager/alertmanager.yml`:
+
+```yaml
+global:
+  resolve_timeout: 5m
+
+route:
+  group_by: ['alertname', 'instance']
+  group_wait: 30s          # Wait to batch related alerts before sending
+  group_interval: 5m       # How often to resend grouped alerts
+  repeat_interval: 4h      # Repeat firing alerts every 4 hours
+
+  receiver: 'default'
+
+  routes:
+    - match:
+        severity: critical
+      receiver: 'critical'
+      repeat_interval: 1h   # Critical alerts: repeat every hour
+
+receivers:
+  - name: 'default'
+    # Replace with your notification method:
+    # slack_configs, email_configs, pagerduty_configs
+    # See: https://prometheus.io/docs/alerting/configuration/
+
+  - name: 'critical'
+    # Same — configure separately for critical escalation
+
+inhibit_rules:
+  # Suppress warnings when a critical alert for the same instance is already firing
+  - source_match:
+      severity: 'critical'
+    target_match:
+      severity: 'warning'
+    equal: ['instance']
+```
+
+> **Alert fatigue prevention:** The `inhibit_rules` section suppresses warning-level alerts when a critical alert for the same instance is already firing. Without this, a disk-full event can trigger 10+ separate alerts simultaneously.
 
 ---
 

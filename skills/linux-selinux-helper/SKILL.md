@@ -1,7 +1,7 @@
 ---
 name: linux-selinux-helper
 description: Use when user has an SELinux denial, AVC message, permission error on RHEL/Rocky/Alma/Fedora/CentOS, wants to write a custom SELinux policy module, needs to fix file contexts, label ports, manage SELinux booleans, troubleshoot why an application is blocked, or wants to understand SELinux modes, contexts, and policies.
-version: 1.1.0
+version: 1.2.0
 author: Lehnert
 ---
 
@@ -284,14 +284,17 @@ semodule -i nginx-custom.pp
 
 ## SELinux Modes Reference
 
+> **Rule:** Never recommend `setenforce 0` to solve a problem — use it only for diagnosis, then fix the policy and re-enable enforcing mode immediately.
+
 ```bash
 # Check current mode
 getenforce          # Enforcing / Permissive / Disabled
 sestatus            # Full status including policy name
 
 # Temporarily switch to permissive (reverts on reboot)
-setenforce 0        # permissive — logs but doesn't block
-setenforce 1        # enforcing — logs and blocks
+# ⚠️  Diagnosis use ONLY — never leave a system in permissive
+setenforce 0        # permissive — logs but doesn't block (use to identify all denials at once)
+setenforce 1        # enforcing — restore this immediately after diagnosis
 
 # Permanently change mode in /etc/selinux/config
 # (requires reboot)

@@ -1,7 +1,7 @@
 ---
 name: linux-backup-restore
 description: Use when user wants to back up a Linux server, design a backup strategy, write a backup script, set up automated backups, configure restic or borgbackup, restore from a backup, test backup integrity, back up databases, Docker volumes, or asks about the 3-2-1 backup rule or disaster recovery.
-version: 1.3.0
+version: 1.4.0
 author: Lehnert
 ---
 
@@ -508,7 +508,9 @@ Then print ONLY:
   ./backup/test-restore.sh
 
 💡 Follow the 3-2-1 rule: local + remote/cloud copy + test regularly.
-⚠️  Store your encryption password safely — if lost, backups are unrecoverable.
+⚠️  Store your encryption password in a password manager AND write it down offline.
+    If lost, ALL backups are permanently unrecoverable — even if the files exist.
+    Run the test-restore.sh NOW before trusting these backups with real data.
 💡 Next: /linux-cron-manager to create a systemd timer for automated backups.
 💡 Next: /linux-monitoring-setup to alert when backups fail or disk fills up.
 ```
