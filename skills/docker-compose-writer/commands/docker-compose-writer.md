@@ -11,23 +11,38 @@ Set up any self-hosted app or Docker stack — generates a complete, production-
 ## Examples
 
 ```
+/docker-compose-writer Vaultwarden password manager
 /docker-compose-writer note-taking app
-/docker-compose-writer Vaultwarden
-/docker-compose-writer I need a database with a web UI
-/docker-compose-writer monitoring stack
-/docker-compose-writer Next.js + PostgreSQL + Redis + Traefik
-/docker-compose-writer [paste existing docker-compose.yml]
+/docker-compose-writer I want to self-host my own Git
+/docker-compose-writer Nextcloud with PostgreSQL and Redis
+/docker-compose-writer Next.js + PostgreSQL + Redis + Traefik with SSL
+/docker-compose-writer I need uptime monitoring for my websites
+/docker-compose-writer CI/CD server
+/docker-compose-writer media server with automatic downloads
+/docker-compose-writer [paste existing docker-compose.yml to optimize]
+```
+
+## Generates
+
+```
+<app-name>/
+  docker-compose.yml    ← production-ready, with health checks and named volumes
+  .env.example          ← all required environment variables with descriptions
 ```
 
 ## Behavior
 
-If the user names a **specific tool** (Gitea, Nextcloud, Jellyfin, etc.) or describes a **custom stack** → generate the full compose immediately.
+**Direct mode** — if the user names a specific tool (Gitea, Jellyfin, Nextcloud, etc.) or describes a full custom stack → generate immediately without asking.
 
-If the user names a **category** ("database", "note-taking", "monitoring", "file storage", "CI/CD") or describes a **need** ("I want to self-host my files", "I need uptime monitoring") → present 3–4 real options with descriptions, let the user pick a number, then generate the full stack.
+**Selection mode** — if the user names a category ("note-taking", "monitoring", "CI/CD", "media server") or describes a vague need ("I want to back up my files") → present 3–4 real options with one-line descriptions, let the user pick a number, then generate.
 
-After the user picks (or for direct mode):
-1. Write `docker-compose.yml` and `.env.example` silently to `./[app-name]/`
-2. Print only: confirmation line, `cd` + start commands, useful day-to-day commands, and the access URL
-3. Do NOT print the compose file or .env content in chat
+After the user picks (or in direct mode):
+1. Write `docker-compose.yml` and `.env.example` silently to `./<app-name>/`
+2. Do NOT print the compose file or .env content in chat
+3. Print only:
+   - Confirmation: files written to `./<app-name>/`
+   - Setup + start commands: `cp .env.example .env`, `docker compose up -d`
+   - Useful day-to-day commands: logs, restart, update, backup volume
+   - Access URL and default credentials (if applicable)
 
 $ARGUMENTS
