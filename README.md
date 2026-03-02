@@ -34,6 +34,7 @@ The fastest way to get everything – one command registers the marketplace, one
 /plugin install linux-monitoring-setup@lehnert-claude-skills
 /plugin install linux-network-configurer@lehnert-claude-skills
 /plugin install linux-backup-restore@lehnert-claude-skills
+/plugin install linux-systemd-manager@lehnert-claude-skills
 ```
 
 **To install all active skills at once:**
@@ -100,6 +101,7 @@ Skills without a `commands/` directory are **helpers** – they are loaded autom
 | `linux-monitoring-setup` | Slash command | `/linux-monitoring-setup` |
 | `linux-network-configurer` | Slash command | `/linux-network-configurer` |
 | `linux-backup-restore` | Slash command | `/linux-backup-restore` |
+| `linux-systemd-manager` | Slash command | `/linux-systemd-manager` |
 
 **Rule of thumb:** If a skill is a standalone user-facing tool → give it a `commands/` file. If it's a helper or orchestrator → leave it as a pure skill.
 
@@ -174,6 +176,7 @@ claude plugin install /path/to/lehnert-claude-skills --scope user
 | `linux-monitoring-setup` | Sets up Prometheus, Grafana, Node Exporter, Loki, Alertmanager, Uptime Kuma, or Netdata for any server or Docker host — writes all configs to disk | ✅ Active |
 | `linux-network-configurer` | Configures static IP, routing, VLANs, bonding, bridges, WireGuard VPN, iptables, nftables, DNS across NetworkManager, systemd-networkd, and ifupdown | ✅ Active |
 | `linux-backup-restore` | Generates complete backup solutions with restic, BorgBackup, rsync, or tar — encryption, remote storage, DB/Docker backups, retention, and restore procedures | ✅ Active |
+| `linux-systemd-manager` | Creates, debugs, and hardens systemd services, timers, sockets, and path units — with sandboxing, resource limits, and restart policies | ✅ Active |
 
 ### 🔒 Pentesting
 

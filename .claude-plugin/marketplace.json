@@ -196,6 +196,15 @@
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["backup", "restore", "restic", "borgbackup", "rsync", "disaster-recovery", "database-backup", "docker-volumes", "s3", "3-2-1", "retention", "linux"]
+    },
+    {
+      "name": "linux-systemd-manager",
+      "source": "./skills/linux-systemd-manager",
+      "description": "Creates, debugs, and hardens systemd service, timer, socket, path, and mount units — with sandboxing, resource limits, restart policies, and timer scheduling.",
+      "version": "1.0.0",
+      "author": { "name": "Lehnert" },
+      "category": "linux-sysadmin",
+      "keywords": ["systemd", "service", "timer", "socket", "unit", "journalctl", "autostart", "boot", "scheduling", "sandboxing", "linux"]
     }
   ]
 }

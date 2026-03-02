@@ -1,0 +1,7 @@
+{
+  "name": "linux-systemd-manager",
+  "description": "Creates, debugs, and hardens systemd service, timer, socket, path, and mount units — with sandboxing, resource limits, restart policies, and timer scheduling.",
+  "version": "1.0.0",
+  "author": { "name": "Lehnert" },
+  "keywords": ["systemd", "service", "timer", "socket", "unit", "journalctl", "autostart", "boot", "scheduling", "sandboxing", "linux"]
+}

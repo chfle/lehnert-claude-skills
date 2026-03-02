@@ -47,6 +47,7 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | `linux-monitoring-setup` | Sets up Prometheus+Grafana, Loki, Alertmanager, Uptime Kuma, or Netdata for any server or Docker host | ✅ Active |
 | `linux-network-configurer` | Configures static IP, VLANs, bonding, WireGuard, iptables, nftables, DNS across all Linux network stacks | ✅ Active |
 | `linux-backup-restore` | Generates backup solutions with restic, BorgBackup, rsync, or tar — encryption, remote/cloud storage, DB/Docker backups, retention, restore | ✅ Active |
+| `linux-systemd-manager` | Creates, debugs, and hardens systemd services, timers, sockets, and path units — with sandboxing, resource limits, and restart policies | ✅ Active |
 
 ### 🔒 Pentesting
 
@@ -121,6 +122,10 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | "Set up automated backups with restic or borg" | → `linux-backup-restore` |
 | "Restore from a backup" | → `linux-backup-restore` |
 | "Back up Docker volumes to S3 / Backblaze" | → `linux-backup-restore` |
+| "Run my app as a systemd service" | → `linux-systemd-manager` |
+| "Create a systemd timer (cron replacement)" | → `linux-systemd-manager` |
+| "My systemd service keeps failing / crashing" | → `linux-systemd-manager` |
+| "Harden my systemd service unit" | → `linux-systemd-manager` |
 
 > No skill for your task yet? Say: **"Create the skill [name] for me"** – I'll build the folder and SKILL.md right away.
 
