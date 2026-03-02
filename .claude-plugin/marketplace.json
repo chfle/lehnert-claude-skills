@@ -21,7 +21,7 @@
       "name": "sw-idea-analyzer",
       "source": "./skills/sw-idea-analyzer",
       "description": "Analyzes software ideas for feasibility, target audience, core features, technical complexity, risks, and MVP scope – pure planning, no code generation.",
-      "version": "1.5.0",
+      "version": "1.6.0",
       "author": { "name": "Lehnert" },
       "category": "software-planning",
       "keywords": ["idea", "analysis", "feasibility", "mvp", "planning", "startup"]
@@ -30,7 +30,7 @@
       "name": "sw-diagram-creator",
       "source": "./skills/sw-diagram-creator",
       "description": "Generates ready-to-copy Mermaid, PlantUML, and ASCII diagrams from any software description, idea, or sw-idea-analyzer output.",
-      "version": "1.3.0",
+      "version": "1.4.0",
       "author": { "name": "Lehnert" },
       "category": "software-planning",
       "keywords": ["diagram", "mermaid", "plantuml", "architecture", "erd", "flowchart", "sequence", "c4", "visualization"]
@@ -128,8 +128,8 @@
     {
       "name": "linux-shell-scriptor",
       "source": "./skills/linux-shell-scriptor",
-      "description": "Generates production-ready bash scripts for any Linux task from a plain English description — backups, monitoring, deployment, cron jobs, health checks, maintenance.",
-      "version": "1.0.0",
+      "description": "Generates production-ready bash scripts for any Linux task from a plain English description — backups, monitoring, deployment, cron jobs, health checks, database maintenance.",
+      "version": "1.1.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["bash", "shell", "script", "linux", "automation", "backup", "monitoring", "deployment", "cron", "sysadmin"]

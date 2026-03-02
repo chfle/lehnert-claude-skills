@@ -1,7 +1,7 @@
 ---
 name: linux-shell-scriptor
 description: Use when user wants to write, generate, or create a bash or shell script for any Linux task — backups, monitoring, deployment, automation, cron jobs, health checks, system maintenance, log rotation, or any described sysadmin use case.
-version: 1.0.0
+version: 1.1.0
 author: Lehnert
 ---
 
@@ -101,6 +101,13 @@ Every script MUST contain all of the following:
 - Counts occurrences, extracts fields, detects anomalies
 - Outputs a summary report to stdout or a file
 - Optionally archives processed logs
+
+### Database Maintenance
+- Connects using env vars (never hardcoded credentials)
+- PostgreSQL: `pg_dump`, `VACUUM`, `ANALYZE`, `pg_stat_activity` monitoring
+- MySQL: `mysqldump`, optimize tables, check binary log size
+- Redis: `redis-cli INFO`, `BGSAVE`, key count / memory stats
+- Sends result summary to log file; alerts on non-zero exit
 
 ---
 

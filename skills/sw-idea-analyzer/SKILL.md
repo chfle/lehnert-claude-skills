@@ -1,7 +1,7 @@
 ---
 name: sw-idea-analyzer
 description: Use when user shares a software idea, app concept, startup idea, or product vision and wants it analyzed for feasibility, broken down into features, assessed for risks, or needs a structured evaluation before starting development.
-version: 1.0.0
+version: 1.6.0
 author: Lehnert
 ---
 
@@ -25,9 +25,9 @@ Analyzes any software or product idea with a structured framework: feasibility, 
 
 ## When NOT to Use
 
-- User already has a spec and wants user stories → use `user-story-writer`
-- User wants a project timeline → use `project-planner`
-- User wants market research only → use `research-assistant`
+- User already has a spec and wants user stories → use `sw-user-story-creator`
+- User wants to pick a tech stack → use `sw-tech-stack-planner`
+- User wants diagrams of their architecture → use `sw-diagram-creator`
 
 ---
 
@@ -169,7 +169,6 @@ After completing the full analysis, write everything to `requirements/vision.md`
 At the end of every analysis, suggest the most logical next step:
 
 > **Suggested next skill:**
-> - Got clear features? → Use **`user-story-writer`** to turn them into actionable stories
-> - Need a timeline? → Use **`project-planner`** to scope the work
-> - Need market validation? → Use **`research-assistant`** for deeper competitor research
-> - Building a product? → Use **`brand-guidelines`** to define the identity early
+> - Got clear features? → Run **`/sw-user-story-creator`** to turn them into user stories with acceptance criteria
+> - Need diagrams? → Run **`/sw-diagram-creator`** to visualize the architecture or data model
+> - Ready to plan the tech stack? → Run **`/sw-tech-stack-planner`** to pick the right framework and database

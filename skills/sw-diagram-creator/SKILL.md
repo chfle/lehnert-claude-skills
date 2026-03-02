@@ -1,7 +1,7 @@
 ---
 name: sw-diagram-creator
 description: Use when user wants to create, generate, or visualize a diagram from an idea, requirement, sw-idea-analyzer output, or any description – supports Mermaid flowchart, sequence, class, ERD, C4, gantt, mindmap, PlantUML, and ASCII art fallback.
-version: 1.0.0
+version: 1.4.0
 author: Lehnert
 ---
 
@@ -82,11 +82,11 @@ Output as plain fenced code block (` ``` `).
 
 ## Output Rules
 
-1. **Never print the diagram or explanation to the console.** All output goes to files only.
-2. Do not show any diagram code, code blocks, or descriptions in the chat.
-3. The only console output allowed is the final confirmation line.
-4. If the input is ambiguous, ask **one** clarifying question before generating – do not guess silently.
-5. After saving, offer 1–2 alternative diagram types in the confirmation line only.
+1. **Never print the raw diagram code in the chat.** The diagram file goes to `requirements/diagrams/` only.
+2. **Always print a 1–2 sentence explanation** of what the diagram shows (entities, relationships, flow) — this is useful inline and too short to skip.
+3. If the input is ambiguous, ask **one** clarifying question before generating – do not guess silently.
+4. After saving, offer 1–2 alternative diagram types in the confirmation line.
+5. The chat output is: explanation sentence + confirmation line + alternative suggestion. No raw code blocks.
 
 ---
 
@@ -153,7 +153,8 @@ After generating every diagram, always save it to `requirements/diagrams/` in th
 
 | Mistake | Fix |
 |---------|-----|
-| Generating without explanation | Always explain what the diagram shows |
+| Printing raw diagram code in chat | Only print explanation + confirmation line; code goes to file |
+| Generating without explanation | Always print 1–2 sentences describing what the diagram shows |
 | Using wrong direction (`TD` vs `LR`) | `TD` for hierarchies, `LR` for flows/pipelines |
 | Forgetting `@startuml` / `@enduml` in PlantUML | Always wrap PlantUML output |
 | Generating all possible diagrams unprompted | Generate one, offer alternatives |
@@ -166,6 +167,6 @@ After generating every diagram, always save it to `requirements/diagrams/` in th
 At the end of every diagram, suggest the most logical next step:
 
 > **Suggested next skill:**
-> - Have features laid out visually? → Use **`user-story-writer`** to turn them into stories
-> - Need to plan the build? → Use **`project-planner`** to schedule the work
-> - Starting from scratch? → Use **`sw-idea-analyzer`** first to analyze your idea before diagramming
+> - Have features laid out visually? → Run **`/sw-user-story-creator`** to turn them into user stories
+> - Want to pick a tech stack? → Run **`/sw-tech-stack-planner`** to choose frameworks and databases
+> - Starting from scratch? → Run **`/sw-idea-analyzer`** first to analyze your idea before diagramming
