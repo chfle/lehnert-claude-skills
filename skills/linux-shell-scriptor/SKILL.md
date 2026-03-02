@@ -1,7 +1,7 @@
 ---
 name: linux-shell-scriptor
 description: Use when user wants to write, generate, or create a bash or shell script for any Linux task — backups, monitoring, deployment, automation, cron jobs, health checks, system maintenance, log rotation, or any described sysadmin use case.
-version: 1.1.0
+version: 1.2.0
 author: Lehnert
 ---
 
@@ -25,9 +25,9 @@ Generates production-ready bash scripts from plain English descriptions. Every s
 ## When NOT to Use
 
 - User wants a Python / Perl / Ruby script → general coding
-- User wants to audit an existing config → `linux-config-auditor`
-- User wants to configure a service → `linux-config-auditor`
-- User wants to set up cron scheduling only → `linux-cron-manager`
+- User wants to audit an existing config → /linux-config-auditor
+- User wants to configure a service → /linux-config-auditor
+- User wants to set up cron scheduling only → /linux-cron-manager
 
 ---
 

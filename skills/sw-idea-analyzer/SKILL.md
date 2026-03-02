@@ -1,7 +1,7 @@
 ---
 name: sw-idea-analyzer
 description: Use when user shares a software idea, app concept, startup idea, or product vision and wants it analyzed for feasibility, broken down into features, assessed for risks, or needs a structured evaluation before starting development.
-version: 1.7.0
+version: 1.8.0
 author: Lehnert
 ---
 
@@ -25,9 +25,9 @@ Analyzes any software or product idea with a structured framework: feasibility, 
 
 ## When NOT to Use
 
-- User already has a spec and wants user stories → use `sw-user-story-creator`
-- User wants to pick a tech stack → use `sw-tech-stack-planner`
-- User wants diagrams of their architecture → use `sw-diagram-creator`
+- User already has a spec and wants user stories → use /sw-user-story-creator
+- User wants to pick a tech stack → use /sw-tech-stack-planner
+- User wants diagrams of their architecture → use /sw-diagram-creator
 
 ---
 

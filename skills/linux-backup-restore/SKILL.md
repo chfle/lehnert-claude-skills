@@ -1,7 +1,7 @@
 ---
 name: linux-backup-restore
 description: Use when user wants to back up a Linux server, design a backup strategy, write a backup script, set up automated backups, configure restic or borgbackup, restore from a backup, test backup integrity, back up databases, Docker volumes, or asks about the 3-2-1 backup rule or disaster recovery.
-version: 1.2.0
+version: 1.3.0
 author: Lehnert
 ---
 
@@ -27,9 +27,9 @@ Designs and generates a complete backup solution tailored to what the user needs
 
 ## When NOT to Use
 
-- User wants to sync files in real time → use rsync in script via `linux-shell-scriptor`
-- User wants to monitor backup jobs → use `linux-monitoring-setup`
-- User wants to automate only the scheduling → use `linux-cron-manager`
+- User wants to sync files in real time → use rsync in script via /linux-shell-scriptor
+- User wants to monitor backup jobs → use /linux-monitoring-setup
+- User wants to automate only the scheduling → use /linux-cron-manager
 
 ---
 

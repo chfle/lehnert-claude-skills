@@ -21,7 +21,7 @@
       "name": "sw-idea-analyzer",
       "source": "./skills/sw-idea-analyzer",
       "description": "Analyzes software ideas for feasibility, target audience, core features, technical complexity, risks, and MVP scope – pure planning, no code generation.",
-      "version": "1.7.0",
+      "version": "1.8.0",
       "author": { "name": "Lehnert" },
       "category": "software-planning",
       "keywords": ["idea", "analysis", "feasibility", "mvp", "planning", "startup"]
@@ -84,7 +84,7 @@
       "name": "sw-boilerplate-root",
       "source": "./skills/sw-boilerplate-root",
       "description": "Creates root-level project config files (package.json, tsconfig.json, pom.xml, .gitignore etc.) from tech-stack.yaml.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "author": { "name": "Lehnert" },
       "category": "software-development",
       "keywords": ["boilerplate", "scaffold", "package-json", "tsconfig", "pom-xml", "config"]
@@ -129,7 +129,7 @@
       "name": "linux-shell-scriptor",
       "source": "./skills/linux-shell-scriptor",
       "description": "Generates production-ready bash scripts for any Linux task from a plain English description — backups, monitoring, deployment, cron jobs, health checks, database maintenance.",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["bash", "shell", "script", "linux", "automation", "backup", "monitoring", "deployment", "cron", "sysadmin"]
@@ -192,7 +192,7 @@
       "name": "linux-backup-restore",
       "source": "./skills/linux-backup-restore",
       "description": "Designs and generates complete Linux backup solutions using restic, BorgBackup, rsync, or tar — with encryption, encryption key management, remote storage, retention policies, database backups, Docker volume backups, and restore procedures.",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["backup", "restore", "restic", "borgbackup", "rsync", "disaster-recovery", "database-backup", "docker-volumes", "s3", "3-2-1", "retention", "linux"]
