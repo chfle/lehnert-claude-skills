@@ -146,11 +146,11 @@
     {
       "name": "docker-compose-writer",
       "source": "./skills/docker-compose-writer",
-      "description": "Generates or optimizes docker-compose.yml from a project description or existing stack — health checks, named volumes, env management, security hardening.",
-      "version": "1.2.0",
+      "description": "Generates or optimizes docker-compose.yml for any self-hosted app or cloud replacement (Google Photos→Immich, Gmail→Mailcow, ChatGPT→Ollama) — full stacks with health checks, named volumes, and .env setup.",
+      "version": "2.0.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
-      "keywords": ["docker", "docker-compose", "containers", "services", "nginx", "postgres", "redis", "traefik", "devops", "infrastructure"]
+      "keywords": ["docker", "docker-compose", "containers", "self-hosted", "homelab", "nginx", "postgres", "redis", "traefik", "devops", "infrastructure", "immich", "nextcloud", "jellyfin", "ollama"]
     },
     {
       "name": "linux-security-hardener",

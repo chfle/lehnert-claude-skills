@@ -1,7 +1,7 @@
 ---
 name: docker-compose-writer
-description: Use when user wants to write, generate, create, or optimize a docker-compose.yml — for a new project, an existing stack, a self-hosted app, a database, or when asked to set up tools like note-taking apps, password managers, media servers, monitoring, git hosting, file storage, CI/CD, analytics, or any service that runs in Docker.
-version: 1.2.0
+description: Use when user wants to write, generate, create, or optimize a docker-compose.yml — for a new project, an existing stack, any self-hosted app, or when they want to replace a cloud service (Google Drive, Gmail, GitHub, Slack, Notion, ChatGPT, etc.) with a self-hosted alternative.
+version: 2.0.0
 author: Lehnert
 ---
 
@@ -9,191 +9,443 @@ author: Lehnert
 
 ## Overview
 
-Two modes:
+Three modes:
 
-**Selection Mode** — User asks for a category ("I need a database", "I want a note-taking app", "set up monitoring"). Present 3–4 real options with a short description. User picks one. Generate the full stack.
+**Selection Mode** — User asks for a category or vague need → present 3–4 real options → user picks → generate complete stack.
 
-**Direct Mode** — User names a specific tool or pastes an existing compose. Generate or optimize immediately, no questions.
+**Direct Mode** — User names a specific app or describes a full custom stack → generate immediately.
+
+**Optimize Mode** — User pastes existing `docker-compose.yml` → audit and fix issues → write improved version.
 
 **Language:** Respond in the user's language. YAML keys and comments always in English.
 
 ---
 
-## Step 1 — Detect Mode
+## Step 1 — Detect Mode and Handle "Replace X" Requests
+
+First, map "I want to replace X" requests to the right category:
+
+| User wants to replace / run | Point to |
+|----------------------------|----------|
+| Google Drive / Dropbox | File Storage → Nextcloud, Seafile |
+| Google Photos / iCloud Photos | Photos → Immich |
+| Gmail / email hosting | Email → Mailcow, Mailu |
+| GitHub / GitLab | Git Hosting → Gitea, Forgejo, GitLab CE |
+| Slack / Teams | Chat → Mattermost, Element/Matrix |
+| Notion / Confluence | Notes/Wiki → Outline, BookStack, Trilium |
+| LastPass / 1Password / Bitwarden | Passwords → Vaultwarden, Passbolt |
+| Trello / Jira / Linear | Project Management → Plane, Vikunja |
+| Google Analytics | Analytics → Plausible, Umami, Matomo |
+| ChatGPT / Claude (locally) | AI → Ollama + Open WebUI |
+| Spotify (music streaming) | Media → Navidrome |
+| Netflix (video streaming) | Media → Jellyfin |
+| YouTube (video hosting) | Media → PeerTube |
+| Evernote / Apple Notes sync | Notes → Joplin Server, Trilium |
+| Pocket / Instapaper | Read Later → Wallabag |
+| Feedly / RSS reader | RSS → FreshRSS, Miniflux |
+| Google Bookmarks | Bookmarks → Linkding, Hoarder |
+| Mint / YNAB (budgeting) | Finance → Firefly III, Actual Budget |
+| Goodreads / e-book library | Books → Calibre-Web, Kavita |
+| DNS / ad blocking | Network → Pi-hole, AdGuard Home |
+| Okta / Auth0 / SSO | Identity → Authelia, Keycloak |
+
+Then decide mode:
 
 | User says | Mode |
 |-----------|------|
-| Names a specific tool ("Vaultwarden", "Gitea", "Nextcloud") | Direct → generate immediately |
-| Pastes an existing compose file | Direct → optimize it |
-| Names a category ("a database", "monitoring", "a wiki") | Selection → show options |
-| Describes a need ("I want to store files", "I need to track uptime") | Selection → map to category → show options |
-| Describes a custom app stack ("Next.js + Postgres + Redis") | Direct → generate immediately |
+| Names specific app ("Vaultwarden", "Gitea", "Nextcloud") | Direct → generate immediately |
+| Pastes existing compose file | Optimize → audit and fix |
+| Names category ("database", "notes", "monitoring") | Selection → show 3–4 options |
+| Describes vague need ("I want to back up my photos") | Map to category → Selection |
+| Custom app stack ("Next.js + Postgres + Redis") | Direct → generate immediately |
+| "I want to replace Google Drive" | Map → File Storage Selection |
 
 ---
 
 ## Step 2 — Selection Mode: Present Options
 
-When in Selection Mode, respond with a numbered list like this:
+When in Selection Mode, respond with:
 
-> Here are the best options for **[category]**. Which one fits your needs?
+> Here are the best self-hosted options for **[need]**. Which fits your use case?
 >
 > **1. [App Name]** — [one sentence what it is]
-> Best for: [who/what it's best for] · Requires: [any dependencies, e.g. "PostgreSQL"]
+> Best for: [who/what it's best for] · RAM: [rough requirement] · Requires: [dependencies]
 >
-> **2. [App Name]** — [one sentence what it is]
-> Best for: [who/what it's best for] · Requires: [any dependencies]
+> **2. [App Name]** — [one sentence]
+> Best for: ... · RAM: ... · Requires: ...
 >
-> **3. [App Name]** — [one sentence what it is]
-> Best for: [who/what it's best for] · Requires: [any dependencies]
+> **3. [App Name]** — [one sentence]
+> Best for: ...
 >
 > *(Optional)* **4. [App Name]** — ...
 >
-> Type a number to generate the full Docker Compose stack, or tell me more about what you need.
+> Type a number to generate the full Docker Compose stack.
 
-Never ask follow-up questions during selection — the user picks a number, then you generate.
+Never ask follow-up questions during selection — user picks a number, then generate immediately.
 
 ---
 
 ## App Catalogue
 
-Use these options per category. Always recommend the best options for self-hosting.
+### 📦 Databases & Data Stores
 
-### 📦 Databases
+| App | Description | RAM | Best for |
+|-----|-------------|-----|----------|
+| **PostgreSQL** | Industry-standard relational DB | 256MB+ | Most apps, complex queries |
+| **MariaDB** | MySQL-compatible, fast, reliable | 256MB+ | WordPress, legacy apps |
+| **MongoDB** | Document NoSQL database | 512MB+ | JSON-heavy, flexible schemas |
+| **Redis** | In-memory cache, session store, queue | 64MB+ | Caching, pub/sub, rate limiting |
+| **ClickHouse** | Columnar DB for analytics, extremely fast | 1GB+ | Time-series data, large-scale analytics |
+| **InfluxDB** | Purpose-built time-series database | 256MB+ | IoT metrics, monitoring |
 
-| # | App | Description | Best for |
-|---|-----|-------------|----------|
-| 1 | **PostgreSQL** | Industry-standard relational database | Most apps, complex queries |
-| 2 | **MariaDB** | MySQL-compatible, fast, reliable | WordPress, legacy apps, wide compatibility |
-| 3 | **MongoDB** | Document-oriented NoSQL database | JSON-heavy apps, flexible schemas |
-| 4 | **Redis** | In-memory cache, session store, message broker | Caching, queues, pub/sub |
+*Extras to suggest alongside:* pgAdmin (PostgreSQL UI) · RedisInsight (Redis UI) · Mongo Express (MongoDB UI)
 
-Extras to suggest alongside: **pgAdmin** (PostgreSQL UI), **RedisInsight** (Redis UI), **Mongo Express** (MongoDB UI)
+---
 
-### 📝 Notes & Knowledge Base
+### 📝 Notes, Wikis & Knowledge Base
 
-| # | App | Description | Best for |
-|---|-----|-------------|----------|
-| 1 | **Trilium Notes** | Hierarchical personal knowledge base with rich text, code, and relational notes | Power users, large personal wikis |
-| 2 | **Joplin Server** | End-to-end encrypted note syncing backend for Joplin clients | Users who already use Joplin |
-| 3 | **Outline** | Modern team wiki with Slack/Google auth | Teams, documentation |
-| 4 | **BookStack** | Simple, structured wiki with books, chapters, and pages | Personal or team documentation |
+| App | Description | RAM | Best for |
+|-----|-------------|-----|----------|
+| **Outline** | Modern team wiki, Slack/Google auth, real-time | 512MB+ | Teams, documentation |
+| **BookStack** | Structured wiki: books → chapters → pages | 256MB+ | Simple personal/team docs |
+| **Trilium Notes** | Hierarchical personal KB, code, relations | 256MB+ | Power users, large wikis |
+| **Joplin Server** | Note sync backend for Joplin clients (E2E encrypted) | 128MB+ | Existing Joplin users |
+| **SilverBullet** | Markdown-based PKM, self-hosted Obsidian alternative | 64MB+ | Markdown note-takers |
+| **Affine** | Next-gen Notion/Miro hybrid — docs + whiteboard | 512MB+ | Visual knowledge work |
+
+---
 
 ### 🔒 Password Managers
 
-| # | App | Description | Best for |
-|---|-----|-------------|----------|
-| 1 | **Vaultwarden** | Unofficial Bitwarden-compatible server, extremely lightweight | Personal or family use |
-| 2 | **Passbolt CE** | Team-oriented password manager with GPG encryption | Teams, organizations |
+| App | Description | RAM | Best for |
+|-----|-------------|-----|----------|
+| **Vaultwarden** | Unofficial Bitwarden server, extremely lightweight | 64MB+ | Personal/family |
+| **Passbolt CE** | Team password manager with GPG | 256MB+ | Teams, organizations |
+
+---
 
 ### ☁️ File Storage & Cloud
 
-| # | App | Description | Best for |
-|---|-----|-------------|----------|
-| 1 | **Nextcloud** | Full-featured self-hosted cloud: files, calendar, contacts, office | Full Google Drive / Dropbox replacement |
-| 2 | **Seafile** | Fast, reliable file sync and share | Pure file sync, large file collections |
-| 3 | **Filebrowser** | Minimal web-based file browser and upload tool | Simple file access without full cloud |
+| App | Description | RAM | Best for |
+|-----|-------------|-----|----------|
+| **Nextcloud** | Full Google Drive replacement: files, calendar, contacts, office | 512MB+ | Full cloud suite |
+| **Seafile** | Fast file sync and share, reliable | 256MB+ | Pure file sync |
+| **Filebrowser** | Minimal web file browser and uploader | 32MB+ | Simple access, no sync needed |
+| **Syncthing** | Peer-to-peer continuous file sync (no server-side storage) | 128MB+ | Device sync without central server |
 
-### 📊 Monitoring & Observability
+---
 
-| # | App | Description | Best for |
-|---|-----|-------------|----------|
-| 1 | **Prometheus + Grafana** | Industry-standard metrics collection and visualization | Server and app metrics dashboards |
-| 2 | **Uptime Kuma** | Beautiful self-hosted uptime and status page monitor | Website/service availability monitoring |
-| 3 | **Netdata** | Real-time system metrics with zero config | Live system performance monitoring |
-| 4 | **Dozzle** | Real-time Docker log viewer in the browser | Quick Docker container log access |
+### 📸 Photos
+
+| App | Description | RAM | Best for |
+|-----|-------------|-----|----------|
+| **Immich** | Self-hosted Google Photos: auto-backup, face recognition, albums, mobile app | 2GB+ | Phone photo backup |
+| **PhotoPrism** | AI-powered photo manager, facial recognition, maps | 1GB+ | Large collections, AI tags |
+| **Photoview** | Fast, simple photo viewer for existing directory structure | 256MB+ | Existing photo directories |
+| **Piwigo** | Traditional photo gallery with albums and sharing | 256MB+ | Public photo sharing |
+
+*Note for Immich:* Requires PostgreSQL + Redis + Machine Learning service in the same stack.
+
+---
+
+### 🎬 Media Servers
+
+| App | Description | RAM | Best for |
+|-----|-------------|-----|----------|
+| **Jellyfin** | Fully open-source media server, no subscription | 512MB+ | Privacy-first streaming |
+| **Plex** | Feature-rich server with mobile apps, remote access | 1GB+ | Best client support |
+| **Navidrome** | Lightweight music server (Subsonic API) | 64MB+ | Music-only, minimal |
+| **Audiobookshelf** | Audiobook + podcast server with mobile apps | 256MB+ | Audiobooks, podcasts |
+
+*Media automation (* arr stack):* Suggest Sonarr + Radarr + Prowlarr + qBittorrent together when user asks for automated downloads.
+
+---
+
+### 📥 Media Automation (*arr Stack)
+
+| App | Description |
+|-----|-------------|
+| **Sonarr** | TV show monitoring and download automation |
+| **Radarr** | Movie monitoring and download automation |
+| **Lidarr** | Music monitoring and download automation |
+| **Prowlarr** | Indexer manager for Sonarr/Radarr/Lidarr |
+| **qBittorrent** | Torrent client with web UI |
+| **SABnzbd** | Usenet downloader |
+
+*Always generate the full *arr stack together when user asks for any of these — they're meant to work as a unit.*
+
+---
+
+### 🤖 AI / LLM
+
+| App | Description | RAM / GPU | Best for |
+|-----|-------------|-----------|----------|
+| **Ollama + Open WebUI** | Run LLMs locally (Llama, Mistral, etc.) with a ChatGPT-like UI | 8GB+ RAM, GPU optional | Local AI chat, privacy |
+| **LocalAI** | OpenAI-compatible API for local models | 4GB+ | API-compatible local AI |
+| **Stable Diffusion WebUI** | Local image generation (AUTOMATIC1111) | 4GB+ GPU | AI image generation |
+| **Open WebUI** (standalone) | Chat UI that connects to external OpenAI/Anthropic APIs | 256MB+ | Self-hosted chat frontend |
+
+*Note for Ollama:* If user has NVIDIA GPU, add `deploy: resources: reservations: devices` for GPU passthrough.
+
+---
+
+### 📧 Email
+
+| App | Description | RAM | Best for |
+|-----|-------------|-----|----------|
+| **Mailcow** | Full-featured mail server: SMTP, IMAP, web UI, spam filter | 2GB+ | Complete email hosting |
+| **Mailu** | Simpler mail server, easier setup than Mailcow | 1GB+ | Simple email hosting |
+| **Stalwart Mail** | Modern all-in-one mail server (JMAP/SMTP/IMAP) | 256MB+ | Modern standards, low resource |
+
+*Warning: Email delivery requires proper DNS (SPF, DKIM, DMARC, PTR) — mention this when generating.*
+
+---
+
+### 🛡️ Identity, SSO & Access
+
+| App | Description | RAM | Best for |
+|-----|-------------|-----|----------|
+| **Authelia** | Lightweight SSO + 2FA proxy for nginx/Traefik | 64MB+ | Protecting services with single login |
+| **Keycloak** | Full enterprise identity provider, OIDC/SAML | 512MB+ | Full SSO platform, many apps |
+| **Zitadel** | Modern cloud-native identity platform | 256MB+ | Developer-friendly, modern stack |
+| **Authentik** | Flexible IdP with beautiful UI | 512MB+ | Best balance of features and ease |
+
+---
 
 ### 🔀 Reverse Proxy
 
-| # | App | Description | Best for |
-|---|-----|-------------|----------|
-| 1 | **Traefik v3** | Auto-discovers Docker services, built-in Let's Encrypt TLS | Multi-service setups, automated HTTPS |
-| 2 | **Nginx Proxy Manager** | Web UI for nginx reverse proxy with Let's Encrypt | Users who prefer a GUI over config files |
-| 3 | **Caddy** | Automatic HTTPS, simple Caddyfile config | Simple setups, fast to configure |
+| App | Description | RAM | Best for |
+|-----|-------------|-----|----------|
+| **Traefik v3** | Auto-discovers Docker services, Let's Encrypt TLS | 64MB+ | Multi-service, automated HTTPS |
+| **Nginx Proxy Manager** | Web UI for nginx reverse proxy + Let's Encrypt | 256MB+ | GUI over config files |
+| **Caddy** | Automatic HTTPS, simple Caddyfile config | 64MB+ | Simple setups |
+
+---
+
+### 🌐 Network & Ad Blocking
+
+| App | Description | RAM | Best for |
+|-----|-------------|-----|----------|
+| **Pi-hole** | DNS-based ad blocker for entire network | 64MB+ | Network-wide ad blocking |
+| **AdGuard Home** | DNS ad blocker with modern UI, DoH/DoT support | 64MB+ | Same as Pi-hole, more modern UI |
+| **Unbound** | Validating, recursive DNS resolver | 32MB+ | Privacy-focused recursive DNS |
+| **WireGuard (wg-easy)** | WireGuard VPN with simple web UI | 32MB+ | Easy VPN setup with UI |
+
+---
+
+### 📖 RSS & Read Later
+
+| App | Description | RAM | Best for |
+|-----|-------------|-----|----------|
+| **FreshRSS** | Full-featured RSS/Atom aggregator | 128MB+ | Power RSS users |
+| **Miniflux** | Minimalist, fast RSS reader | 32MB+ | Simple, fast, no-frills |
+| **Wallabag** | Save articles for later reading (Pocket replacement) | 256MB+ | Read-later queue |
+
+---
+
+### 📚 Books, Comics & Audiobooks
+
+| App | Description | RAM | Best for |
+|-----|-------------|-----|----------|
+| **Calibre-Web** | Web UI for Calibre e-book library, OPDS support | 256MB+ | E-book library management |
+| **Kavita** | Fast manga/comic/book server, cross-platform reader | 128MB+ | Comics, manga, mixed library |
+| **Komga** | Comic/manga server with OPDS + web reader | 256MB+ | Comics focus, excellent reader |
+| **Audiobookshelf** | Audiobook and podcast server with mobile apps | 256MB+ | Audiobooks + podcasts |
+
+---
+
+### 🔗 Bookmarks & Links
+
+| App | Description | RAM | Best for |
+|-----|-------------|-----|----------|
+| **Linkding** | Minimal bookmark manager, browser extensions | 64MB+ | Simple, fast, self-hosted bookmarks |
+| **Hoarder** | AI-powered bookmark manager with auto-tagging | 512MB+ | Smart bookmarks with AI tags |
+| **Shaarli** | Personal link sharing / bookmark tool | 32MB+ | Simple, PHP-based, no DB |
+
+---
+
+### 💰 Finance & Budget
+
+| App | Description | RAM | Best for |
+|-----|-------------|-----|----------|
+| **Firefly III** | Personal finance manager, budgets, accounts, reports | 256MB+ | Detailed personal finance |
+| **Actual Budget** | Modern local-first budget app (YNAB alternative) | 64MB+ | Simple, fast budgeting |
+
+---
+
+### 📊 Analytics & Business Intelligence
+
+| App | Description | RAM | Best for |
+|-----|-------------|-----|----------|
+| **Plausible** | Privacy-friendly, GDPR-compliant web analytics | 512MB+ | Privacy-first website analytics |
+| **Umami** | Minimal, fast analytics, multi-site | 256MB+ | Simple GA replacement |
+| **Matomo** | Full-featured analytics, full data ownership | 512MB+ | Full Google Analytics replacement |
+| **Metabase** | BI tool — query databases visually, dashboards | 1GB+ | SQL queries without SQL knowledge |
+| **Grafana** | Metric visualization + dashboards | 256MB+ | Technical dashboards, time-series |
+
+---
 
 ### 🐙 Git & Code Hosting
 
-| # | App | Description | Best for |
-|---|-----|-------------|----------|
-| 1 | **Gitea** | Lightweight self-hosted Git service | Personal or small team Git hosting |
-| 2 | **Forgejo** | Community fork of Gitea, more open governance | Same as Gitea, community-driven |
-| 3 | **GitLab CE** | Full DevOps platform: Git, CI/CD, registry, issues | Teams needing full GitLab feature set |
+| App | Description | RAM | Best for |
+|-----|-------------|-----|----------|
+| **Gitea** | Lightweight self-hosted Git | 128MB+ | Personal/small team |
+| **Forgejo** | Community fork of Gitea | 128MB+ | Same, more open governance |
+| **GitLab CE** | Full DevOps platform: Git, CI/CD, registry | 4GB+ | Teams needing full GitLab |
+
+---
 
 ### 🚀 CI/CD
 
-| # | App | Description | Best for |
-|---|-----|-------------|----------|
-| 1 | **Woodpecker CI** | Lightweight, Gitea/Forgejo-native container CI | Teams using Gitea/Forgejo |
-| 2 | **Drone CI** | Container-native CI with pipeline-as-code | Modern container-first pipelines |
-| 3 | **Jenkins** | Battle-tested, massively extensible CI server | Complex pipelines, many plugins needed |
+| App | Description | RAM | Best for |
+|-----|-------------|-----|----------|
+| **Woodpecker CI** | Gitea/Forgejo-native, lightweight | 256MB+ | Gitea/Forgejo users |
+| **Drone CI** | Container-native pipeline-as-code | 256MB+ | Modern container CI |
+| **Jenkins** | Battle-tested, massively extensible | 1GB+ | Complex pipelines, many plugins |
+| **Tekton** | Kubernetes-native CI/CD pipelines | 512MB+ | K8s environments |
 
-### 🎬 Media & Photos
+---
 
-| # | App | Description | Best for |
-|---|-----|-------------|----------|
-| 1 | **Jellyfin** | Fully open-source media server, no premium features | Personal media streaming, privacy-first |
-| 2 | **Plex** | Feature-rich media server with mobile apps and remote access | Best client support, polished UX |
-| 3 | **Navidrome** | Lightweight music streaming server (Subsonic-compatible) | Music-only, very fast and minimal |
-| 4 | **Immich** | Self-hosted Google Photos replacement — auto-backup, face recognition, albums | Photo/video backup from phone |
+### 📦 Container Registry
+
+| App | Description | RAM | Best for |
+|-----|-------------|-----|----------|
+| **Harbor** | Enterprise container registry with security scanning | 2GB+ | Production, security scanning |
+| **Zot** | OCI-native, minimal, production-ready registry | 64MB+ | Lightweight, OCI standards |
+| **Docker Registry** | Official Docker registry (minimal) | 32MB+ | Simple internal registry |
+
+---
 
 ### ✅ Project Management & Productivity
 
-| # | App | Description | Best for |
-|---|-----|-------------|----------|
-| 1 | **Plane** | Open-source Linear/Jira alternative with issues, cycles, modules | Teams, software projects |
-| 2 | **Vikunja** | Self-hosted to-do app with tasks, teams, and projects | Personal and small team task management |
-| 3 | **Kanboard** | Minimal Kanban board with time tracking | Simple Kanban workflow |
+| App | Description | RAM | Best for |
+|-----|-------------|-----|----------|
+| **Plane** | Open-source Linear/Jira alternative | 1GB+ | Teams, software projects |
+| **Vikunja** | To-do app with tasks, teams, projects | 128MB+ | Personal/small team tasks |
+| **Focalboard** | Kanban/calendar boards (open-source Trello) | 128MB+ | Simple Kanban |
 
-### 📈 Analytics
+---
 
-| # | App | Description | Best for |
-|---|-----|-------------|----------|
-| 1 | **Plausible** | Privacy-friendly, GDPR-compliant web analytics | Privacy-conscious website owners |
-| 2 | **Umami** | Fast, minimal analytics with multi-site support | Simple, lightweight alternative to GA |
-| 3 | **Matomo** | Full-featured analytics with full data ownership | Full GA replacement |
+### 🗓️ Calendar & Contacts
+
+| App | Description | RAM | Best for |
+|-----|-------------|-----|----------|
+| **Radicale** | Lightweight CalDAV + CardDAV server | 32MB+ | Simple calendar + contacts sync |
+| **Nextcloud** | Full calendar, contacts, tasks as part of cloud suite | 512MB+ | Part of full Nextcloud setup |
+
+---
+
+### 💬 Chat & Communication
+
+| App | Description | RAM | Best for |
+|-----|-------------|-----|----------|
+| **Mattermost** | Open-source Slack: channels, DMs, integrations | 512MB+ | Team chat |
+| **Matrix + Element** | Federated, E2E encrypted chat (Synapse + Element Web) | 1GB+ | Secure, federated messaging |
+| **Rocket.Chat** | Full-featured chat platform, video calls | 1GB+ | Enterprise, video calls |
+
+---
+
+### 🔔 Notifications
+
+| App | Description | RAM | Best for |
+|-----|-------------|-----|----------|
+| **Ntfy** | Simple pub/sub push notification server | 32MB+ | Server alerts, cron failures |
+| **Gotify** | Self-hosted push notifications with Android app | 32MB+ | Android push notifications |
+
+---
+
+### 📊 Monitoring & Observability
+
+| App | Description | RAM | Best for |
+|-----|-------------|-----|----------|
+| **Prometheus + Grafana** | Industry-standard metrics + visualization | 512MB+ | Server/app dashboards |
+| **Uptime Kuma** | Uptime monitor + status page | 128MB+ | Service availability |
+| **Netdata** | Real-time metrics, zero config | 256MB+ | Live system monitoring |
+| **Dozzle** | Real-time Docker log viewer | 16MB+ | Quick container log access |
+
+*For full observability stacks → use `/linux-monitoring-setup` instead.*
+
+---
 
 ### 🏠 Home Automation
 
-| # | App | Description | Best for |
-|---|-----|-------------|----------|
-| 1 | **Home Assistant** | The gold standard self-hosted home automation platform | Full smart home control |
-| 2 | **Node-RED** | Visual flow-based programming for IoT and automation | Custom automations and integrations |
+| App | Description | RAM | Best for |
+|-----|-------------|-----|----------|
+| **Home Assistant** | Gold standard home automation | 512MB+ | Full smart home |
+| **Node-RED** | Visual flow-based IoT programming | 128MB+ | Custom automations |
 
-### 🛠️ Developer Tools
+---
 
-| # | App | Description | Best for |
-|---|-----|-------------|----------|
-| 1 | **Portainer CE** | Docker and Swarm management web UI | Visual Docker management |
-| 2 | **pgAdmin 4** | Web-based PostgreSQL management tool | PostgreSQL administration |
-| 3 | **Stirling PDF** | 50+ PDF operations in a self-hosted web UI | PDF processing without cloud tools |
-| 4 | **IT-Tools** | Collection of developer utility tools in a web UI | Quick dev utilities |
+### 🛠️ Developer Tools & Utilities
 
-### 🔔 Notifications & Communication
-
-| # | App | Description | Best for |
-|---|-----|-------------|----------|
-| 1 | **Ntfy** | Simple pub/sub push notification server — send alerts to any device | Server alerts, cron failure notifications |
-| 2 | **Gotify** | Self-hosted push notifications with Android app | Android push notifications |
-| 3 | **Mattermost** | Open-source Slack alternative — channels, DMs, integrations | Team chat |
+| App | Description | RAM | Best for |
+|-----|-------------|-----|----------|
+| **Portainer CE** | Docker management web UI | 128MB+ | Visual Docker management |
+| **pgAdmin 4** | PostgreSQL web admin | 256MB+ | PostgreSQL administration |
+| **Stirling PDF** | 50+ PDF operations in browser | 256MB+ | PDF processing |
+| **IT-Tools** | Developer utility tools web UI | 32MB+ | Quick dev utilities |
+| **Dashdot** | Beautiful server stats dashboard | 64MB+ | Server overview page |
+| **Homepage** | Personal dashboard for all your services | 32MB+ | Homelab start page |
+| **SearXNG** | Privacy-respecting meta search engine | 128MB+ | Self-hosted search |
+| **Shlink** | URL shortener with analytics | 128MB+ | Link shortening |
+| **Infisical** | Open-source secrets manager (Vault alternative) | 512MB+ | App secrets management |
 
 ---
 
 ## Step 3 — Generate the Compose Stack
 
-After the user selects an option (or in Direct Mode), generate the full stack immediately. No more questions.
+After the user selects (or in Direct Mode), generate the **complete, working** stack immediately. No more questions.
 
 ### Quality Standards — Every compose file MUST have:
 
 | Element | Rule |
 |---------|------|
-| Compose version | `version: '3.8'` minimum (optional in Compose V2 — omit it for modern setups) |
+| No `version:` field | Omit it — Compose V2 ignores it; Compose V1 compatibility not needed |
 | Named networks | At least one; never rely on default bridge |
 | Named volumes | All persistent data in named volumes — no bind mounts for DB data |
-| Health checks | On every service others `depends_on` |
-| `depends_on` condition | `condition: service_healthy`, not just `service_started` |
-| Env variables | Via `${ENV_VAR}` — never hardcode passwords inline |
-| Restart policy | `restart: unless-stopped` |
-| Image pinning | Specific tags (e.g. `postgres:16-alpine`) — never `latest` |
-| Security | `cap_drop: [ALL]`, read-only config mounts `:ro`, no `privileged: true` |
+| Health checks | On every service others `depends_on` — use real test commands |
+| `depends_on` condition | `condition: service_healthy`, not `service_started` |
+| Env variables | Via `${ENV_VAR}` — never hardcode passwords or secrets inline |
+| Restart policy | `restart: unless-stopped` on every service |
+| Image tags | Specific pinned tags (e.g. `postgres:16-alpine`) — **never** `latest` |
+| Log limits | `logging: options: max-size: "10m" max-file: "3"` to prevent disk fill |
+| Security | `cap_drop: [ALL]`, read-only config mounts `:ro`, no `privileged: true` unless required |
+| Internal-only ports | Services not exposed to host must NOT have `ports:` — use Docker network |
+
+### App-Specific Requirements
+
+Some apps require specific companion services — always include them:
+
+| App | Required companions |
+|-----|-------------------|
+| **Immich** | PostgreSQL 16 + Redis + `immich-machine-learning` service |
+| **Nextcloud** | MariaDB or PostgreSQL + Redis (for caching + locking) |
+| **Mailcow** | Do not use docker-compose-writer — Mailcow has its own installer; direct user to `curl -LO https://github.com/mailcow/mailcow-dockerized/archive/master.tar.gz` |
+| **Outline** | PostgreSQL + Redis |
+| **Plane** | PostgreSQL + Redis + MinIO (object storage) |
+| **Authentik** | PostgreSQL + Redis |
+| **Keycloak** | PostgreSQL |
+| **Matrix/Synapse** | PostgreSQL |
+| **GitLab CE** | PostgreSQL + Redis (bundled in official image, or external) |
+| **Metabase** | PostgreSQL (for app metadata) |
+| **Firefly III** | MariaDB or PostgreSQL |
+| **Actual Budget** | None (local SQLite, no companion needed) |
+| **Hoarder** | Redis + `meilisearch` for full-text search |
+| **Ollama + Open WebUI** | No companions needed; add GPU passthrough if user has NVIDIA |
+
+### NVIDIA GPU Passthrough (for Ollama, Stable Diffusion)
+
+Ask if user has NVIDIA GPU. If yes, add to the service:
+```yaml
+deploy:
+  resources:
+    reservations:
+      devices:
+        - driver: nvidia
+          count: all
+          capabilities: [gpu]
+```
+Requirements: NVIDIA Container Toolkit must be installed on host.
 
 ---
 
@@ -201,71 +453,84 @@ After the user selects an option (or in Direct Mode), generate the full stack im
 
 Do NOT print the compose file or .env.example content in chat. Write them to disk silently.
 
-### File locations
-
-Write all files into a subdirectory named after the app (kebab-case), relative to the current working directory:
-
+**File locations** — kebab-case subdirectory in current working directory:
 ```
 [app-name]/
-  docker-compose.yml
-  .env.example
+  docker-compose.yml    ← complete, production-ready
+  .env.example          ← all required vars with descriptions and safe placeholder values
 ```
 
-Example: for Vaultwarden → `vaultwarden/docker-compose.yml` and `vaultwarden/.env.example`.
-
-For custom stacks without a single app name, use a descriptive folder name (e.g. `nextjs-stack/`).
-
-### Steps
-1. Create the directory if it doesn't exist
-2. Write `docker-compose.yml` — complete, well-commented, production-ready
-3. Write `.env.example` — all required variables with placeholder values and comments
+**Generate complete .env.example** — every env var must have:
+- A comment explaining what it is
+- A safe placeholder value (not empty — `CHANGE_ME_strong_password_here`, `your-domain.com`, etc.)
+- A note if it's auto-generated (e.g. `# Generate with: openssl rand -hex 32`)
 
 ### Output — print ONLY this after writing:
 
 ```
 ✅ [App Name] stack created in ./[app-name]/
 
-▶ To start:
+▶ Setup:
   cd [app-name]
-  cp .env.example .env && nano .env
+  cp .env.example .env
+  nano .env              # ← edit ALL passwords and domain settings first!
+
+▶ Start:
   docker compose up -d
 
+▶ Check health:
+  docker compose ps
+  docker compose logs -f [service-name]
+
 📋 Useful commands:
-  docker compose ps          # check service health
-  docker compose logs -f     # tail all logs
-  docker compose pull && docker compose up -d   # update to latest images
-  docker compose down        # stop
-  docker compose down -v     # stop + DELETE ALL DATA
+  docker compose pull && docker compose up -d    # update to latest images
+  docker compose down                            # stop (data preserved)
+  docker compose down -v                         # ⚠️  stop + DELETE ALL DATA
 
 🌐 Access: http://localhost:[PORT]
+[default login credentials if applicable]
+
+⚠️  [Any important warnings — email DNS, firewall ports, first-run setup steps]
+
+💡 Next steps:
+  [1-2 relevant next steps, e.g. "Set up Traefik for HTTPS → /docker-compose-writer Traefik"]
+  [e.g. "Back up volumes → /linux-backup-restore Docker volumes"]
 ```
 
-Replace `[PORT]` with the actual default port of the app. If the app uses a domain (e.g. Traefik), print `https://[your-domain]` instead.
-
-If multiple services have UIs, list each:
+List each UI separately if multiple services expose ports:
 ```
 🌐 App:      http://localhost:8080
-🌐 Admin UI: http://localhost:9000
-```
-
-Then always end with:
-```
-💡 Next: cd [app-name] && cp .env.example .env — edit passwords before starting.
+🌐 Admin UI: http://localhost:9000  (admin / [password from .env])
 ```
 
 ---
 
 ## Optimize Mode (existing compose pasted)
 
-When the user pastes an existing compose file:
+When user pastes an existing compose file:
 
-1. Identify all issues silently (missing health checks, `latest` tags, hardcoded secrets, missing networks, no restart policy, etc.)
-2. Write the fixed `docker-compose.yml` to `./[detected-app-name]/docker-compose.yml`
-3. Print only:
+1. Audit silently for all issues:
+   - `latest` image tags → pin to specific version
+   - Hardcoded secrets → replace with `${ENV_VAR}`
+   - Missing health checks → add working test commands
+   - Missing restart policy → add `unless-stopped`
+   - Default bridge network → add named network
+   - Missing log limits → add `logging` block
+   - `privileged: true` without reason → warn and remove if possible
+   - Bind mounts for DB data → move to named volumes
 
+2. Write fixed `docker-compose.yml` to `./[app-name]/docker-compose.yml`
+3. If secrets were hardcoded, also write `.env.example`
+
+4. Print only:
 ```
 ✅ Optimized compose written to ./[app-name]/docker-compose.yml
-   Fixed X issues: [comma-separated list of what changed]
+   Fixed [N] issues:
+   - Pinned [X] image tags (removed :latest)
+   - Moved secrets to .env.example
+   - Added health checks to [services]
+   - Added log rotation limits
+   - [other changes]
 
 🌐 Access: http://localhost:[PORT]
 ```
@@ -275,8 +540,20 @@ When the user pastes an existing compose file:
 ## Security Rules (non-negotiable)
 
 - **No inline secrets** — `${ENV_VAR}` only, never `password: mysecret`
-- **Read-only config mounts** — always `:ro` for config files
-- **`cap_drop: [ALL]`** — drop all Linux capabilities, add back only what's needed
-- **Never `privileged: true`** — if user explicitly needs it, warn them and explain the risk
-- **Non-root user** — set `user: "1000:1000"` for custom app services where supported
-- **Internal ports only** — services that don't need to be public must NOT have `ports:` — use the Docker network instead
+- **Read-only config mounts** — always `:ro` for config files that the app only reads
+- **`cap_drop: [ALL]`** — drop all Linux capabilities; add back only what's explicitly needed
+- **Never `privileged: true`** — if the user insists, warn with the security risk and require explicit confirmation
+- **Non-root user** — `user: "1000:1000"` for app services where the image supports it
+- **Internal networks** — services that communicate only internally must NOT have `ports:` exposed to host
+- **Log limits** — always add `logging` block to prevent disk fill from container logs
+
+---
+
+## Homelab / Multi-App Stacks
+
+When user asks for a "full homelab setup", "all my self-hosted apps in one compose", or similar:
+
+1. Ask which categories they want: file cloud, media, monitoring, git, CI/CD, etc.
+2. Generate a single `docker-compose.yml` with all requested apps + shared infrastructure (Traefik as reverse proxy, shared PostgreSQL, shared Redis)
+3. Use Traefik labels for routing instead of port mappings where possible
+4. Group services with comments (`# ── Media ──`, `# ── Storage ──`, etc.)
