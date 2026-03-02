@@ -1,7 +1,7 @@
 ---
 name: sw-diagram-creator
 description: Use when user wants to create, generate, or visualize a diagram from an idea, requirement, sw-idea-analyzer output, or any description – supports Mermaid flowchart, sequence, class, ERD, C4, gantt, mindmap, PlantUML, and ASCII art fallback.
-version: 1.5.0
+version: 1.6.0
 author: Lehnert
 ---
 
@@ -10,6 +10,8 @@ author: Lehnert
 ## Overview
 
 Generates ready-to-copy diagrams from any software description, idea, or structured input. Automatically selects the best diagram type and format. Always outputs clean, fenced code blocks — no setup required on the user's side.
+
+**Note:** Diagrams are saved to `requirements/diagrams/` as **visual reference only** — they are not read by code-generation skills like `/sw-use-case-coder`. To generate actual code, continue with `/sw-user-story-creator`.
 
 **Language detection:** Read the user's input language and respond entirely in that language. Default to German if undetectable.
 

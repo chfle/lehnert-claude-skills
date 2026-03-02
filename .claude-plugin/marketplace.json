@@ -30,7 +30,7 @@
       "name": "sw-diagram-creator",
       "source": "./skills/sw-diagram-creator",
       "description": "Generates ready-to-copy Mermaid, PlantUML, and ASCII diagrams from any software description, idea, or sw-idea-analyzer output.",
-      "version": "1.5.0",
+      "version": "1.6.0",
       "author": { "name": "Lehnert" },
       "category": "software-planning",
       "keywords": ["diagram", "mermaid", "plantuml", "architecture", "erd", "flowchart", "sequence", "c4", "visualization"]
@@ -66,7 +66,7 @@
       "name": "sw-use-case-coder",
       "source": "./skills/sw-use-case-coder",
       "description": "Generates production-ready code for selected use cases (UC-01, US-03, all MVP) from tech-stack.yaml and use-cases.md — writes files directly into workspace root.",
-      "version": "2.6.0",
+      "version": "2.7.0",
       "author": { "name": "Lehnert" },
       "category": "software-planning",
       "keywords": ["code-generation", "scaffolding", "use-cases", "nextjs", "nestjs", "spring", "fastapi", "prisma", "testcontainers"]
@@ -75,7 +75,7 @@
       "name": "sw-boilerplate",
       "source": "./skills/sw-boilerplate",
       "description": "Scaffolds a complete project from tech-stack.yaml into the workspace root — root configs, source structure, database files, Docker, and UI foundation in one command.",
-      "version": "1.4.0",
+      "version": "1.5.0",
       "author": { "name": "Lehnert" },
       "category": "software-development",
       "keywords": ["boilerplate", "scaffold", "project-setup", "orchestrator", "fullstack", "init"]
@@ -138,7 +138,7 @@
       "name": "linux-config-auditor",
       "source": "./skills/linux-config-auditor",
       "description": "Audits Linux config files (nginx, Apache, sshd, systemd units, iptables, nftables, fail2ban, sudoers, sysctl, pg_hba.conf, my.cnf, redis.conf) for security issues, misconfigurations, and performance gaps.",
-      "version": "1.4.0",
+      "version": "1.5.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["audit", "security", "nginx", "sshd", "systemd", "iptables", "firewall", "config", "hardening", "compliance", "cis"]
@@ -147,7 +147,7 @@
       "name": "docker-compose-writer",
       "source": "./skills/docker-compose-writer",
       "description": "Generates or optimizes docker-compose.yml for any self-hosted app or cloud replacement (Google Photos→Immich, Gmail→Mailcow, ChatGPT→Ollama) — full stacks with health checks, named volumes, and .env setup.",
-      "version": "2.3.0",
+      "version": "2.4.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["docker", "docker-compose", "containers", "self-hosted", "homelab", "nginx", "postgres", "redis", "traefik", "devops", "infrastructure", "immich", "nextcloud", "jellyfin", "ollama"]
@@ -228,7 +228,7 @@
       "name": "linux-performance-tuner",
       "source": "./skills/linux-performance-tuner",
       "description": "Profiles a Linux system and generates tuned sysctl, CPU governor, I/O scheduler, and workload-specific configs for web, database, networking, HPC, or general workloads.",
-      "version": "1.3.0",
+      "version": "1.4.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["performance", "tuning", "sysctl", "cpu-governor", "io-scheduler", "kernel", "linux", "optimization", "profiling", "latency", "throughput", "bbr", "hugepages", "numa"]

@@ -1,7 +1,7 @@
 ---
 name: linux-performance-tuner
 description: Use when user wants to tune Linux performance — kernel parameters, CPU governor, I/O scheduler, memory and swap settings, network stack tuning, database tuning (PostgreSQL, MySQL, Redis), high-throughput or low-latency optimization, profiling slow systems, or asks why their server is slow, has high load, or underperforms.
-version: 1.3.0
+version: 1.4.0
 author: Lehnert
 ---
 
@@ -300,6 +300,10 @@ echo never > /sys/kernel/mm/transparent_hugepage/defrag
 
 # Isolate CPUs for latency-sensitive processes
 # Add to kernel cmdline: isolcpus=2,3,4,5 nohz_full=2-5 rcu_nocbs=2-5
+# ⚠️  Kernel cmdline changes require a reboot to take effect:
+#   1. Edit /etc/default/grub → add params to GRUB_CMDLINE_LINUX
+#   2. Run: update-grub && reboot
+#   Verify after reboot: cat /proc/cmdline
 
 # Set process CPU affinity
 taskset -cp 2-5 <pid>

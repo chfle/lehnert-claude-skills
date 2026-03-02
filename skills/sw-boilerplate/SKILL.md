@@ -1,7 +1,7 @@
 ---
 name: sw-boilerplate
 description: Use when user wants to scaffold a complete project boilerplate, says "create boilerplate", "set up the project", "generate the skeleton", or wants all project files created from requirements/tech-stack.yaml directly in the workspace root.
-version: 1.4.0
+version: 1.5.0
 author: Lehnert
 ---
 
@@ -12,6 +12,8 @@ author: Lehnert
 Reads `requirements/tech-stack.yaml` and writes every project file directly into the workspace root. Completely silent – no code output, no questions, no file lists. Prints a progress line after each module and exactly two lines at the end.
 
 **Do NOT invoke any sub-skills or use the Skill tool. Execute all modules inline, in sequence, as described below.**
+
+💡 **Need Docker files only?** Use `/sw-boilerplate-docker` for just docker-compose.yml, Dockerfiles, and Traefik config — without touching other project files.
 
 ---
 

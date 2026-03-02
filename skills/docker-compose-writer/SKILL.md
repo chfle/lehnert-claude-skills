@@ -1,7 +1,7 @@
 ---
 name: docker-compose-writer
 description: Use when user wants to write, generate, create, or optimize a docker-compose.yml — for a new project, an existing stack, any self-hosted app, or when they want to replace a cloud service (Google Drive, Gmail, GitHub, Slack, Notion, ChatGPT, etc.) with a self-hosted alternative.
-version: 2.3.0
+version: 2.4.0
 author: Lehnert
 ---
 
@@ -525,6 +525,7 @@ Do NOT print the compose file or .env.example content in chat. Write them to dis
 💡 Next steps:
   [1-2 relevant next steps, e.g. "Set up Traefik for HTTPS → /docker-compose-writer Traefik"]
   [e.g. "Back up volumes → /linux-backup-restore Docker volumes"]
+  [e.g. "Monitor this stack → /linux-monitoring-setup for Prometheus + Grafana"]
 ```
 
 List each UI separately if multiple services expose ports:

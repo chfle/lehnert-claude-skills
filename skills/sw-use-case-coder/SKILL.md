@@ -1,7 +1,7 @@
 ---
 name: sw-use-case-coder
 description: Use when user wants to generate code for a use case or user story, says "code UC-01", "implement US-03", "generate all MVP", "scaffold UC-05 UC-07", or wants production-ready files from use-cases.md and tech-stack.yaml written directly into the project root.
-version: 2.6.0
+version: 2.7.0
 author: Lehnert
 ---
 
@@ -106,12 +106,12 @@ Example — NestJS in monorepo: `src/devices/devices.service.ts` → `apps/api/s
 - Use `ui_library` value (shadcn/ui, Tailwind, MUI) for component styling
 - Add `'use client'` in Next.js only when component uses state, effects, or event handlers
 - DTOs and schemas contain the exact fields from the use case main flow
-- Acceptance criteria from use-cases.md become `// TODO: AC-X: <text>` comments in test files
+- Acceptance criteria from use-cases.md become `// TODO: AC-X: <text>` comments in E2E test files; for unit/integration tests, use them to guide mock setup and assertions rather than repeating them as TODO comments
 - No hardcoded secrets – use `process.env.VAR`, `os.environ`, `@Value`, etc.
 - Use `@/` alias for Next.js; relative imports for NestJS and other frameworks
 - Prisma models include `@@map("table_name")` and all required relations
 - **Iterative**: if a file already exists, edit and improve it — add or enhance functions rather than replacing the entire file. For test files, always regenerate with all acceptance criteria covered. Never delete existing working logic.
-- **Migrations are additive**: each use case appends to the schema/migration history — never modify or delete an existing migration file. Flyway: new `V<n+1>__add_<feature>.sql`. Alembic: new version file. Prisma: append models only. If a conflict is detected, stop and report it.
+- **Migrations are additive**: each use case appends to the schema/migration history — never modify or delete an existing migration file. Flyway: new `V<n+1>__add_<feature>.sql`. Alembic: new version file. Prisma: append models only. If a conflict is detected, stop and report it. After appending Prisma models, remind the user to run `npx prisma migrate dev --name add_<feature>` to generate and apply the migration.
 
 ### Tests to generate
 
