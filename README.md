@@ -20,11 +20,6 @@ The fastest way to get everything – one command registers the marketplace, one
 /plugin install sw-tech-stack-planner@lehnert-claude-skills
 /plugin install sw-use-case-coder@lehnert-claude-skills
 /plugin install sw-boilerplate@lehnert-claude-skills
-/plugin install sw-boilerplate-root@lehnert-claude-skills
-/plugin install sw-boilerplate-structure@lehnert-claude-skills
-/plugin install sw-boilerplate-db@lehnert-claude-skills
-/plugin install sw-boilerplate-docker@lehnert-claude-skills
-/plugin install sw-boilerplate-ui@lehnert-claude-skills
 /plugin install sw-diagram-creator@lehnert-claude-skills
 /plugin install linux-shell-scriptor@lehnert-claude-skills
 /plugin install linux-config-auditor@lehnert-claude-skills
@@ -91,11 +86,6 @@ Skills without a `commands/` directory are **helpers** – they are loaded autom
 | `sw-tech-stack-planner` | Slash command | `/sw-tech-stack-planner` |
 | `sw-use-case-coder` | Slash command | `/sw-use-case-coder` |
 | `sw-boilerplate` | Slash command | `/sw-boilerplate` |
-| `sw-boilerplate-root` | Slash command | `/sw-boilerplate-root` |
-| `sw-boilerplate-structure` | Slash command | `/sw-boilerplate-structure` |
-| `sw-boilerplate-db` | Slash command | `/sw-boilerplate-db` |
-| `sw-boilerplate-docker` | Slash command | `/sw-boilerplate-docker` |
-| `sw-boilerplate-ui` | Slash command | `/sw-boilerplate-ui` |
 | `linux-shell-scriptor` | Slash command | `/linux-shell-scriptor` |
 | `linux-config-auditor` | Slash command | `/linux-config-auditor` |
 | `docker-compose-writer` | Slash command | `/docker-compose-writer` |
@@ -163,12 +153,7 @@ claude plugin install /path/to/lehnert-claude-skills --scope user
 | Skill | Description | Status |
 |-------|-------------|--------|
 | `sw-use-case-coder` | Generates production-ready code for selected use cases from tech-stack.yaml and use-cases.md | ✅ Active |
-| `sw-boilerplate` | Orchestrates all boilerplate sub-skills to scaffold a complete project from tech-stack.yaml into root | ✅ Active |
-| `sw-boilerplate-root` | Creates root config files (package.json, tsconfig.json, pom.xml etc.) from tech-stack.yaml | ✅ Active |
-| `sw-boilerplate-structure` | Creates source code skeleton (entry points, modules, controllers) from tech-stack.yaml | ✅ Active |
-| `sw-boilerplate-db` | Creates database and ORM files (Prisma schema, Flyway migration, SQLAlchemy) from tech-stack.yaml | ✅ Active |
-| `sw-boilerplate-docker` | Creates Docker infrastructure files (docker-compose.yml, Dockerfiles, Traefik) from tech-stack.yaml | ✅ Active |
-| `sw-boilerplate-ui` | Creates UI foundation files (Tailwind, shadcn/ui, globals.css, layout) from tech-stack.yaml | ✅ Active |
+| `sw-boilerplate` | Scaffolds a complete project from tech-stack.yaml — root configs, source structure, DB files, Docker, and UI foundation in one command | ✅ Active |
 
 ### 🐧 Linux & Sysadmin
 
@@ -176,7 +161,7 @@ claude plugin install /path/to/lehnert-claude-skills --scope user
 |-------|-------------|--------|
 | `linux-shell-scriptor` | Generates production-ready bash scripts for backups, monitoring, deployment, cron jobs, and any sysadmin task from a plain description | ✅ Active |
 | `linux-config-auditor` | Audits nginx, Apache, sshd, systemd units, iptables, fail2ban, sudoers, and sysctl configs for security issues, misconfigs, and performance gaps | ✅ Active |
-| `docker-compose-writer` | Generates or optimizes docker-compose.yml from a project description or existing stack — health checks, named volumes, env management, security hardening | ✅ Active |
+| `docker-compose-writer` | Generates a complete Docker Compose stack for any self-hosted app or cloud replacement (Google Photos→Immich, Gmail→Mailcow, ChatGPT→Ollama) — 20+ categories, health checks, named volumes | ✅ Active |
 | `linux-security-hardener` | Generates a complete server hardening plan with SSH lockdown, firewall, fail2ban, sysctl, auditd, and a ready-to-run harden.sh script | ✅ Active |
 | `linux-log-analyzer` | Analyzes auth.log, syslog, nginx, Apache, journalctl, Docker, and fail2ban logs for errors, security threats, brute force, and anomalies | ✅ Active |
 | `linux-monitoring-setup` | Sets up Prometheus, Grafana, Node Exporter, Loki, Alertmanager, Uptime Kuma, or Netdata for any server or Docker host — writes all configs to disk | ✅ Active |
@@ -272,8 +257,6 @@ lehnert-claude-skills/
     ├── skill-shop-manager/
     │   ├── .claude-plugin/
     │   │   └── plugin.json      ← skill plugin manifest
-    │   └── SKILL.md
-    ├── brand-guidelines/        ← to be created
     │   └── SKILL.md
     └── ...
 ```
