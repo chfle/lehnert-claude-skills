@@ -1,7 +1,7 @@
 ---
 name: linux-log-analyzer
 description: Use when user wants to analyze, review, parse, or understand Linux log files — auth.log, syslog, kern.log, nginx access or error logs, Apache logs, journalctl output, fail2ban logs, Docker container logs, cron logs, or any system or application log — to find errors, anomalies, security events, brute force attempts, crashes, or performance issues.
-version: 1.0.0
+version: 1.1.0
 author: Lehnert
 ---
 
@@ -122,6 +122,65 @@ For any log containing IP addresses:
 - Flag IPs with >10 failed auth attempts
 - Flag IPs that appear in both failures and successes (potential breach)
 - Note any internal vs external IP patterns
+- Classify IPs: private RFC1918 (`10.x`, `172.16–31.x`, `192.168.x`) vs public
+- Flag known bad ranges (Tor exit nodes, common scanner ASNs like Shodan, Censys)
+
+### Pass 6 — Extended Analysis
+
+Run these deeper passes when the log has enough data (>50 lines or contains meaningful time range):
+
+#### Frequency & Spike Detection
+- Bucket events by hour or minute and calculate the baseline rate
+- Flag any window where the event rate is >3× the average — these are anomalous spikes
+- Example output: "Error rate spiked 8× at 03:14 — 47 errors in 60 seconds vs. average of 6/min"
+
+#### Cross-Event Correlation
+Link related events that occurred close in time (within 60 seconds):
+- SSH failure burst → followed by successful login = **credential stuffing / breach attempt**
+- Service restart → followed by error spike = **crash loop with side effects**
+- OOM kill → followed by slow query or timeout = **resource starvation cascade**
+- UFW block spike → followed by auth failures = **coordinated attack from same actor**
+
+#### Trend Analysis
+If the log spans more than 1 hour:
+- Is the error rate increasing, decreasing, or stable?
+- Are any IPs showing escalating activity (first scans, then auth attempts, then exploits)?
+- Any recurring patterns (same error every hour = likely a broken cron job)?
+
+#### Filesystem & Kernel Extended Analysis (ext2/ext3/ext4, hardware)
+Specifically for kern.log and syslog:
+
+| Signal | Meaning | Urgency |
+|--------|---------|---------|
+| `EXT4-fs error` / `EXT3-fs error` | Filesystem corruption | 🔴 Immediate — backup and run `fsck` |
+| `Buffer I/O error on dev` | Disk read/write failure | 🔴 Disk may be dying — run `smartctl` |
+| `SCSI error` / `ata exception` | Storage controller error | 🔴 Hardware issue |
+| `MCE hardware error` | CPU/memory hardware fault | 🔴 Critical hardware failure |
+| `EDAC MC` errors | ECC memory errors | 🟠 RAM degrading |
+| `soft lockup` / `hard lockup` | Kernel deadlock or hung task | 🟠 System instability |
+| `RCU stall` | Real-Time Clock stall — kernel hang | 🟠 Investigate running processes |
+| `segfault` at address | Process memory violation | 🟠 App crash or exploit attempt |
+| `oom-killer` | Out-of-memory process kill | 🟠 RAM exhaustion |
+| `ip_tables: ... table is full` | Firewall rule table overflow | 🟡 Tune conntrack limits |
+
+For each filesystem/hardware finding, include the exact recommended command to diagnose further.
+
+#### HTTP / Web Log Pattern Analysis
+For nginx and Apache access logs only:
+- **Status code distribution**: count 2xx / 3xx / 4xx / 5xx — high 5xx = app problem, high 4xx = scanners/bad clients
+- **Top requested paths**: list top 20 URLs — flag any that look like vulnerability scanning (`/.env`, `/wp-login.php`, `/admin`, `/shell`, `/phpinfo.php`)
+- **Response size anomalies**: unusually large responses could indicate data exfiltration
+- **User-agent analysis**: flag empty user-agents, known scanner agents (Nikto, sqlmap, masscan, zgrab), and headless browser signatures
+- **Request rate per IP per minute**: flag IPs exceeding 60 req/min as potential DDoS or scrapers
+- **Slow requests**: flag any `request_time` > 5s if log format includes it
+
+#### Database Log Extended Analysis
+For MySQL, PostgreSQL, MongoDB logs:
+- List slow queries (>1s) with count and average duration
+- Flag `lock wait timeout` — identifies transaction conflicts
+- Flag `too many connections` — indicates connection pool exhaustion
+- Flag `deadlock found` — requires query/index review
+- Replication errors: `Slave_IO_Running: No`, `replication lag`
 
 ---
 
@@ -158,6 +217,25 @@ Report structure:
 
 ## Service / Stability Events
 [list of crashes, restarts, OOM events with timestamps]
+
+## Filesystem & Hardware Events
+[ext4 errors, disk I/O errors, kernel panics, MCE errors — with recommended diagnostic commands]
+
+## Extended Analysis
+### Anomalous Spikes
+[hourly event rate table — flag windows >3× average]
+
+### Correlated Event Chains
+[linked event sequences with timestamps and interpretation]
+
+### Trend
+[is the situation stable, improving, or worsening?]
+
+### HTTP Pattern Analysis (if web log)
+[status code distribution, top paths, scanner activity, suspicious user-agents]
+
+### Database Analysis (if DB log)
+[slow queries, lock waits, connection issues]
 
 ## Notable Events Timeline
 [chronological list of the 10–20 most significant events]
