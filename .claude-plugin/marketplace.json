@@ -133,6 +133,15 @@
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["bash", "shell", "script", "linux", "automation", "backup", "monitoring", "deployment", "cron", "sysadmin"]
+    },
+    {
+      "name": "linux-config-auditor",
+      "source": "./skills/linux-config-auditor",
+      "description": "Audits Linux config files (nginx, Apache, sshd, systemd units, iptables, nftables, fail2ban, sudoers, sysctl) for security issues, misconfigurations, and performance gaps.",
+      "version": "1.0.0",
+      "author": { "name": "Lehnert" },
+      "category": "linux-sysadmin",
+      "keywords": ["audit", "security", "nginx", "sshd", "systemd", "iptables", "firewall", "config", "hardening", "compliance", "cis"]
     }
   ]
 }

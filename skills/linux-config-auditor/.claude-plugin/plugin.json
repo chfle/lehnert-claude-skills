@@ -1,0 +1,7 @@
+{
+  "name": "linux-config-auditor",
+  "version": "1.0.0",
+  "description": "Audits Linux config files (nginx, sshd, systemd, iptables, fail2ban, sudoers) for security issues, misconfigurations, and performance gaps.",
+  "author": { "name": "Lehnert" },
+  "skillFile": "SKILL.md"
+}

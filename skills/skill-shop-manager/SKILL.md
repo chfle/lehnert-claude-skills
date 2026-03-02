@@ -40,6 +40,7 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | Skill | Description | Status |
 |-------|-------------|--------|
 | `linux-shell-scriptor` | Generates production-ready bash scripts for backups, monitoring, deployment, cron jobs, and any sysadmin task | ✅ Active |
+| `linux-config-auditor` | Audits nginx, sshd, systemd units, iptables, fail2ban, sudoers, sysctl for security issues and performance gaps | ✅ Active |
 
 ### 🔒 Pentesting
 
@@ -84,6 +85,11 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | "Generate a deployment script" | → `linux-shell-scriptor` |
 | "Script to clean up old log files" | → `linux-shell-scriptor` |
 | "Automate this sysadmin task with bash" | → `linux-shell-scriptor` |
+| "Audit my nginx config" | → `linux-config-auditor` |
+| "Is my sshd_config secure?" | → `linux-config-auditor` |
+| "Review my iptables / firewall rules" | → `linux-config-auditor` |
+| "Check my systemd service for security issues" | → `linux-config-auditor` |
+| "Audit my sudoers file" | → `linux-config-auditor` |
 
 > No skill for your task yet? Say: **"Create the skill [name] for me"** – I'll build the folder and SKILL.md right away.
 
