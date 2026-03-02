@@ -1,0 +1,7 @@
+{
+  "name": "linux-performance-tuner",
+  "description": "Generates tuned sysctl, I/O scheduler, CPU governor, and workload-specific configs — measures before tuning.",
+  "version": "1.0.0",
+  "author": { "name": "Lehnert" },
+  "keywords": ["performance", "tuning", "sysctl", "cpu-governor", "io-scheduler", "kernel", "linux", "optimization", "profiling", "latency", "throughput", "bbr", "hugepages", "numa"]
+}

@@ -50,6 +50,7 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | `linux-systemd-manager` | Creates, debugs, and hardens systemd services, timers, sockets, and path units — with sandboxing, resource limits, and restart policies | ✅ Active |
 | `linux-cron-manager` | Generates cron jobs with /etc/cron.d/ entries and wrapper scripts — flock locking, logging, failure alerting, debugging | ✅ Active |
 | `linux-selinux-helper` | Diagnoses and fixes SELinux denials — file contexts, booleans, port labels, custom policy modules | ✅ Active |
+| `linux-performance-tuner` | Profiles a Linux system and generates tuned sysctl, CPU governor, I/O scheduler, and workload-specific configs | ✅ Active |
 
 ### 🔒 Pentesting
 
@@ -136,6 +137,11 @@ You are the manager of Lehnert's personal skill shop. Your job: display skills, 
 | "AVC denial / permission denied on RHEL/Rocky" | → `linux-selinux-helper` |
 | "Fix SELinux file context / restorecon" | → `linux-selinux-helper` |
 | "Write a custom SELinux policy module" | → `linux-selinux-helper` |
+| "My server is slow / high load" | → `linux-performance-tuner` |
+| "Tune kernel parameters / sysctl" | → `linux-performance-tuner` |
+| "Set CPU governor to performance" | → `linux-performance-tuner` |
+| "Optimize for PostgreSQL / web / HPC" | → `linux-performance-tuner` |
+| "Profile where my server is spending time" | → `linux-performance-tuner` |
 
 > No skill for your task yet? Say: **"Create the skill [name] for me"** – I'll build the folder and SKILL.md right away.
 

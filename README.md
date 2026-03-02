@@ -37,6 +37,7 @@ The fastest way to get everything – one command registers the marketplace, one
 /plugin install linux-systemd-manager@lehnert-claude-skills
 /plugin install linux-cron-manager@lehnert-claude-skills
 /plugin install linux-selinux-helper@lehnert-claude-skills
+/plugin install linux-performance-tuner@lehnert-claude-skills
 ```
 
 **To install all active skills at once:**
@@ -106,6 +107,7 @@ Skills without a `commands/` directory are **helpers** – they are loaded autom
 | `linux-systemd-manager` | Slash command | `/linux-systemd-manager` |
 | `linux-cron-manager` | Slash command | `/linux-cron-manager` |
 | `linux-selinux-helper` | Slash command | `/linux-selinux-helper` |
+| `linux-performance-tuner` | Slash command | `/linux-performance-tuner` |
 
 **Rule of thumb:** If a skill is a standalone user-facing tool → give it a `commands/` file. If it's a helper or orchestrator → leave it as a pure skill.
 
@@ -183,6 +185,7 @@ claude plugin install /path/to/lehnert-claude-skills --scope user
 | `linux-systemd-manager` | Creates, debugs, and hardens systemd services, timers, sockets, and path units — with sandboxing, resource limits, and restart policies | ✅ Active |
 | `linux-cron-manager` | Generates cron jobs with /etc/cron.d/ entries and wrapper scripts — flock locking, logging, log rotation, failure alerting, and cron debugging | ✅ Active |
 | `linux-selinux-helper` | Diagnoses and fixes SELinux denials — file contexts, booleans, port labels, and custom policy modules. Never suggests disabling SELinux | ✅ Active |
+| `linux-performance-tuner` | Profiles a Linux system and generates tuned sysctl, CPU governor, I/O scheduler, and workload-specific configs for web, database, networking, HPC, or general workloads | ✅ Active |
 
 ### 🔒 Pentesting
 
