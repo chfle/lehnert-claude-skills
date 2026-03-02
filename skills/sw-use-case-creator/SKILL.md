@@ -1,7 +1,7 @@
 ---
 name: sw-use-case-creator
 description: Use when user wants to create use cases, detailed system behavior specs, actor flows, or a use case document from user-stories.md, vision.md, or any software description – generates requirements/use-cases.md silently.
-version: 1.0.0
+version: 1.1.0
 author: Lehnert
 ---
 
@@ -63,6 +63,8 @@ Every use case follows this exact structure:
 - Alternative flows = valid but non-default paths
 - Exceptions = error states the system must handle
 - Acceptance criteria = link back to user story IDs where possible
+- IDs start at `UC-001` and increment sequentially across the entire document
+- If appending to an existing `use-cases.md`, read the last ID used and continue from there
 
 ---
 
@@ -70,11 +72,19 @@ Every use case follows this exact structure:
 
 | Source | How to derive use cases |
 |--------|------------------------|
-| `user-stories.md` | One use case per epic or per high-level user goal; group related stories |
+| `user-stories.md` | One use case per epic or major workflow; group 2–4 related stories into one UC |
 | `vision.md` | One use case per core MVP feature |
 | Free text | Identify actor + goal pairs; each pair = one use case |
 
-Aim for 5–10 use cases for a typical MVP. Do not create a use case for every micro-interaction.
+Aim for 5–10 use cases for a typical MVP. Do not create a use case for every micro-interaction — CRUD is one UC, not four.
+
+**When to merge stories into one UC:**
+- Related stories share the same actor and workflow (e.g., "view profile" + "edit profile" → UC "Manage Profile")
+- The stories form a single coherent interaction sequence
+
+**When to keep them separate:**
+- Different primary actors
+- Completely independent workflows that don't share preconditions or main flow steps
 
 ---
 
