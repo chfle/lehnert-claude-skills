@@ -66,7 +66,7 @@
       "name": "sw-use-case-coder",
       "source": "./skills/sw-use-case-coder",
       "description": "Generates production-ready code for selected use cases (UC-01, US-03, all MVP) from tech-stack.yaml and use-cases.md — writes files directly into workspace root.",
-      "version": "2.5.0",
+      "version": "2.6.0",
       "author": { "name": "Lehnert" },
       "category": "software-planning",
       "keywords": ["code-generation", "scaffolding", "use-cases", "nextjs", "nestjs", "spring", "fastapi", "prisma", "testcontainers"]
@@ -111,7 +111,7 @@
       "name": "sw-boilerplate-docker",
       "source": "./skills/sw-boilerplate-docker",
       "description": "Creates Docker infrastructure files (docker-compose.yml, Dockerfiles, .dockerignore, Traefik config) from tech-stack.yaml.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "author": { "name": "Lehnert" },
       "category": "software-development",
       "keywords": ["boilerplate", "docker", "docker-compose", "dockerfile", "traefik", "infrastructure"]
@@ -138,7 +138,7 @@
       "name": "linux-config-auditor",
       "source": "./skills/linux-config-auditor",
       "description": "Audits Linux config files (nginx, Apache, sshd, systemd units, iptables, nftables, fail2ban, sudoers, sysctl, pg_hba.conf, my.cnf, redis.conf) for security issues, misconfigurations, and performance gaps.",
-      "version": "1.3.0",
+      "version": "1.4.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["audit", "security", "nginx", "sshd", "systemd", "iptables", "firewall", "config", "hardening", "compliance", "cis"]
@@ -147,7 +147,7 @@
       "name": "docker-compose-writer",
       "source": "./skills/docker-compose-writer",
       "description": "Generates or optimizes docker-compose.yml for any self-hosted app or cloud replacement (Google Photos→Immich, Gmail→Mailcow, ChatGPT→Ollama) — full stacks with health checks, named volumes, and .env setup.",
-      "version": "2.2.0",
+      "version": "2.3.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["docker", "docker-compose", "containers", "self-hosted", "homelab", "nginx", "postgres", "redis", "traefik", "devops", "infrastructure", "immich", "nextcloud", "jellyfin", "ollama"]
@@ -174,7 +174,7 @@
       "name": "linux-monitoring-setup",
       "source": "./skills/linux-monitoring-setup",
       "description": "Sets up a complete monitoring stack (Prometheus, Grafana, Node Exporter, Loki, Alertmanager, Uptime Kuma, Netdata) for any Linux server, Docker host, or application.",
-      "version": "1.4.0",
+      "version": "1.5.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["monitoring", "prometheus", "grafana", "loki", "alertmanager", "node-exporter", "uptime-kuma", "netdata", "cadvisor", "observability", "metrics", "alerts"]
@@ -192,7 +192,7 @@
       "name": "linux-backup-restore",
       "source": "./skills/linux-backup-restore",
       "description": "Designs and generates complete Linux backup solutions using restic, BorgBackup, rsync, or tar — with encryption, encryption key management, remote storage, retention policies, database backups, Docker volume backups, and restore procedures.",
-      "version": "1.6.0",
+      "version": "1.7.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["backup", "restore", "restic", "borgbackup", "rsync", "disaster-recovery", "database-backup", "docker-volumes", "s3", "3-2-1", "retention", "linux"]
@@ -210,7 +210,7 @@
       "name": "linux-cron-manager",
       "source": "./skills/linux-cron-manager",
       "description": "Generates production-ready cron jobs with /etc/cron.d/ entries and wrapper scripts featuring flock locking, logging, log rotation, and failure alerting.",
-      "version": "1.4.0",
+      "version": "1.5.0",
       "author": { "name": "Lehnert" },
       "category": "linux-sysadmin",
       "keywords": ["cron", "crontab", "scheduling", "flock", "locking", "automation", "linux", "systemd-timer", "cron.d"]

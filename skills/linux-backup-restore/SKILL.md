@@ -1,7 +1,7 @@
 ---
 name: linux-backup-restore
 description: Use when user wants to back up a Linux server, design a backup strategy, write a backup script, set up automated backups, configure restic or borgbackup, restore from a backup, test backup integrity, back up databases, Docker volumes, or asks about the 3-2-1 backup rule or disaster recovery.
-version: 1.6.0
+version: 1.7.0
 author: Lehnert
 ---
 
@@ -268,10 +268,16 @@ log "Dumping $DB_NAME"
 # (pg_restore cannot read double-compressed files)
 pg_dump -U "$DB_USER" -Fc "$DB_NAME" > "${BACKUP_DIR}/${DB_NAME}_${DATE}.dump"
 
-# Verify the dump is readable
+# Verify the dump is readable and non-empty
 pg_restore --list "${BACKUP_DIR}/${DB_NAME}_${DATE}.dump" > /dev/null \
-  && log "Dump verified OK" \
-  || { log "ERROR: Dump verification failed"; exit 1; }
+  || { log "ERROR: Dump is corrupted or unreadable"; exit 1; }
+
+DUMP_KB=$(du -k "${BACKUP_DIR}/${DB_NAME}_${DATE}.dump" | cut -f1)
+if [[ $DUMP_KB -lt 10 ]]; then
+  log "ERROR: Dump suspiciously small (${DUMP_KB}KB) — possible empty database or write failure"
+  exit 1
+fi
+log "Dump verified OK (${DUMP_KB}KB)"
 
 # Retain last 14 dumps
 find "$BACKUP_DIR" -name "${DB_NAME}_*.dump" -mtime +14 -delete

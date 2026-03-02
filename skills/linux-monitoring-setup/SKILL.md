@@ -1,7 +1,7 @@
 ---
 name: linux-monitoring-setup
 description: Use when user wants to set up monitoring, observability, alerting, dashboards, uptime checks, metrics collection, or log aggregation for a Linux server, Docker stack, application, or infrastructure — including Prometheus, Grafana, Node Exporter, Loki, Alertmanager, Uptime Kuma, Netdata, or custom bash-based monitoring scripts.
-version: 1.4.0
+version: 1.5.0
 author: Lehnert
 ---
 
@@ -175,6 +175,7 @@ volumes:
 global:
   scrape_interval: 15s
   evaluation_interval: 15s
+  scrape_timeout: 10s      # Increase to 30s if exporters are slow (must be < scrape_interval)
 
 scrape_configs:
   - job_name: 'prometheus'

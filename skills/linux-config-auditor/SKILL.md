@@ -1,7 +1,7 @@
 ---
 name: linux-config-auditor
 description: Use when user wants to audit, review, analyze, or improve a Linux config file — nginx, Apache, sshd_config, systemd service/timer/socket units, iptables, nftables, firewalld, fail2ban, sudoers, /etc/security/limits.conf, sysctl.conf, or any server config — for security issues, misconfigurations, performance problems, or compliance gaps.
-version: 1.3.0
+version: 1.4.0
 author: Lehnert
 ---
 
@@ -220,3 +220,9 @@ Flag these patterns in any config type as 🔴 Critical:
 - `NOPASSWD: ALL` in sudoers
 - Wildcard (`*`) in AllowUsers or command grants
 - Empty or commented-out authentication requirements
+
+**Sudoers-specific critical patterns:**
+- `Cmnd_Alias` containing `/usr/bin/bash`, `/bin/sh`, `/bin/bash`, `sudoedit`, `su` → shell escape for full root
+- `%group ALL=(ALL) NOPASSWD: ALL` on a broad group (e.g. `%wheel`, `%sudo`, `%docker`) → unrestricted group sudo
+- `ALL=(ALL:ALL) NOPASSWD: /path/to/script *` with wildcard arguments → argument injection
+- `visudo` not being used to edit sudoers (syntax errors in sudoers can lock out all sudo access)

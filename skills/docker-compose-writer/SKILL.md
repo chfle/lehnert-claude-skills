@@ -1,7 +1,7 @@
 ---
 name: docker-compose-writer
 description: Use when user wants to write, generate, create, or optimize a docker-compose.yml — for a new project, an existing stack, any self-hosted app, or when they want to replace a cloud service (Google Drive, Gmail, GitHub, Slack, Notion, ChatGPT, etc.) with a self-hosted alternative.
-version: 2.2.0
+version: 2.3.0
 author: Lehnert
 ---
 
@@ -425,7 +425,9 @@ When generating Redis as a companion service, always include a health check so d
     networks:
       - app_network
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ["CMD", "redis-cli", "--raw", "ping"]
+      # redis:7-alpine includes redis-cli. For minimal custom images use:
+      # test: ["CMD", "sh", "-c", "redis-cli ping | grep -q PONG"]
       interval: 10s
       timeout: 5s
       retries: 5

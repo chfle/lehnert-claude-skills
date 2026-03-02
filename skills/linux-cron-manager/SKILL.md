@@ -1,7 +1,7 @@
 ---
 name: linux-cron-manager
 description: Use when user wants to schedule a task with cron, write a crontab entry, create a /etc/cron.d/ file, set up a cron job with locking and logging, convert a cron job to a systemd timer, debug a cron job that isn't running, or understand cron syntax and environment behavior.
-version: 1.4.0
+version: 1.5.0
 author: Lehnert
 ---
 
@@ -200,7 +200,8 @@ Common environment pitfalls:
 | Problem | Cause | Fix |
 |---------|-------|-----|
 | Command not found | PATH is minimal in cron | Use full path: `/usr/bin/python3` |
-| Script works manually, not in cron | Missing env vars | Add `EnvironmentFile` or `source /etc/profile` at top of script |
+| Script works manually, not in cron | Missing env vars | Add `source /etc/environment` or export each var at top of wrapper script |
+| App-specific env vars missing | `.env` file not loaded | Add `set -a; source /opt/myapp/.env; set +a` at top of wrapper script |
 | Python/Node virtualenv not active | No shell init | Source virtualenv explicitly: `source /opt/venv/bin/activate` |
 | HOME not set | Cron doesn't source profile | Add `HOME=/home/appuser` to cron file |
 | No display/dbus | X11/dbus not available | Not suitable for GUI apps; use headless mode |
@@ -304,6 +305,8 @@ Then print ONLY:
 ✅ Cron job written to ./cron/
 
 ▶ Install:
+  # ⚠️  /etc/cron.d files MUST be owned by root with mode 644.
+  #     Cron silently ignores files with wrong ownership or permissions.
   sudo cp cron/myapp-task /etc/cron.d/myapp-task
   sudo chmod 644 /etc/cron.d/myapp-task
   sudo chown root:root /etc/cron.d/myapp-task

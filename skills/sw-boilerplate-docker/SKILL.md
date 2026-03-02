@@ -1,7 +1,7 @@
 ---
 name: sw-boilerplate-docker
 description: Use when user wants to create Docker infrastructure files (docker-compose.yml, Dockerfiles, .dockerignore, Traefik config) based on requirements/tech-stack.yaml directly in the workspace root.
-version: 1.0.0
+version: 1.1.0
 author: Lehnert
 ---
 
@@ -37,7 +37,7 @@ Build a complete `docker-compose.yml` using the exact `compose_version` from tec
 |---------|--------|
 | `postgres` | Image `postgres:16-alpine`, env vars from `.env`, named volume, health check |
 | `mysql` / `mariadb` | Image `mysql:8` / `mariadb:11`, env vars, named volume, health check |
-| `redis` | Image `redis:7-alpine`, named volume |
+| `redis` | Image `redis:7-alpine`, named volume, healthcheck (`redis-cli --raw ping`) |
 | `backend` (NestJS/FastAPI/Go) | Build from `Dockerfile`, depends_on db, env_file `.env` |
 | `frontend` (Next.js) | Build from `Dockerfile.frontend`, depends_on backend, ports |
 | `traefik` | Image `traefik:v3`, ports 80/443, volume for socket + certs |
@@ -77,6 +77,19 @@ If `deployment.reverse_proxy` contains "Traefik":
 |------|---------|
 | `traefik.yml` | Static Traefik config: entryPoints (web 80, websecure 443), Let's Encrypt resolver, Docker provider |
 | `dynamic/` | Empty directory placeholder for dynamic config |
+
+**Traefik routing labels for exposed services** — add to every service that should be reachable via Traefik (backend, frontend):
+
+```yaml
+labels:
+  traefik.enable: "true"
+  traefik.http.routers.backend.rule: "Host(`api.${DOMAIN}`)"
+  traefik.http.routers.backend.entrypoints: "websecure"
+  traefik.http.routers.backend.tls.certresolver: "letsencrypt"
+  traefik.http.services.backend.loadbalancer.server.port: "3000"
+```
+
+Database services (postgres, redis) must NOT have `traefik.enable: "true"` — they should never be publicly routed.
 
 ---
 
